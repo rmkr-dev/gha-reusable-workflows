@@ -52,3 +52,5 @@ flowchart LR
 ```
 
 Self-test path (this repository): `ci.yml` → `python-ci` / `java-maven-ci` against `samples/`.
+
+Callers pin `@v0.1.0` (or `@main` while dogfooding).

@@ -10,15 +10,15 @@ Reusable workflows run on **caller** repositories with the caller's `GITHUB_TOKE
 | --- | --- |
 | No secrets in logs | Never `echo` tokens; mask sensitive outputs |
 | Least privilege | Callers should set `permissions:` narrowly on jobs that call these workflows |
-| Pin by tag | Prefer `@v1` / annotated semver tags over mutable branches for production callers |
+| Pin by tag | Prefer `@v0.1.0` / annotated semver tags over mutable branches for production callers |
 | Dependency review | Use `dependency-review.yml` on pull requests |
-| CodeQL | Use `codeql.yml` with an explicit `languages` input |
+| CodeQL | Use `codeql.yml` with a JSON `languages` input (for example `'["python"]'`) |
 | SBOM | Generate and upload an SBOM artifact for release traceability |
-| Dependabot | Enable `github-actions` updates in consumer repos and here |
+| Dependabot | `github-actions` updates are enabled in this repo |
 
 ## Reporting
 
-See [SECURITY.md](../../SECURITY.md) at the repository root (added with workflows) for how to report vulnerabilities privately.
+See [SECURITY.md](../../SECURITY.md) for how to report vulnerabilities privately.
 
 ## Runner trust
 
