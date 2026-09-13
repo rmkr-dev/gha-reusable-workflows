@@ -4,7 +4,7 @@
 
 ```
 .github/workflows/     # reusable + self-test workflows
-.github/actions/       # optional composite helpers used by reusable workflows
+.github/actions/       # composite helpers (setup-python-project, setup-maven-project)
 samples/python-hello/  # Python package used by self-test CI
 samples/java-hello/    # Maven project used by self-test CI
 docs/                  # architecture, security, examples
@@ -17,6 +17,15 @@ docs/                  # architecture, security, examples
 - `gh` authenticated for PR/merge work
 
 No Node/npm toolchain.
+
+## Composite actions
+
+| Action | Responsibility |
+| --- | --- |
+| `.github/actions/setup-python-project` | `setup-python` (+ optional pip cache) and install deps per caller contract |
+| `.github/actions/setup-maven-project` | `setup-java` (+ optional Maven cache) and verify `pom.xml` |
+
+Reusable workflows reference these with an absolute `owner/repo/.github/actions/...@ref` pin (same ref consumers use for the workflow) so cross-repo callers resolve actions correctly.
 
 ## Editing reusable workflows
 
