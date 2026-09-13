@@ -29,7 +29,7 @@ on:
         type: boolean
         default: true
       maven-goals:
-        description: Maven goals to run (default: test)
+        description: "Maven goals to run (default: test)"
         required: false
         type: string
         default: "test"
