@@ -1,6 +1,6 @@
 # Example consumer workflows
 
-Copy these into a caller repository under `.github/workflows/`. Prefer a version tag (`@v0.2.0` or `@v0.1.0`) once published; use `@main` only while iterating.
+Copy these into a caller repository under `.github/workflows/`. Prefer a version tag (`@v0.2.0` or `@v0.2.0`) once published; use `@main` only while iterating.
 
 Caller contract reminders:
 
@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.2.0
     with:
       working-directory: .
       python-version: "3.12"
@@ -48,7 +48,7 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.2.0
     with:
       working-directory: .
       java-version: "21"
@@ -77,7 +77,7 @@ permissions:
 
 jobs:
   analyze:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.2.0
     with:
       languages: '["python"]'
       # or: languages: '["java-kotlin"]'
@@ -97,7 +97,7 @@ permissions:
 
 jobs:
   review:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.2.0
 ```
 
 ## SBOM artifact
@@ -115,7 +115,7 @@ permissions:
 
 jobs:
   sbom:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.2.0
     with:
       path: .
       artifact-name: sbom
@@ -169,7 +169,7 @@ permissions:
 
 jobs:
   release:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/release-tag.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/release-tag.yml@v0.2.0
     with:
       tag: ${{ inputs.tag }}
       generate-notes: true
@@ -193,19 +193,19 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.2.0
     with:
       python-version: "3.12"
       enable-pip-cache: true
 
   codeql:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.2.0
     with:
       languages: '["python"]'
 
   dependency-review:
     if: github.event_name == 'pull_request'
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.2.0
 ```
 
 ## Pinning `@main` vs tags
@@ -213,8 +213,10 @@ jobs:
 | Ref | When to use |
 | --- | --- |
 | `@main` | Early adoption / dogfooding this repo |
-| `@v0.1.0` | Reproducible pin to a release |
+| `@v0.2.0` | Reproducible pin to a release |
 | `@v0.2.0` | Next minor after input hardening / composites |
 | `@v1` | Moving major line once a `v1` tag (or `v1` major alias) exists |
 
 This repository tags annotated releases from `main` after CI is green.
+
+Semver rules: [versioning.md](versioning.md). Release history: [CHANGELOG.md](../../CHANGELOG.md).
