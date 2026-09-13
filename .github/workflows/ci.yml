@@ -36,3 +36,13 @@ jobs:
       fail-fast: true
       enable-maven-cache: true
       maven-goals: test
+
+  java-multi-sample:
+    uses: ./.github/workflows/java-maven-ci.yml
+    with:
+      working-directory: samples/java-multi
+      java-version: "21"
+      timeout-minutes: 20
+      fail-fast: true
+      enable-maven-cache: true
+      maven-goals: test
