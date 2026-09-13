@@ -13,24 +13,63 @@ on:
         required: false
         type: string
         default: "21"
+      timeout-minutes:
+        description: Job timeout in minutes
+        required: false
+        type: number
+        default: 30
+      fail-fast:
+        description: When true, stop Maven after the first test failure
+        required: false
+        type: boolean
+        default: true
+      enable-maven-cache:
+        description: Enable Maven dependency cache via actions/setup-java
+        required: false
+        type: boolean
+        default: true
+      maven-goals:
+        description: "Maven goals to run (default: test)"
+        required: false
+        type: string
+        default: "test"
+    outputs:
+      java-version:
+        description: Resolved JDK version used for the job
+        value: ${{ jobs.test.outputs.java-version }}
+      maven-goals:
+        description: Maven goals that were executed
+        value: ${{ jobs.test.outputs.maven-goals }}
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
+    outputs:
+      java-version: ${{ steps.meta.outputs.java-version }}
+      maven-goals: ${{ steps.meta.outputs.maven-goals }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up JDK
+      - name: Set up JDK (with Maven cache)
+        if: inputs.enable-maven-cache
         uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: ${{ inputs.java-version }}
           cache: maven
           cache-dependency-path: ${{ inputs.working-directory }}/pom.xml
+
+      - name: Set up JDK (no cache)
+        if: ${{ !inputs.enable-maven-cache }}
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: ${{ inputs.java-version }}
 
       - name: Verify pom.xml
         run: |
@@ -41,4 +80,41 @@ jobs:
           fi
 
       - name: Test
-        run: mvn -B test
+        id: mvn
+        env:
+          GOALS: ${{ inputs.maven-goals }}
+          FAIL_FAST: ${{ inputs.fail-fast }}
+        run: |
+          set -euo pipefail
+          # Word-split goals intentionally so callers can pass "clean test"
+          # shellcheck disable=SC2086
+          if [ "${FAIL_FAST}" = "true" ]; then
+            mvn -B ${GOALS} -Dsurefire.skipAfterFailureCount=1
+          else
+            mvn -B ${GOALS}
+          fi
+
+      - name: Job summary
+        if: always()
+        id: meta
+        env:
+          JAVA_VER: ${{ inputs.java-version }}
+          GOALS: ${{ inputs.maven-goals }}
+          WD: ${{ inputs.working-directory }}
+          FAIL_FAST: ${{ inputs.fail-fast }}
+          MVN_CACHE: ${{ inputs.enable-maven-cache }}
+        run: |
+          set -euo pipefail
+          echo "java-version=${JAVA_VER}" >> "$GITHUB_OUTPUT"
+          echo "maven-goals=${GOALS}" >> "$GITHUB_OUTPUT"
+          {
+            echo "## Java Maven CI summary"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| working-directory | \`${WD}\` |"
+            echo "| java-version | \`${JAVA_VER}\` |"
+            echo "| maven-goals | \`${GOALS}\` |"
+            echo "| fail-fast | \`${FAIL_FAST}\` |"
+            echo "| maven-cache | \`${MVN_CACHE}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"

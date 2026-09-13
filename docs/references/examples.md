@@ -1,12 +1,13 @@
 # Example consumer workflows
 
-Copy these into a caller repository under `.github/workflows/`. Prefer a version tag (`@v0.1.0` or `@v1`) once published; use `@main` only while iterating.
+Copy these into a caller repository under `.github/workflows/`. Prefer a version tag (`@v0.2.0` or `@v0.1.0`) once published; use `@main` only while iterating.
 
 Caller contract reminders:
 
 - **Python** (`python-ci.yml`): optional `pyproject.toml` with `[project.optional-dependencies].dev`, or `requirements-dev.txt` / `requirements.txt`. Without those, the workflow still runs `python -m compileall`.
 - **Java** (`java-maven-ci.yml`): `pom.xml` must exist under `working-directory`.
 - Reusable workflows run on **GitHub-hosted** `ubuntu-latest` runners.
+- Optional hardening inputs: `timeout-minutes`, `fail-fast`, `enable-pip-cache` / `enable-maven-cache`, plus job summary outputs.
 
 ## Python CI
 
@@ -27,6 +28,9 @@ jobs:
     with:
       working-directory: .
       python-version: "3.12"
+      timeout-minutes: 20
+      fail-fast: true
+      enable-pip-cache: true
 ```
 
 ## Java / Maven CI
@@ -48,6 +52,10 @@ jobs:
     with:
       working-directory: .
       java-version: "21"
+      timeout-minutes: 20
+      fail-fast: true
+      enable-maven-cache: true
+      maven-goals: test
 ```
 
 ## CodeQL
@@ -113,6 +121,8 @@ jobs:
       artifact-name: sbom
 ```
 
+Default artifact retention follows the repository / org Actions artifact retention setting (GitHub default is 90 days unless customized). Callers who need longer retention should download the SPDX artifact in a follow-up job or mirror it to their release assets.
+
 ## Release tag helper
 
 ```yaml
@@ -158,6 +168,7 @@ jobs:
     uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.1.0
     with:
       python-version: "3.12"
+      enable-pip-cache: true
 
   codeql:
     uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.1.0
@@ -175,6 +186,7 @@ jobs:
 | --- | --- |
 | `@main` | Early adoption / dogfooding this repo |
 | `@v0.1.0` | Reproducible pin to a release |
+| `@v0.2.0` | Next minor after input hardening / composites |
 | `@v1` | Moving major line once a `v1` tag (or `v1` major alias) exists |
 
 This repository tags annotated releases from `main` after CI is green.
