@@ -18,6 +18,15 @@ jobs:
       fail-fast: true
       enable-pip-cache: true
 
+  python-requirements-dev-sample:
+    uses: ./.github/workflows/python-ci.yml
+    with:
+      working-directory: samples/python-requirements-dev
+      python-version: "3.12"
+      timeout-minutes: 20
+      fail-fast: true
+      enable-pip-cache: true
+
   java-sample:
     uses: ./.github/workflows/java-maven-ci.yml
     with:
