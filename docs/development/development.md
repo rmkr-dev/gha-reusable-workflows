@@ -9,6 +9,8 @@ samples/python-hello/  # Python package used by self-test CI
 samples/java-hello/    # Maven project used by self-test CI
 samples/python-requirements-dev/  # requirements-dev.txt install path
 samples/java-multi/   # multi-module Maven reactor
+samples/python-requirements-only/  # requirements.txt install path
+samples/python-compileall-only/    # compileall fallback, no tests
 docs/                  # architecture, security, examples
 ```
 

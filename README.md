@@ -102,6 +102,8 @@ Self-test packages exercised by this repo's `ci.yml`:
 - [`samples/java-hello`](samples/java-hello) — minimal Maven app + JUnit 5 (Java 21)
 - [`samples/python-requirements-dev`](samples/python-requirements-dev) — `requirements-dev.txt` install path
 - [`samples/java-multi`](samples/java-multi) — multi-module Maven reactor
+- [`samples/python-requirements-only`](samples/python-requirements-only) — `requirements.txt` only
+- [`samples/python-compileall-only`](samples/python-compileall-only) — no metadata; compileall fallback
 
 ## Docs
 
