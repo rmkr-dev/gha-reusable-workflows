@@ -50,45 +50,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up Python (with pip cache)
-        if: inputs.enable-pip-cache
-        uses: actions/setup-python@v7
+      - name: Setup Python project
+        uses: rmkr-dev/gha-reusable-workflows/.github/actions/setup-python-project@main
         with:
           python-version: ${{ inputs.python-version }}
-          cache: pip
-          cache-dependency-path: |
-            ${{ inputs.working-directory }}/pyproject.toml
-            ${{ inputs.working-directory }}/requirements*.txt
-
-      - name: Set up Python (no cache)
-        if: ${{ !inputs.enable-pip-cache }}
-        uses: actions/setup-python@v7
-        with:
-          python-version: ${{ inputs.python-version }}
-
-      - name: Install dependencies
-        run: |
-          set -euo pipefail
-          python -m pip install --upgrade pip
-          # Caller contract (first match wins):
-          # 1. pyproject.toml with optional-dependencies.dev -> pip install -e ".[dev]"
-          #    otherwise -> pip install -e .
-          # 2. requirements-dev.txt -> pip install -r requirements-dev.txt
-          # 3. requirements.txt -> pip install -r requirements.txt
-          # 4. otherwise skip install; compileall still runs below
-          if [ -f pyproject.toml ]; then
-            if python -c 'import pathlib; d=pathlib.Path("pyproject.toml").read_text(); import re,sys; sys.exit(0 if re.search(r"(?m)^\[project\.optional-dependencies\][\s\S]*?^dev\s*=", d) else 1)'; then
-              pip install -e ".[dev]"
-            else
-              pip install -e .
-            fi
-          elif [ -f requirements-dev.txt ]; then
-            pip install -r requirements-dev.txt
-          elif [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          else
-            echo "No pyproject.toml or requirements*.txt; skipping pip install"
-          fi
+          working-directory: ${{ inputs.working-directory }}
+          enable-pip-cache: ${{ inputs.enable-pip-cache }}
 
       - name: Lint or compile
         run: |
@@ -137,4 +104,5 @@ jobs:
             echo "| tests-ran | \`${TESTS_RAN:-false}\` |"
             echo "| fail-fast | \`${FAIL_FAST}\` |"
             echo "| pip-cache | \`${PIP_CACHE}\` |"
+            echo "| setup | composite setup-python-project |"
           } >> "$GITHUB_STEP_SUMMARY"
