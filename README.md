@@ -17,12 +17,24 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | Workflow | Trigger type | Purpose |
 | --- | --- | --- |
 | [`python-ci.yml`](.github/workflows/python-ci.yml) | `workflow_call` | Setup Python, install deps, compile/lint, pytest |
-| [`java-maven-ci.yml`](.github/workflows/java-maven-ci.yml) | `workflow_call` | Setup Temurin JDK, `mvn -B test` |
+| [`java-maven-ci.yml`](.github/workflows/java-maven-ci.yml) | `workflow_call` | Setup Temurin JDK, Maven goals (default `test`) |
 | [`codeql.yml`](.github/workflows/codeql.yml) | `workflow_call` | CodeQL analyze for caller-provided languages |
 | [`dependency-review.yml`](.github/workflows/dependency-review.yml) | `workflow_call` | PR dependency review |
 | [`sbom.yml`](.github/workflows/sbom.yml) | `workflow_call` | Generate SPDX SBOM and upload artifact |
 | [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release |
 | [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: calls Python + Java workflows on `samples/` |
+
+### Hardening inputs (Python / Java)
+
+| Input | Default | Applies to |
+| --- | --- | --- |
+| `timeout-minutes` | `30` | both |
+| `fail-fast` | `true` | both |
+| `enable-pip-cache` | `true` | Python |
+| `enable-maven-cache` | `true` | Java |
+| `maven-goals` | `test` | Java |
+
+Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-ran`, `java-version` / `maven-goals`).
 
 ## Supported stacks
 
@@ -48,12 +60,14 @@ jobs:
     with:
       working-directory: .
       python-version: "3.12"
+      enable-pip-cache: true
 
   java:
     uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.1.0
     with:
       working-directory: .
       java-version: "21"
+      enable-maven-cache: true
 ```
 
 Full copy-paste snippets (CodeQL, dependency review, SBOM, release): [docs/references/examples.md](docs/references/examples.md).
@@ -68,7 +82,7 @@ Full copy-paste snippets (CodeQL, dependency review, SBOM, release): [docs/refer
 ## Versioning
 
 - `main` — latest merged work; OK for early adopters.
-- Annotated tags (`v0.1.0`, later `v1`) — preferred for consumers.
+- Annotated tags (`v0.1.0`, later `v0.2.0` / `v1`) — preferred for consumers.
 - Breaking input/output changes bump the major tag line; document in PR and release notes.
 
 ## Samples
