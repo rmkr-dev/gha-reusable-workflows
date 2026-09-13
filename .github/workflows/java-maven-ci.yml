@@ -13,13 +13,44 @@ on:
         required: false
         type: string
         default: "21"
+      timeout-minutes:
+        description: Job timeout in minutes
+        required: false
+        type: number
+        default: 30
+      fail-fast:
+        description: Fail immediately when Maven tests fail (Maven surefire default)
+        required: false
+        type: boolean
+        default: true
+      enable-maven-cache:
+        description: Enable Maven dependency cache via actions/setup-java
+        required: false
+        type: boolean
+        default: true
+      maven-goals:
+        description: Maven goals to run (default: test)
+        required: false
+        type: string
+        default: "test"
+    outputs:
+      java-version:
+        description: Resolved JDK version used for the job
+        value: ${{ jobs.test.outputs.java-version }}
+      maven-goals:
+        description: Maven goals that were executed
+        value: ${{ jobs.test.outputs.maven-goals }}
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
+    outputs:
+      java-version: ${{ steps.meta.outputs.java-version }}
+      maven-goals: ${{ steps.meta.outputs.maven-goals }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -29,7 +60,7 @@ jobs:
         with:
           distribution: temurin
           java-version: ${{ inputs.java-version }}
-          cache: maven
+          cache: ${{ inputs.enable-maven-cache && 'maven' || '' }}
           cache-dependency-path: ${{ inputs.working-directory }}/pom.xml
 
       - name: Verify pom.xml
@@ -41,4 +72,38 @@ jobs:
           fi
 
       - name: Test
-        run: mvn -B test
+        id: mvn
+        env:
+          GOALS: ${{ inputs.maven-goals }}
+          FAIL_FAST: ${{ inputs.fail-fast }}
+        run: |
+          set -euo pipefail
+          EXTRA=()
+          if [ "${FAIL_FAST}" = "true" ]; then
+            EXTRA+=(-Dsurefire.skipAfterFailureCount=1)
+          fi
+          mvn -B "${GOALS}" "${EXTRA[@]}"
+
+      - name: Job summary
+        if: always()
+        id: meta
+        env:
+          JAVA_VER: ${{ inputs.java-version }}
+          GOALS: ${{ inputs.maven-goals }}
+          WD: ${{ inputs.working-directory }}
+          FAIL_FAST: ${{ inputs.fail-fast }}
+        run: |
+          set -euo pipefail
+          echo "java-version=${JAVA_VER}" >> "$GITHUB_OUTPUT"
+          echo "maven-goals=${GOALS}" >> "$GITHUB_OUTPUT"
+          {
+            echo "## Java Maven CI summary"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| working-directory | \`${WD}\` |"
+            echo "| java-version | \`${JAVA_VER}\` |"
+            echo "| maven-goals | \`${GOALS}\` |"
+            echo "| fail-fast | \`${FAIL_FAST}\` |"
+            echo "| maven-cache | \`${{ inputs.enable-maven-cache }}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"

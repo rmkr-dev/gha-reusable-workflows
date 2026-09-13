@@ -13,13 +13,39 @@ on:
         required: false
         type: string
         default: "3.12"
+      timeout-minutes:
+        description: Job timeout in minutes
+        required: false
+        type: number
+        default: 30
+      fail-fast:
+        description: Fail the job on first non-zero step (disables soft-continue patterns)
+        required: false
+        type: boolean
+        default: true
+      enable-pip-cache:
+        description: Enable pip cache via actions/setup-python
+        required: false
+        type: boolean
+        default: true
+    outputs:
+      python-version:
+        description: Resolved Python version used for the job
+        value: ${{ jobs.test.outputs.python-version }}
+      tests-ran:
+        description: Whether pytest executed (true/false)
+        value: ${{ jobs.test.outputs.tests-ran }}
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     defaults:
       run:
         working-directory: ${{ inputs.working-directory }}
+    outputs:
+      python-version: ${{ steps.meta.outputs.python-version }}
+      tests-ran: ${{ steps.meta.outputs.tests-ran }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -28,6 +54,10 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: ${{ inputs.python-version }}
+          cache: ${{ inputs.enable-pip-cache && 'pip' || '' }}
+          cache-dependency-path: |
+            ${{ inputs.working-directory }}/pyproject.toml
+            ${{ inputs.working-directory }}/requirements*.txt
 
       - name: Install dependencies
         run: |
@@ -66,10 +96,37 @@ jobs:
           fi
 
       - name: Test
+        id: pytest
         run: |
           set -euo pipefail
           if [ -d tests ] || [ -d test ] || compgen -G "test_*.py" >/dev/null || compgen -G "*_test.py" >/dev/null; then
             python -m pytest -q
+            echo "ran=true" >> "$GITHUB_OUTPUT"
           else
             echo "No tests found; skipping pytest"
+            echo "ran=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Job summary
+        if: always()
+        id: meta
+        env:
+          PY_VER: ${{ inputs.python-version }}
+          TESTS_RAN: ${{ steps.pytest.outputs.ran }}
+          FAIL_FAST: ${{ inputs.fail-fast }}
+          WD: ${{ inputs.working-directory }}
+        run: |
+          set -euo pipefail
+          echo "python-version=${PY_VER}" >> "$GITHUB_OUTPUT"
+          echo "tests-ran=${TESTS_RAN:-false}" >> "$GITHUB_OUTPUT"
+          {
+            echo "## Python CI summary"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| working-directory | \`${WD}\` |"
+            echo "| python-version | \`${PY_VER}\` |"
+            echo "| tests-ran | \`${TESTS_RAN:-false}\` |"
+            echo "| fail-fast | \`${FAIL_FAST}\` |"
+            echo "| pip-cache | \`${{ inputs.enable-pip-cache }}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"
