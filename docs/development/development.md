@@ -4,6 +4,7 @@
 
 ```
 .github/workflows/     # reusable + self-test workflows
+.github/actions/       # optional composite helpers used by reusable workflows
 samples/python-hello/  # Python package used by self-test CI
 samples/java-hello/    # Maven project used by self-test CI
 docs/                  # architecture, security, examples
@@ -24,6 +25,20 @@ No Node/npm toolchain.
 3. Update `samples/` and docs in the same PR when contracts change.
 4. Open a PR; merge only when checks pass.
 
+### Notable `workflow_call` inputs
+
+| Workflow | Input | Default | Notes |
+| --- | --- | --- | --- |
+| `python-ci.yml` | `timeout-minutes` | `30` | Job-level timeout |
+| `python-ci.yml` | `fail-fast` | `true` | Documented; pytest fails the job on error |
+| `python-ci.yml` | `enable-pip-cache` | `true` | Uses `actions/setup-python` pip cache |
+| `java-maven-ci.yml` | `timeout-minutes` | `30` | Job-level timeout |
+| `java-maven-ci.yml` | `fail-fast` | `true` | Sets `surefire.skipAfterFailureCount=1` |
+| `java-maven-ci.yml` | `enable-maven-cache` | `true` | Uses `actions/setup-java` Maven cache |
+| `java-maven-ci.yml` | `maven-goals` | `test` | Space-separated goals |
+
+Job summaries are written to `$GITHUB_STEP_SUMMARY`. Workflow outputs expose resolved language versions and whether tests ran.
+
 ## Local sample commands
 
 ```bash
@@ -42,9 +57,9 @@ mvn -B -f samples/java-hello/pom.xml test
 After CI is green on `main`:
 
 ```bash
-gh release create v0.1.0 --generate-notes --target main
+gh release create v0.2.0 --generate-notes --target main
 ```
 
-Callers should prefer `@v0.1.0` / `@v1` over floating `@main` once tags exist.
+Callers should prefer `@v0.2.0` / `@v1` over floating `@main` once tags exist.
 
 See [examples.md](../references/examples.md) for consumer pins.
