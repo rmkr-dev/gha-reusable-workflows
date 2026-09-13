@@ -79,7 +79,7 @@ Full copy-paste snippets (CodeQL, dependency review, SBOM, release): [docs/refer
 | [`.github/actions/setup-python-project`](.github/actions/setup-python-project) | `python-ci.yml` |
 | [`.github/actions/setup-maven-project`](.github/actions/setup-maven-project) | `java-maven-ci.yml` |
 
-Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@main` (move the pin to a version tag after release).
+Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.2.0`.
 
 ## Free-first GitHub Actions stance
 
