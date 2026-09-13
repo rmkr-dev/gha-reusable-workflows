@@ -29,6 +29,7 @@ No Node/npm toolchain.
 ```bash
 # Python
 cd samples/python-hello
+python -m venv .venv && source .venv/bin/activate
 python -m pip install -e ".[dev]"
 pytest
 
@@ -41,9 +42,9 @@ mvn -B -f samples/java-hello/pom.xml test
 After CI is green on `main`:
 
 ```bash
-git tag -a v0.1.0 -m "v0.1.0"
-git push origin v0.1.0
-# or: gh release create v0.1.0 --generate-notes
+gh release create v0.1.0 --generate-notes --target main
 ```
 
 Callers should prefer `@v0.1.0` / `@v1` over floating `@main` once tags exist.
+
+See [examples.md](../references/examples.md) for consumer pins.

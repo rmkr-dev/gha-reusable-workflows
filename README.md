@@ -3,22 +3,34 @@
 Reusable GitHub Actions workflows that other repositories can call with:
 
 ```yaml
-uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v1
+uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v0.1.0
 ```
 
-Until the first release tag exists, callers may pin `@main`. Prefer an annotated version tag once published.
+Until you prefer a floating major, pin the annotated tag. `@main` is available for early adopters.
 
 ## Why
 
 Keep CI consistent across personal Java/Maven and Python repositories without copying workflow YAML into every repo. One place to harden checkout, setup, lint/test, CodeQL, dependency review, SBOM, and release helpers.
 
+## Workflows
+
+| Workflow | Trigger type | Purpose |
+| --- | --- | --- |
+| [`python-ci.yml`](.github/workflows/python-ci.yml) | `workflow_call` | Setup Python, install deps, compile/lint, pytest |
+| [`java-maven-ci.yml`](.github/workflows/java-maven-ci.yml) | `workflow_call` | Setup Temurin JDK, `mvn -B test` |
+| [`codeql.yml`](.github/workflows/codeql.yml) | `workflow_call` | CodeQL analyze for caller-provided languages |
+| [`dependency-review.yml`](.github/workflows/dependency-review.yml) | `workflow_call` | PR dependency review |
+| [`sbom.yml`](.github/workflows/sbom.yml) | `workflow_call` | Generate SPDX SBOM and upload artifact |
+| [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release |
+| [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: calls Python + Java workflows on `samples/` |
+
 ## Supported stacks
 
 | Stack | Workflow | Caller contract |
 | --- | --- | --- |
-| Python | `python-ci.yml` | Optional `pyproject.toml` / `requirements-dev.txt`; falls back to `compileall` on samples |
+| Python | `python-ci.yml` | Optional `pyproject.toml` / `requirements-dev.txt`; falls back to `compileall` |
 | Java / Maven | `java-maven-ci.yml` | Caller must provide `pom.xml` under `working-directory` |
-| Any | `codeql.yml`, `dependency-review.yml`, `sbom.yml`, `release-tag.yml` | Language / event inputs as documented |
+| Any | `codeql.yml`, `dependency-review.yml`, `sbom.yml`, `release-tag.yml` | Language / path / tag inputs as documented |
 
 ## How consumers call workflows
 
@@ -32,25 +44,25 @@ on:
 
 jobs:
   python:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.1.0
     with:
       working-directory: .
       python-version: "3.12"
 
   java:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.1.0
     with:
       working-directory: .
       java-version: "21"
 ```
 
-See [docs/references/examples.md](docs/references/examples.md) for copy-paste snippets (filled in after workflows land).
+Full copy-paste snippets (CodeQL, dependency review, SBOM, release): [docs/references/examples.md](docs/references/examples.md).
 
 ## Free-first GitHub Actions stance
 
 - Prefer GitHub-hosted runners and first-party or widely used free actions.
 - No paid SaaS CI required.
-- No secrets in workflow logs; keep reusable workflows secret-agnostic unless a caller explicitly passes an input they own.
+- No secrets in workflow logs; reusable workflows stay secret-agnostic unless a caller explicitly passes an input they own.
 - Dependabot for `github-actions` keeps action pins current.
 
 ## Versioning
@@ -59,11 +71,19 @@ See [docs/references/examples.md](docs/references/examples.md) for copy-paste sn
 - Annotated tags (`v0.1.0`, later `v1`) — preferred for consumers.
 - Breaking input/output changes bump the major tag line; document in PR and release notes.
 
+## Samples
+
+Self-test packages exercised by this repo's `ci.yml`:
+
+- [`samples/python-hello`](samples/python-hello) — tiny package + pytest
+- [`samples/java-hello`](samples/java-hello) — minimal Maven app + JUnit 5 (Java 21)
+
 ## Docs
 
 - [Architecture](docs/architecture/architecture.md) · [Diagram](docs/architecture/architecture-diagram.md) · [Network](docs/architecture/network-diagram.md)
 - [Development](docs/development/development.md)
-- [Security](docs/security/security.md)
+- [Security](docs/security/security.md) · [SECURITY.md](SECURITY.md)
+- [Examples](docs/references/examples.md)
 - [Contributing](CONTRIBUTING.md) · [Agent notes](AGENTS.md)
 
 ## License
