@@ -55,29 +55,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up JDK (with Maven cache)
-        if: inputs.enable-maven-cache
-        uses: actions/setup-java@v6
+      - name: Setup Maven project
+        uses: rmkr-dev/gha-reusable-workflows/.github/actions/setup-maven-project@main
         with:
-          distribution: temurin
           java-version: ${{ inputs.java-version }}
-          cache: maven
-          cache-dependency-path: ${{ inputs.working-directory }}/pom.xml
-
-      - name: Set up JDK (no cache)
-        if: ${{ !inputs.enable-maven-cache }}
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: ${{ inputs.java-version }}
-
-      - name: Verify pom.xml
-        run: |
-          set -euo pipefail
-          if [ ! -f pom.xml ]; then
-            echo "Caller contract: pom.xml must exist under working-directory (${{ inputs.working-directory }})"
-            exit 1
-          fi
+          working-directory: ${{ inputs.working-directory }}
+          enable-maven-cache: ${{ inputs.enable-maven-cache }}
 
       - name: Test
         id: mvn
@@ -117,4 +100,5 @@ jobs:
             echo "| maven-goals | \`${GOALS}\` |"
             echo "| fail-fast | \`${FAIL_FAST}\` |"
             echo "| maven-cache | \`${MVN_CACHE}\` |"
+            echo "| setup | composite setup-maven-project |"
           } >> "$GITHUB_STEP_SUMMARY"
