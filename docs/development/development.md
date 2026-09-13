@@ -7,6 +7,8 @@
 .github/actions/       # composite helpers (setup-python-project, setup-maven-project)
 samples/python-hello/  # Python package used by self-test CI
 samples/java-hello/    # Maven project used by self-test CI
+samples/python-requirements-dev/  # requirements-dev.txt install path
+samples/java-multi/   # multi-module Maven reactor
 docs/                  # architecture, security, examples
 ```
 
@@ -59,6 +61,14 @@ pytest
 
 # Java
 mvn -B -f samples/java-hello/pom.xml test
+
+# Python requirements-dev path
+cd samples/python-requirements-dev
+python -m pip install -r requirements-dev.txt
+PYTHONPATH=src pytest
+
+# Java multi-module
+mvn -B -f samples/java-multi/pom.xml test
 ```
 
 ## Publishing a version
