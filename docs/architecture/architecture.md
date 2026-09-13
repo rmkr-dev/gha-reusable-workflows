@@ -32,6 +32,7 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 - **Resilient Python path**: if no project metadata exists, still run `compileall`.
 - **Documented Java contract**: caller must supply `pom.xml`.
 - **No secrets by default**: reusable workflows stay secret-agnostic.
+- **Scorecard is caller-owned**: see security docs for why there is no reusable Scorecard wrapper yet.
 
 ## Related diagrams
 
