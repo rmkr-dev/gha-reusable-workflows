@@ -3,7 +3,7 @@
 Reusable GitHub Actions workflows that other repositories can call with:
 
 ```yaml
-uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v0.1.0
+uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v0.2.0
 ```
 
 Until you prefer a floating major, pin the annotated tag. `@main` is available for early adopters.
@@ -56,14 +56,14 @@ on:
 
 jobs:
   python:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.2.0
     with:
       working-directory: .
       python-version: "3.12"
       enable-pip-cache: true
 
   java:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.1.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.2.0
     with:
       working-directory: .
       java-version: "21"
@@ -100,13 +100,15 @@ Self-test packages exercised by this repo's `ci.yml`:
 
 - [`samples/python-hello`](samples/python-hello) — tiny package + pytest
 - [`samples/java-hello`](samples/java-hello) — minimal Maven app + JUnit 5 (Java 21)
+- [`samples/python-requirements-dev`](samples/python-requirements-dev) — `requirements-dev.txt` install path
+- [`samples/java-multi`](samples/java-multi) — multi-module Maven reactor
 
 ## Docs
 
 - [Architecture](docs/architecture/architecture.md) · [Diagram](docs/architecture/architecture-diagram.md) · [Network](docs/architecture/network-diagram.md)
 - [Development](docs/development/development.md)
 - [Security](docs/security/security.md) · [SECURITY.md](SECURITY.md)
-- [Examples](docs/references/examples.md)
+- [Examples](docs/references/examples.md) · [Versioning](docs/references/versioning.md) · [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md) · [Agent notes](AGENTS.md)
 
 ## License

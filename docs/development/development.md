@@ -79,6 +79,9 @@ After CI is green on `main`:
 gh release create v0.2.0 --generate-notes --target main
 ```
 
+See [versioning.md](../references/versioning.md) and [CHANGELOG.md](../../CHANGELOG.md).
+
+
 Callers should prefer `@v0.2.0` / `@v1` over floating `@main` once tags exist.
 
 See [examples.md](../references/examples.md) for consumer pins.
