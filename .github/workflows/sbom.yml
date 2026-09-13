@@ -13,6 +13,11 @@ on:
         required: false
         type: string
         default: "."
+      upload-artifact:
+        description: Whether to upload the SPDX file as a workflow artifact
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   sbom:
@@ -29,5 +34,17 @@ jobs:
           path: ${{ inputs.path }}
           format: spdx-json
           artifact-name: ${{ inputs.artifact-name }}.spdx.json
-          upload-artifact: true
+          upload-artifact: ${{ inputs.upload-artifact }}
           upload-release-assets: false
+
+      - name: Retention reminder
+        if: inputs.upload-artifact
+        run: |
+          set -euo pipefail
+          {
+            echo "## SBOM artifact"
+            echo ""
+            echo "Uploaded \`${{ inputs.artifact-name }}.spdx.json\` (SPDX JSON)."
+            echo "Retention follows this repository/org Actions artifact retention (GitHub default **90 days** unless customized)."
+            echo "Download or attach to a Release if you need longer retention."
+          } >> "$GITHUB_STEP_SUMMARY"

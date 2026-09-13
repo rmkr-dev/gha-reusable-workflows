@@ -119,9 +119,37 @@ jobs:
     with:
       path: .
       artifact-name: sbom
+      upload-artifact: true
 ```
 
-Default artifact retention follows the repository / org Actions artifact retention setting (GitHub default is 90 days unless customized). Callers who need longer retention should download the SPDX artifact in a follow-up job or mirror it to their release assets.
+**Retention:** Actions artifacts follow the repository/org retention setting (GitHub default **90 days**). The reusable workflow writes a step-summary reminder. For longer retention, download the SPDX JSON in a follow-up job or attach it to a GitHub Release (`upload-release-assets` stays false by design so callers stay in control).
+
+## OpenSSF Scorecard (caller-owned)
+
+Scorecard is **not** wrapped as a reusable workflow here (see [security.md](../security/security.md#openssf-scorecard)). Example caller-owned workflow:
+
+```yaml
+name: Scorecard
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+permissions:
+  security-events: write
+  id-token: write
+  contents: read
+  actions: read
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ossf/scorecard-action@v2
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
+```
 
 ## Release tag helper
 
