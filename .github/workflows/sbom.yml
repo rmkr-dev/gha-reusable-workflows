@@ -1,0 +1,33 @@
+name: SBOM
+
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: Name for the uploaded SBOM artifact
+        required: false
+        type: string
+        default: sbom
+      path:
+        description: Path to scan for the SBOM
+        required: false
+        type: string
+        default: "."
+
+jobs:
+  sbom:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate and upload SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: ${{ inputs.path }}
+          format: spdx-json
+          artifact-name: ${{ inputs.artifact-name }}.spdx.json
+          upload-artifact: true
+          upload-release-assets: false

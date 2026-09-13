@@ -1,0 +1,44 @@
+name: Java Maven CI
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: Directory containing pom.xml
+        required: false
+        type: string
+        default: "."
+      java-version:
+        description: JDK version for Temurin
+        required: false
+        type: string
+        default: "21"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: ${{ inputs.java-version }}
+          cache: maven
+          cache-dependency-path: ${{ inputs.working-directory }}/pom.xml
+
+      - name: Verify pom.xml
+        run: |
+          set -euo pipefail
+          if [ ! -f pom.xml ]; then
+            echo "Caller contract: pom.xml must exist under working-directory (${{ inputs.working-directory }})"
+            exit 1
+          fi
+
+      - name: Test
+        run: mvn -B test
