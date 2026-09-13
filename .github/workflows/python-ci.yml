@@ -1,0 +1,75 @@
+name: Python CI
+
+on:
+  workflow_call:
+    inputs:
+      working-directory:
+        description: Project root relative to the repository
+        required: false
+        type: string
+        default: "."
+      python-version:
+        description: Python version for setup-python
+        required: false
+        type: string
+        default: "3.12"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Install dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          # Caller contract (first match wins):
+          # 1. pyproject.toml with optional-dependencies.dev -> pip install -e ".[dev]"
+          #    otherwise -> pip install -e .
+          # 2. requirements-dev.txt -> pip install -r requirements-dev.txt
+          # 3. requirements.txt -> pip install -r requirements.txt
+          # 4. otherwise skip install; compileall still runs below
+          if [ -f pyproject.toml ]; then
+            if python -c 'import pathlib; d=pathlib.Path("pyproject.toml").read_text(); import re,sys; sys.exit(0 if re.search(r"(?m)^\[project\.optional-dependencies\][\s\S]*?^dev\s*=", d) else 1)'; then
+              pip install -e ".[dev]"
+            else
+              pip install -e .
+            fi
+          elif [ -f requirements-dev.txt ]; then
+            pip install -r requirements-dev.txt
+          elif [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            echo "No pyproject.toml or requirements*.txt; skipping pip install"
+          fi
+
+      - name: Lint or compile
+        run: |
+          set -euo pipefail
+          if command -v ruff >/dev/null 2>&1; then
+            ruff check .
+          elif [ -d src ]; then
+            python -m compileall -q src
+          else
+            # Resilient fallback (e.g. samples/ trees without packaging metadata)
+            python -m compileall -q .
+          fi
+
+      - name: Test
+        run: |
+          set -euo pipefail
+          if [ -d tests ] || [ -d test ] || compgen -G "test_*.py" >/dev/null || compgen -G "*_test.py" >/dev/null; then
+            python -m pytest -q
+          else
+            echo "No tests found; skipping pytest"
+          fi

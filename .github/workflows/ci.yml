@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python-sample:
+    uses: ./.github/workflows/python-ci.yml
+    with:
+      working-directory: samples/python-hello
+      python-version: "3.12"
+
+  java-sample:
+    uses: ./.github/workflows/java-maven-ci.yml
+    with:
+      working-directory: samples/java-hello
+      java-version: "21"

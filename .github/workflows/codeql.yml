@@ -1,0 +1,41 @@
+name: CodeQL
+
+on:
+  workflow_call:
+    inputs:
+      languages:
+        description: 'JSON array of CodeQL languages, e.g. ["python"] or ["java-kotlin","python"]'
+        required: true
+        type: string
+      working-directory:
+        description: Optional subdirectory for analyzed project
+        required: false
+        type: string
+        default: "."
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ${{ fromJSON(inputs.languages) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          source-root: ${{ inputs.working-directory }}
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3

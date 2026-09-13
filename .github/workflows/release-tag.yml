@@ -1,0 +1,63 @@
+name: Release tag
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Tag name to create (e.g. v0.1.0). Ignored when triggered via release published path in caller.
+        required: false
+        type: string
+        default: ""
+      generate-notes:
+        description: Whether gh release should generate notes
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create annotated tag and release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          GEN_NOTES: ${{ inputs.generate-notes }}
+        run: |
+          set -euo pipefail
+          if [ -z "${TAG}" ]; then
+            echo "No tag input provided; nothing to create (safe no-op)."
+            echo "Callers may also listen to release: published in their own workflows."
+            exit 0
+          fi
+          case "${TAG}" in
+            v*) ;;
+            *)
+              echo "Refusing tag '${TAG}'; expected to start with 'v'"
+              exit 1
+              ;;
+          esac
+          if git rev-parse -q --verify "refs/tags/${TAG}" >/dev/null; then
+            echo "Tag ${TAG} already exists; skipping create"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag -a "${TAG}" -m "${TAG}"
+            git push origin "refs/tags/${TAG}"
+          fi
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            echo "Release ${TAG} already exists"
+          else
+            if [ "${GEN_NOTES}" = "true" ]; then
+              gh release create "${TAG}" --generate-notes --verify-tag
+            else
+              gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag
+            fi
+          fi
