@@ -72,6 +72,15 @@ jobs:
 
 Full copy-paste snippets (CodeQL, dependency review, SBOM, release): [docs/references/examples.md](docs/references/examples.md).
 
+## Composite actions
+
+| Action | Used by |
+| --- | --- |
+| [`.github/actions/setup-python-project`](.github/actions/setup-python-project) | `python-ci.yml` |
+| [`.github/actions/setup-maven-project`](.github/actions/setup-maven-project) | `java-maven-ci.yml` |
+
+Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@main` (move the pin to a version tag after release).
+
 ## Free-first GitHub Actions stance
 
 - Prefer GitHub-hosted runners and first-party or widely used free actions.
