@@ -19,7 +19,7 @@ on:
         type: number
         default: 30
       fail-fast:
-        description: Fail immediately when Maven tests fail (Maven surefire default)
+        description: When true, stop Maven after the first test failure
         required: false
         type: boolean
         default: true
@@ -55,13 +55,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up JDK
+      - name: Set up JDK (with Maven cache)
+        if: inputs.enable-maven-cache
         uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: ${{ inputs.java-version }}
-          cache: ${{ inputs.enable-maven-cache && 'maven' || '' }}
+          cache: maven
           cache-dependency-path: ${{ inputs.working-directory }}/pom.xml
+
+      - name: Set up JDK (no cache)
+        if: ${{ !inputs.enable-maven-cache }}
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: ${{ inputs.java-version }}
 
       - name: Verify pom.xml
         run: |
@@ -78,11 +86,13 @@ jobs:
           FAIL_FAST: ${{ inputs.fail-fast }}
         run: |
           set -euo pipefail
-          EXTRA=()
+          # Word-split goals intentionally so callers can pass "clean test"
+          # shellcheck disable=SC2086
           if [ "${FAIL_FAST}" = "true" ]; then
-            EXTRA+=(-Dsurefire.skipAfterFailureCount=1)
+            mvn -B ${GOALS} -Dsurefire.skipAfterFailureCount=1
+          else
+            mvn -B ${GOALS}
           fi
-          mvn -B "${GOALS}" "${EXTRA[@]}"
 
       - name: Job summary
         if: always()
@@ -92,6 +102,7 @@ jobs:
           GOALS: ${{ inputs.maven-goals }}
           WD: ${{ inputs.working-directory }}
           FAIL_FAST: ${{ inputs.fail-fast }}
+          MVN_CACHE: ${{ inputs.enable-maven-cache }}
         run: |
           set -euo pipefail
           echo "java-version=${JAVA_VER}" >> "$GITHUB_OUTPUT"
@@ -105,5 +116,5 @@ jobs:
             echo "| java-version | \`${JAVA_VER}\` |"
             echo "| maven-goals | \`${GOALS}\` |"
             echo "| fail-fast | \`${FAIL_FAST}\` |"
-            echo "| maven-cache | \`${{ inputs.enable-maven-cache }}\` |"
+            echo "| maven-cache | \`${MVN_CACHE}\` |"
           } >> "$GITHUB_STEP_SUMMARY"
