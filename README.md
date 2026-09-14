@@ -90,7 +90,7 @@ Docker build deep-dive (inputs, Trivy, GHCR): [docs/references/docker-build.md](
 | [`.github/actions/setup-python-project`](.github/actions/setup-python-project) | `python-ci.yml` |
 | [`.github/actions/setup-maven-project`](.github/actions/setup-maven-project) | `java-maven-ci.yml` |
 
-Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.3.0` until a follow-up bumps them to `@v0.4.0` after the tag exists.
+Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.4.0`.
 
 ## Free-first GitHub Actions stance
 
