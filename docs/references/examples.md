@@ -81,6 +81,7 @@ jobs:
     uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.4.0
     with:
       languages: '["python"]'
+      # queries: security-extended
       # or: languages: '["java-kotlin"]'
 ```
 
