@@ -7,6 +7,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+### Added
+
+- `dependency-review-sample` self-test job (PR events only)
+
 ## [0.3.0] - 2026-09-14
 
 ### Added

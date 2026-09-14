@@ -53,3 +53,7 @@ See [SECURITY.md](../../SECURITY.md) for how to report vulnerabilities privately
 ## Runner trust
 
 Jobs use GitHub-hosted runners. Consumers who need stronger isolation should follow GitHub’s hardened runner guidance in their own orgs; this repo does not customize runner images.
+
+### Dependency review self-test
+
+`ci.yml` runs `dependency-review-sample` when `github.event_name == 'pull_request'`, calling the reusable `dependency-review.yml` workflow.

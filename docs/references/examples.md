@@ -85,6 +85,9 @@ jobs:
 
 ## Dependency review (pull requests)
 
+This repository's `ci.yml` includes `dependency-review-sample` (PR-only) as a self-test.
+
+
 ```yaml
 name: Dependency review
 
