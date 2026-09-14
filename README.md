@@ -33,6 +33,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `fail-fast` | `true` | both |
 | `enable-pip-cache` | `true` | Python |
 | `pytest-args` | `""` | Python (appended after `pytest -q`) |
+| `ruff-args` | `""` | Python (appended after `ruff check` when present) |
 | `enable-maven-cache` | `true` | Java |
 | `maven-goals` | `test` | Java |
 | `maven-extra-args` | `""` | Java (extra CLI args after goals) |
