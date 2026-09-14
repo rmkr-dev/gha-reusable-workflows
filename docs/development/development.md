@@ -11,6 +11,7 @@ samples/python-requirements-dev/  # requirements-dev.txt install path
 samples/java-multi/   # multi-module Maven reactor
 samples/python-requirements-only/  # requirements.txt install path
 samples/python-compileall-only/    # compileall fallback, no tests
+samples/docker-hello/             # docker-build + Trivy self-test
 docs/                  # architecture, security, examples
 ```
 
@@ -91,6 +92,9 @@ PYTHONPATH=src pytest
 
 # Java multi-module
 mvn -B -f samples/java-multi/pom.xml test
+
+# Docker sample
+docker build -t local/docker-hello:dev -f samples/docker-hello/Dockerfile samples/docker-hello
 ```
 
 ## SBOM self-test inputs
@@ -118,12 +122,15 @@ The reusable workflow verifies a local `output-file` after generation so empty/b
 After CI is green on `main`:
 
 ```bash
-gh release create v0.2.0 --generate-notes --target main
+# Prefer CHANGELOG soft notes via release-tag.yml, or:
+gh release create v0.4.0 --notes-file /tmp/notes.md --target main
 ```
 
-See [versioning.md](../references/versioning.md) and [CHANGELOG.md](../../CHANGELOG.md).
+See [versioning.md](../references/versioning.md), [release-notes.md](../references/release-notes.md),
+and [CHANGELOG.md](../../CHANGELOG.md).
 
+Callers should prefer `@v0.4.0` / `@v1` over floating `@main` once tags exist.
 
-Callers should prefer `@v0.2.0` / `@v1` over floating `@main` once tags exist.
-
+Docker build inputs: [docker-build.md](../references/docker-build.md).
+Matrix / monorepo: [monorepo.md](../references/monorepo.md).
 See [examples.md](../references/examples.md) for consumer pins.
