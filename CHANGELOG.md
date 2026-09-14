@@ -2,6 +2,7 @@
 
 ### Added
 
+- `fetch-depth` input on `python-ci.yml` and `java-maven-ci.yml` (default `1`; `0` = full history)
 - SUPPORT.md with support boundaries and how-to-ask guidance
 -  `draft` input (default `false`) for unpublished GitHub Releases
 - Troubleshooting guide (`docs/references/troubleshooting.md`) for Python/Java/Docker/SBOM/CodeQL callers

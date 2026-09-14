@@ -63,3 +63,7 @@ See [release-notes.md](release-notes.md) for CHANGELOG conventions.
 ## More help
 
 Symptom → fix tables: [troubleshooting.md](troubleshooting.md).
+
+## Full git history
+
+Python and Java reusable CI accept `fetch-depth` (default `1`). Pass `fetch-depth: 0` when tools need tags or full history (for example setuptools-scm, git describe).
