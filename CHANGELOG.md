@@ -2,6 +2,7 @@
 
 ### Added
 
+- `dependency-review.yml` `comment-summary-in-pr` input (default `true`)
 - `docker-build.yml` `trivy-exit-code` input (default `1`; set `0` for report-only scans)
 - `codeql.yml` `build-mode` input (optional; empty uses codeql-action default)
 - `sbom.yml` `timeout-minutes` input (default `30`)
