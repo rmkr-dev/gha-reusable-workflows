@@ -139,3 +139,7 @@ See [examples.md](../references/examples.md) for consumer pins.
 ## Releases
 
 Prefer annotated tags via `release-tag.yml`. Use `draft: true` when previewing GitHub Release notes before publish.
+
+## Manual self-test
+
+`.github/workflows/ci.yml` accepts `workflow_dispatch` so maintainers can re-run the sample matrix without an empty commit.
