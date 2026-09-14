@@ -2,6 +2,7 @@
 
 ### Added
 
+- `dependency-review.yml` `deny-licenses` input (comma-separated SPDX ids; empty default)
 - `java-maven-ci.yml` `maven-extra-args` input (extra CLI args after goals; empty default)
 - `docker-build.yml` `target` input (multi-stage; empty default)
 - `docker-build.yml` `enable-gha-cache` input (default `true`; toggles buildx `type=gha` cache)
