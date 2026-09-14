@@ -2,7 +2,7 @@
 
 Workflow: [`.github/workflows/docker-build.yml`](../../.github/workflows/docker-build.yml)
 
-Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.5.1`
+Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.5.2`
 
 ## Inputs
 
@@ -38,7 +38,7 @@ Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.5.1`
 ```yaml
 jobs:
   image:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.5.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.5.2
     with:
       context: samples/docker-hello
       file: samples/docker-hello/Dockerfile

@@ -45,7 +45,7 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 
 `ci.yml` dogfoods the reusable workflows against `samples/*`, plus `sbom-sample`. Callers with Dependency graph enabled can invoke `dependency-review.yml` themselves.
 
-## Caller documentation map (post-v0.5.1)
+## Caller documentation map (post-v0.5.2)
 
 | Doc | Purpose |
 | --- | --- |

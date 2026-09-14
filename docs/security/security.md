@@ -10,7 +10,7 @@ Reusable workflows run on **caller** repositories with the caller's `GITHUB_TOKE
 | --- | --- |
 | No secrets in logs | Never `echo` tokens; mask sensitive outputs |
 | Least privilege | Callers should set `permissions:` narrowly on jobs that call these workflows — see [permissions.md](permissions.md) |
-| Pin by tag | Prefer annotated semver tags (`@v0.5.1`, `@v0.5.0`) over mutable branches for production callers |
+| Pin by tag | Prefer annotated semver tags (`@v0.5.2`, `@v0.5.0`) over mutable branches for production callers |
 | Dependency review | Use `dependency-review.yml` on pull requests |
 | CodeQL | Use `codeql.yml` with a JSON `languages` input (for example `'["python"]'` or `'["java-kotlin"]'`) |
 | SBOM | Generate and upload an SBOM artifact for release traceability |

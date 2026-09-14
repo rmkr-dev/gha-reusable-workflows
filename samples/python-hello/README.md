@@ -11,5 +11,5 @@ Dev extras include `ruff`. The reusable `python-ci.yml` runs `ruff check .` when
 - Pass `ruff-args` for extra Ruff flags (`--select`, `--ignore`) when `ruff` is installed.
 - Pass `pytest-args` for markers/`-k`/verbosity (appended after `pytest -q`).
 - `fail-fast: true` adds pytest `-x` when tests run.
-- Prefer `@v0.5.1` (or newer) when calling `python-ci.yml`.
+- Prefer `@v0.5.2` (or newer) when calling `python-ci.yml`.
 

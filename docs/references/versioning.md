@@ -4,10 +4,10 @@
 
 | Ref | Meaning |
 | --- | --- |
-| `@v0.5.1` | Exact annotated release (preferred for production) |
-| `@v0.5.0` | Previous patch |
-| `@v0.4.2` | Previous patch |
-| `@v0.4.0` | Previous minor |
+| `@v0.5.2` | Exact annotated release (preferred for production) |
+| `@v0.5.1` | Previous patch |
+| `@v0.5.0` | Previous minor |
+| `@v0.4.2` | Older patch |
 | `@main` | Latest merged work (dogfooding only) |
 | `@v1` | Reserved for a future stable major line |
 
@@ -52,7 +52,7 @@ Detailed CHANGELOG / soft-notes conventions: [release-notes.md](release-notes.md
 
 ## Latest patch
 
-`v0.5.1` ships post-`v0.5.0` docs hygiene (architecture/permissions/edge-cases/troubleshooting/examples/SUPPORT pins and catalogs) plus a python-ci `fail-fast` description clarification. Prefer `@v0.5.1` for production pins.
+`v0.5.2` adds CodeQL / dependency-review job summaries and sample/security docs hygiene on top of `v0.5.1`. Prefer `@v0.5.2` for production pins.
 
 ## Previous minor
 

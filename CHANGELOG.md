@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [0.5.2] - 2026-09-14
+
 ### Added
 
 - Job summaries on `codeql.yml` and `dependency-review.yml` (input echo for callers)
@@ -175,7 +177,8 @@
 - Self-test `ci.yml` with `samples/python-hello` and `samples/java-hello`
 - Foundation docs, MIT license, Dependabot for `github-actions`
 
-[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.5.1...HEAD
+[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.5.2...HEAD
+[0.5.2]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.4.2...v0.5.0
 [0.4.2]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.4.1...v0.4.2

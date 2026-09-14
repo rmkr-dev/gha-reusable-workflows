@@ -31,4 +31,4 @@ Failsafe `testSourceDirectory` (or a similar layout) themselves — not covered 
 
 - Pass `maven-extra-args` for reactor/property flags (for example `-DskipITs`) instead of stuffing them into `maven-goals`.
 - Pass `maven-opts` for JVM flags via `MAVEN_OPTS` (for example `-Xmx1g`).
-- Prefer `@v0.5.1` (or newer) when calling `java-maven-ci.yml`.
+- Prefer `@v0.5.2` (or newer) when calling `java-maven-ci.yml`.
