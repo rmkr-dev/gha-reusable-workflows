@@ -43,6 +43,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `scan` | `true` | Trivy via `aquasecurity/trivy-action` |
 | `trivy-severity` | `CRITICAL,HIGH` | Fail the job on matching findings |
 | `context` / `file` | `.` / `Dockerfile` | Build context paths |
+| `labels` | `""` | Optional OCI labels (`key=value`, comma-separated) |
 
 Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-ran`, `java-version` / `maven-goals`).
 

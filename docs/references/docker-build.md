@@ -12,6 +12,7 @@ Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.0`
 | `file` | string | `Dockerfile` | Dockerfile path relative to repository root |
 | `image-name` | string | `app` | Used for default local tag / summary |
 | `tags` | string | `""` | Comma-separated tags; empty → `local/<image-name>:ci` |
+| `labels` | string | `""` | Comma-separated OCI labels (`key=value`) for build-push-action |
 | `push` | boolean | `false` | Build-only by default (self-test safe) |
 | `platforms` | string | `linux/amd64` | Prefer a single platform when `push=false` + `load` |
 | `scan` | boolean | `true` | Run Trivy after build |
@@ -78,6 +79,20 @@ Keeping `push: false` in this reusable workflow is intentional for safe dogfoodi
 - Action: `aquasecurity/trivy-action` (pinned in the workflow).
 - `ignore-unfixed: true` so findings without fixes do not fail the job.
 - Tune `trivy-severity` (for example `CRITICAL` only) for noisy base images.
+
+
+## Labels
+
+Optional OCI labels (comma-separated `key=value`) flow through to `docker/build-push-action`:
+
+```yaml
+with:
+  image-name: api
+  labels: org.opencontainers.image.source=https://github.com/example/api,org.opencontainers.image.title=api
+  push: false
+```
+
+Empty `labels` leaves the build-push default (no extra labels).
 
 ## Platforms
 
