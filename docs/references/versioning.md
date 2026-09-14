@@ -41,3 +41,7 @@ Or call `release-tag.yml` from a trusted workflow with `tag: v0.2.0`.
 - Dependabot action major bumps merged on `main`
 
 See [CHANGELOG.md](../../CHANGELOG.md).
+
+## Release notes source
+
+`release-tag.yml` prefers a matching `## [X.Y.Z]` section from `changelog-path` (default `CHANGELOG.md`). If none is found, it uses `gh release create --generate-notes` when `generate-notes` is true. Empty `tag` input remains a safe no-op.
