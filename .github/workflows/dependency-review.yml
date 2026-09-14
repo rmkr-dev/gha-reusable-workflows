@@ -2,6 +2,12 @@ name: Dependency Review
 
 on:
   workflow_call:
+    inputs:
+      fail-on-severity:
+        description: "Fail on findings at or above this severity (dependency-review-action)"
+        required: false
+        type: string
+        default: "low"
 
 jobs:
   dependency-review:
@@ -15,3 +21,5 @@ jobs:
 
       - name: Dependency review
         uses: actions/dependency-review-action@v5
+        with:
+          fail-on-severity: ${{ inputs.fail-on-severity }}
