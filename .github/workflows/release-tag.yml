@@ -4,15 +4,25 @@ on:
   workflow_call:
     inputs:
       tag:
-        description: Tag name to create (e.g. v0.1.0). Ignored when triggered via release published path in caller.
+        description: Tag name to create (e.g. v0.1.0). Ignored when empty (safe no-op).
         required: false
         type: string
         default: ""
       generate-notes:
-        description: Whether gh release should generate notes
+        description: Whether gh release should generate notes when no changelog section is found
         required: false
         type: boolean
         default: true
+      changelog-path:
+        description: Path to CHANGELOG.md used for soft notes extraction (empty skips extraction)
+        required: false
+        type: string
+        default: "CHANGELOG.md"
+      notes-fallback:
+        description: "notes | generate | tag — used when changelog has no matching section"
+        required: false
+        type: string
+        default: "generate"
 
 jobs:
   release:
@@ -30,6 +40,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.tag }}
           GEN_NOTES: ${{ inputs.generate-notes }}
+          CHANGELOG_PATH: ${{ inputs.changelog-path }}
+          NOTES_FALLBACK: ${{ inputs.notes-fallback }}
         run: |
           set -euo pipefail
           if [ -z "${TAG}" ]; then
@@ -52,12 +64,66 @@ jobs:
             git tag -a "${TAG}" -m "${TAG}"
             git push origin "refs/tags/${TAG}"
           fi
-          if gh release view "${TAG}" >/dev/null 2>&1; then
-            echo "Release ${TAG} already exists"
-          else
-            if [ "${GEN_NOTES}" = "true" ]; then
-              gh release create "${TAG}" --generate-notes --verify-tag
+
+          # Soft notes: prefer CHANGELOG section for this version when present
+          NOTES_FILE="$(mktemp)"
+          USED_CHANGELOG=false
+          VERSION="${TAG#v}"
+          if [ -n "${CHANGELOG_PATH}" ] && [ -f "${CHANGELOG_PATH}" ]; then
+            # Extract ## [VERSION] ... up to (but not including) the next ## heading
+            if awk -v ver="${VERSION}" '
+              BEGIN { grab=0 }
+              $0 ~ "^## \\[" ver "\\]" { grab=1; print; next }
+              grab && $0 ~ /^## / { exit }
+              grab { print }
+            ' "${CHANGELOG_PATH}" > "${NOTES_FILE}" \
+              && [ -s "${NOTES_FILE}" ]; then
+              USED_CHANGELOG=true
+              echo "Extracted release notes from ${CHANGELOG_PATH} for ${VERSION}"
             else
-              gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag
+              : > "${NOTES_FILE}"
+              echo "No matching ## [${VERSION}] section in ${CHANGELOG_PATH}"
             fi
           fi
+
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            echo "Release ${TAG} already exists"
+            if [ "${USED_CHANGELOG}" = "true" ]; then
+              echo "Leaving existing release notes unchanged (safe)."
+            fi
+          else
+            if [ "${USED_CHANGELOG}" = "true" ]; then
+              gh release create "${TAG}" --title "${TAG}" --notes-file "${NOTES_FILE}" --verify-tag
+            else
+              case "${NOTES_FALLBACK}" in
+                generate)
+                  if [ "${GEN_NOTES}" = "true" ]; then
+                    gh release create "${TAG}" --generate-notes --verify-tag
+                  else
+                    gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag
+                  fi
+                  ;;
+                notes)
+                  gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag
+                  ;;
+                tag)
+                  gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag
+                  ;;
+                *)
+                  echo "Unknown notes-fallback '${NOTES_FALLBACK}'; expected generate|notes|tag"
+                  exit 1
+                  ;;
+              esac
+            fi
+          fi
+
+          {
+            echo "## Release tag summary"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| tag | \`${TAG}\` |"
+            echo "| changelog-path | \`${CHANGELOG_PATH}\` |"
+            echo "| used-changelog | \`${USED_CHANGELOG}\` |"
+            echo "| notes-fallback | \`${NOTES_FALLBACK}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -173,7 +173,14 @@ jobs:
     with:
       tag: ${{ inputs.tag }}
       generate-notes: true
+      changelog-path: CHANGELOG.md
+      notes-fallback: generate
 ```
+
+When `CHANGELOG.md` contains a `## [X.Y.Z]` section matching the tag without the leading
+`v`, those notes are used. Otherwise the workflow falls back to `--generate-notes`
+(or a plain tag title when `generate-notes: false` / `notes-fallback: notes`).
+Existing tags and releases remain untouched (safe no-op / skip).
 
 ## Combined Python + security jobs
 
