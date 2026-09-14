@@ -53,3 +53,7 @@ See [SECURITY.md](../../SECURITY.md) for how to report vulnerabilities privately
 ## Runner trust
 
 Jobs use GitHub-hosted runners. Consumers who need stronger isolation should follow GitHub’s hardened runner guidance in their own orgs; this repo does not customize runner images.
+
+### Self-test
+
+This repository's `ci.yml` runs `sbom-sample` against `samples/python-hello` so the reusable SBOM workflow stays exercised on every PR.
