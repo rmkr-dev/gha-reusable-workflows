@@ -7,18 +7,20 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-14
+
 ### Added
 
-- `samples/java-hello` Failsafe `integration-test` profile and `java-failsafe-sample` CI job
-- `samples/python-hello` optional `ruff` so self-test exercises the existing `ruff check` path
 - `docker-build.yml` reusable workflow (`workflow_call`): buildx build, `push` default false, optional Trivy scan
 - Sample `samples/docker-hello` and self-test job in `ci.yml`
 - `release-tag.yml`: optional CHANGELOG section extraction (`changelog-path`) with soft `notes-fallback`
 - Monorepo / matrix caller docs (`docs/references/monorepo.md`) with path-filter example
+- `samples/python-hello` optional `ruff` so self-test exercises the existing `ruff check` path
+- `samples/java-hello` Failsafe `integration-test` profile and `java-failsafe-sample` CI job
 
 ### Changed
 
-- Pin composite actions used by reusable CI workflows to `@v0.2.0`
+- Self-test `ci.yml` now covers Docker build and Java Failsafe verify in addition to Python/Java samples
 
 ## [0.2.0] - 2026-09-13
 
@@ -49,6 +51,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - Self-test `ci.yml` with `samples/python-hello` and `samples/java-hello`
 - Foundation docs, MIT license, Dependabot for `github-actions`
 
-[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/rmkr-dev/gha-reusable-workflows/releases/tag/v0.1.0
