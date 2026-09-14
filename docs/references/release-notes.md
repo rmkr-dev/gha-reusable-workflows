@@ -11,7 +11,7 @@ Semantic Versioning tags (`vX.Y.Z`).
 ### Added
 - …
 
-## [0.3.0] - 2026-09-14
+## [0.4.0] - 2026-09-14
 
 ### Added
 - …
@@ -20,8 +20,8 @@ Semantic Versioning tags (`vX.Y.Z`).
 Footer links:
 
 ```markdown
-[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.3.0...HEAD
-[0.3.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.2.0...v0.3.0
+[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.3.0...v0.4.0
 ```
 
 ## How `release-tag.yml` uses the CHANGELOG
@@ -48,6 +48,6 @@ Existing tags and releases are left alone (safe skip).
 2. Move `[Unreleased]` bullets into `## [X.Y.Z] - YYYY-MM-DD`.
 3. Update compare footer links.
 4. Create annotated tag + release (`release-tag.yml` or `gh release create`).
-5. Bump consumer pin docs from `@v0.3.0` → `@vX.Y.Z` in a follow-up if needed.
+5. Bump consumer pin docs from `@v0.3.0` → `@v0.4.0` (then composites after the tag exists).
 
 Semver rules: [versioning.md](versioning.md). History: [CHANGELOG.md](../../CHANGELOG.md).
