@@ -9,6 +9,8 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Added
 
+- `docker-build.yml` reusable workflow (`workflow_call`): buildx build, `push` default false, optional Trivy scan
+- Sample `samples/docker-hello` and self-test job in `ci.yml`
 - Monorepo / matrix caller docs (`docs/references/monorepo.md`) with path-filter example
 
 ### Changed

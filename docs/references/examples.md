@@ -151,6 +151,37 @@ jobs:
           publish_results: true
 ```
 
+
+## Docker build (no push by default)
+
+```yaml
+name: Docker
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  image:
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.2.0
+    with:
+      context: .
+      file: Dockerfile
+      image-name: myapp
+      tags: ghcr.io/OWNER/myapp:latest
+      push: false
+      scan: true
+      trivy-severity: CRITICAL,HIGH
+```
+
+Set `push: true` only when the caller has already authenticated to a registry
+(for example `docker/login-action` in a thin wrapper job, or `permissions: packages: write`
+plus GHCR login). The reusable workflow itself does not log in.
+
 ## Release tag helper
 
 ```yaml

@@ -22,7 +22,8 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | [`dependency-review.yml`](.github/workflows/dependency-review.yml) | `workflow_call` | PR dependency review |
 | [`sbom.yml`](.github/workflows/sbom.yml) | `workflow_call` | Generate SPDX SBOM and upload artifact |
 | [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release |
-| [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: calls Python + Java workflows on `samples/` |
+| [`docker-build.yml`](.github/workflows/docker-build.yml) | `workflow_call` | Build image (push default false), optional Trivy scan |
+| [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: Python, Java, and Docker samples |
 
 ### Hardening inputs (Python / Java)
 
@@ -70,7 +71,7 @@ jobs:
       enable-maven-cache: true
 ```
 
-Full copy-paste snippets (CodeQL, dependency review, SBOM, release): [docs/references/examples.md](docs/references/examples.md).
+Full copy-paste snippets (CodeQL, dependency review, SBOM, Docker, release): [docs/references/examples.md](docs/references/examples.md).
 
 ## Composite actions
 
@@ -104,6 +105,7 @@ Self-test packages exercised by this repo's `ci.yml`:
 - [`samples/java-multi`](samples/java-multi) — multi-module Maven reactor
 - [`samples/python-requirements-only`](samples/python-requirements-only) — `requirements.txt` only
 - [`samples/python-compileall-only`](samples/python-compileall-only) — no metadata; compileall fallback
+- [`samples/docker-hello`](samples/docker-hello) — BusyBox Dockerfile for docker-build self-test
 
 ## Monorepo and matrices
 
