@@ -75,3 +75,8 @@ Python and Java reusable CI accept `fetch-depth` (default `1`). Pass `fetch-dept
 ## Docker build-args
 
 Pass `build-args: FOO=bar,BAZ=qux` to `docker-build.yml` when the Dockerfile declares `ARG`s.
+
+
+## Maven extra CLI args
+
+Prefer `maven-goals` for the goal list (`test`, `verify -Pintegration-test`). Use `maven-extra-args` for reactor / property flags that should not be mixed into the goals string, for example `-pl module-a -am` or `-DskipITs`.
