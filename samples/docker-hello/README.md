@@ -24,3 +24,4 @@ docker run --rm local/docker-hello:dev
 - Prefer your own Dockerfile and base image in consumer repos.
 - Start with `push: false` on pull requests; only enable push after registry login in a **caller-owned** job (see [docker-build.md](../../docs/references/docker-build.md)).
 - If Trivy fails on HIGH findings for a fat base image, narrow `trivy-severity` or upgrade the base — do not disable `scan` without a documented exception.
+- Optional: `labels` / `annotations`, multi-stage `target`, `enable-gha-cache: false`, or `trivy-exit-code: "0"` for report-only scans (see `@v0.5.1` docker-build inputs).

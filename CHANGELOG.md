@@ -3,6 +3,8 @@
 ### Changed
 
 - Pin composite actions used by reusable CI workflows to `@v0.5.1`
+- `samples/docker-hello` caller tips cover annotations/target/cache/trivy-exit-code
+- Architecture docs map labeled post-v0.5.1
 
 ## [0.5.1] - 2026-09-14
 
