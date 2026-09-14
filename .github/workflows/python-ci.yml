@@ -28,6 +28,11 @@ on:
         required: false
         type: boolean
         default: true
+      pytest-args:
+        description: Extra arguments appended to `python -m pytest -q` when tests run
+        required: false
+        type: string
+        default: ""
       fetch-depth:
         description: actions/checkout fetch-depth (0 = full history)
         required: false
@@ -78,10 +83,14 @@ jobs:
 
       - name: Test
         id: pytest
+        env:
+          PYTEST_ARGS: ${{ inputs.pytest-args }}
         run: |
           set -euo pipefail
           if [ -d tests ] || [ -d test ] || compgen -G "test_*.py" >/dev/null || compgen -G "*_test.py" >/dev/null; then
-            python -m pytest -q
+            # Word-split pytest-args intentionally (callers pass flags like -k 'name')
+            # shellcheck disable=SC2086
+            python -m pytest -q ${PYTEST_ARGS}
             echo "ran=true" >> "$GITHUB_OUTPUT"
           else
             echo "No tests found; skipping pytest"
@@ -97,6 +106,7 @@ jobs:
           FAIL_FAST: ${{ inputs.fail-fast }}
           WD: ${{ inputs.working-directory }}
           PIP_CACHE: ${{ inputs.enable-pip-cache }}
+          PYTEST_ARGS: ${{ inputs.pytest-args }}
         run: |
           set -euo pipefail
           echo "python-version=${PY_VER}" >> "$GITHUB_OUTPUT"
@@ -111,5 +121,6 @@ jobs:
             echo "| tests-ran | \`${TESTS_RAN:-false}\` |"
             echo "| fail-fast | \`${FAIL_FAST}\` |"
             echo "| pip-cache | \`${PIP_CACHE}\` |"
+            echo "| pytest-args | \`${PYTEST_ARGS:-}\` |"
             echo "| setup | composite setup-python-project |"
           } >> "$GITHUB_STEP_SUMMARY"
