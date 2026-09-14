@@ -2,7 +2,7 @@
 
 Workflow: [`.github/workflows/sbom.yml`](../../.github/workflows/sbom.yml)
 
-Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.4.0`
+Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.4.1`
 
 ## Inputs
 
@@ -23,7 +23,7 @@ When `format` is `spdx-json`, the workflow parses the SPDX JSON and fails on emp
 ```yaml
 jobs:
   sbom:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.4.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.4.1
     with:
       path: .
       artifact-name: sbom-root

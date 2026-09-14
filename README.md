@@ -3,7 +3,7 @@
 Reusable GitHub Actions workflows that other repositories can call with:
 
 ```yaml
-uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v0.4.0
+uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v0.4.1
 ```
 
 Until you prefer a floating major, pin the annotated tag. `@main` is available for early adopters.
@@ -76,14 +76,14 @@ on:
 
 jobs:
   python:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.1
     with:
       working-directory: .
       python-version: "3.12"
       enable-pip-cache: true
 
   java:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.1
     with:
       working-directory: .
       java-version: "21"
@@ -103,7 +103,7 @@ SBOM deep-dive: [docs/references/sbom.md](docs/references/sbom.md).
 | [`.github/actions/setup-python-project`](.github/actions/setup-python-project) | `python-ci.yml` |
 | [`.github/actions/setup-maven-project`](.github/actions/setup-maven-project) | `java-maven-ci.yml` |
 
-Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.4.0`.
+Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.4.1`.
 
 ## Support
 
@@ -121,7 +121,6 @@ Usage help: [SUPPORT.md](SUPPORT.md). Troubleshooting: [docs/references/troubles
 
 - `main` — latest merged work; OK for early adopters.
 - Annotated tags (`v0.1.0`, later `v0.2.0` / `v1`) — preferred for consumers.
-- `v0.4.1` (planned) — patch for post-`v0.4.0` additive inputs currently on `main`.
 - Breaking input/output changes bump the major tag line; document in PR and release notes.
 
 ## Samples
