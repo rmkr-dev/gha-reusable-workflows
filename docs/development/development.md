@@ -143,3 +143,7 @@ Prefer annotated tags via `release-tag.yml`. Use `draft: true` when previewing G
 ## Manual self-test
 
 `.github/workflows/ci.yml` accepts `workflow_dispatch` so maintainers can re-run the sample matrix without an empty commit.
+
+## Current release
+
+Latest annotated tag: `v0.4.1`. Composite actions in reusable CI workflows pin to the same tag.
