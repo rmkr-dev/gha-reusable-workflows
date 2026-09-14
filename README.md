@@ -21,7 +21,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | [`codeql.yml`](.github/workflows/codeql.yml) | `workflow_call` | CodeQL analyze for caller-provided languages |
 | [`dependency-review.yml`](.github/workflows/dependency-review.yml) | `workflow_call` | PR dependency review |
 | [`sbom.yml`](.github/workflows/sbom.yml) | `workflow_call` | Generate SPDX SBOM and upload artifact |
-| [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release |
+| [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release (CHANGELOG soft notes) |
 | [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: calls Python + Java workflows on `samples/` |
 
 ### Hardening inputs (Python / Java)

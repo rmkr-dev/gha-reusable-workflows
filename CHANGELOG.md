@@ -7,6 +7,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+### Added
+
+- `release-tag.yml`: optional CHANGELOG section extraction (`changelog-path`) with soft `notes-fallback`
+
 ### Changed
 
 - Pin composite actions used by reusable CI workflows to `@v0.2.0`
