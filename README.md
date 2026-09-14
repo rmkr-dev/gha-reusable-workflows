@@ -105,12 +105,17 @@ Self-test packages exercised by this repo's `ci.yml`:
 - [`samples/python-requirements-only`](samples/python-requirements-only) — `requirements.txt` only
 - [`samples/python-compileall-only`](samples/python-compileall-only) — no metadata; compileall fallback
 
+## Monorepo and matrices
+
+Call Python/Java/Docker reusable workflows **once per module** (or behind path filters).
+Copy-paste patterns: [docs/references/monorepo.md](docs/references/monorepo.md).
+
 ## Docs
 
 - [Architecture](docs/architecture/architecture.md) · [Diagram](docs/architecture/architecture-diagram.md) · [Network](docs/architecture/network-diagram.md)
 - [Development](docs/development/development.md)
 - [Security](docs/security/security.md) · [SECURITY.md](SECURITY.md)
-- [Examples](docs/references/examples.md) · [Versioning](docs/references/versioning.md) · [Changelog](CHANGELOG.md)
+- [Examples](docs/references/examples.md) · [Monorepo / matrix](docs/references/monorepo.md) · [Versioning](docs/references/versioning.md) · [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md) · [Agent notes](AGENTS.md)
 
 ## License

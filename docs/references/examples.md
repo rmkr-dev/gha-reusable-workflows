@@ -220,3 +220,5 @@ jobs:
 This repository tags annotated releases from `main` after CI is green.
 
 Semver rules: [versioning.md](versioning.md). Release history: [CHANGELOG.md](../../CHANGELOG.md).
+
+Monorepo / multi-module callers: [monorepo.md](monorepo.md).
