@@ -28,3 +28,8 @@ install / lint / test path a reusable workflow will take.
 | SBOM path scan (Python / Java) | `sbom-sample` / `sbom-java-sample` jobs |
 
 Caller pitfalls and unsupported edges: [edge-cases.md](../docs/references/edge-cases.md).
+
+## Caller tips
+
+- Pass `fetch-depth: 0` on Python/Java reusable CI when packaging needs git history.
+- Docker `labels` / `build-args` are optional strings; leave empty for defaults.
