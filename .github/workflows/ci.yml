@@ -65,3 +65,15 @@ jobs:
       fail-fast: true
       enable-maven-cache: true
       maven-goals: test
+
+  docker-sample:
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      context: samples/docker-hello
+      file: samples/docker-hello/Dockerfile
+      image-name: docker-hello
+      tags: local/docker-hello:ci
+      push: false
+      scan: true
+      trivy-severity: CRITICAL
+      timeout-minutes: 20

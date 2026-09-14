@@ -1,0 +1,157 @@
+name: Docker build
+
+on:
+  workflow_call:
+    inputs:
+      context:
+        description: Build context path relative to the repository root
+        required: false
+        type: string
+        default: "."
+      file:
+        description: Path to the Dockerfile relative to the repository root
+        required: false
+        type: string
+        default: "Dockerfile"
+      image-name:
+        description: Image name without registry (used for local tags / summary)
+        required: false
+        type: string
+        default: "app"
+      tags:
+        description: Comma-separated image tags (e.g. myorg/app:latest,myorg/app:sha)
+        required: false
+        type: string
+        default: ""
+      push:
+        description: Push the image to a registry (default false — build-only / self-test safe)
+        required: false
+        type: boolean
+        default: false
+      platforms:
+        description: Target platforms for buildx (single platform recommended when push=false)
+        required: false
+        type: string
+        default: "linux/amd64"
+      scan:
+        description: Run Trivy vulnerability scan on the built image (free aquasecurity action)
+        required: false
+        type: boolean
+        default: true
+      trivy-severity:
+        description: Comma-separated severities that fail the scan when scan=true
+        required: false
+        type: string
+        default: "CRITICAL,HIGH"
+      timeout-minutes:
+        description: Job timeout in minutes
+        required: false
+        type: number
+        default: 30
+    outputs:
+      image-name:
+        description: Resolved image name used for local tags
+        value: ${{ jobs.build.outputs.image-name }}
+      pushed:
+        description: Whether the image was pushed (true/false)
+        value: ${{ jobs.build.outputs.pushed }}
+      scanned:
+        description: Whether Trivy ran (true/false)
+        value: ${{ jobs.build.outputs.scanned }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    permissions:
+      contents: read
+      # packages:write only needed when callers push to ghcr; keep read-only by default
+    outputs:
+      image-name: ${{ steps.meta.outputs.image-name }}
+      pushed: ${{ steps.meta.outputs.pushed }}
+      scanned: ${{ steps.meta.outputs.scanned }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Resolve tags
+        id: tags
+        env:
+          IMAGE: ${{ inputs.image-name }}
+          TAGS_IN: ${{ inputs.tags }}
+          PUSH: ${{ inputs.push }}
+        run: |
+          set -euo pipefail
+          if [ -n "${TAGS_IN}" ]; then
+            echo "tags=${TAGS_IN}" >> "$GITHUB_OUTPUT"
+          else
+            # Local-only tag when caller omits tags (safe for push=false self-tests)
+            echo "tags=local/${IMAGE}:ci" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build (and optionally push)
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ inputs.context }}
+          file: ${{ inputs.file }}
+          push: ${{ inputs.push }}
+          load: ${{ inputs.push == false }}
+          tags: ${{ steps.tags.outputs.tags }}
+          platforms: ${{ inputs.platforms }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Resolve scan image ref
+        if: inputs.scan
+        id: scanref
+        env:
+          TAGS: ${{ steps.tags.outputs.tags }}
+        run: |
+          set -euo pipefail
+          # Trivy expects a single image ref; use the first tag when several are listed
+          echo "ref=${TAGS%%,*}" >> "$GITHUB_OUTPUT"
+
+      - name: Trivy scan
+        if: inputs.scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: ${{ steps.scanref.outputs.ref }}
+          format: table
+          exit-code: "1"
+          severity: ${{ inputs.trivy-severity }}
+          ignore-unfixed: true
+
+      - name: Job summary
+        if: always()
+        id: meta
+        env:
+          IMAGE: ${{ inputs.image-name }}
+          TAGS: ${{ steps.tags.outputs.tags }}
+          PUSH: ${{ inputs.push }}
+          SCAN: ${{ inputs.scan }}
+          CTX: ${{ inputs.context }}
+          FILE: ${{ inputs.file }}
+        run: |
+          set -euo pipefail
+          # When multiple tags were provided, use the first for summary fields
+          FIRST_TAG="${TAGS%%,*}"
+          echo "image-name=${IMAGE}" >> "$GITHUB_OUTPUT"
+          echo "pushed=${PUSH}" >> "$GITHUB_OUTPUT"
+          echo "scanned=${SCAN}" >> "$GITHUB_OUTPUT"
+          {
+            echo "## Docker build summary"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| context | \`${CTX}\` |"
+            echo "| file | \`${FILE}\` |"
+            echo "| image-name | \`${IMAGE}\` |"
+            echo "| tags | \`${TAGS}\` |"
+            echo "| push | \`${PUSH}\` |"
+            echo "| scan (Trivy) | \`${SCAN}\` |"
+            echo "| primary-tag | \`${FIRST_TAG}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"
