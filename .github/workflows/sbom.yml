@@ -28,10 +28,16 @@ on:
         required: false
         type: number
         default: 0
+      timeout-minutes:
+        description: Job timeout in minutes
+        required: false
+        type: number
+        default: 30
 
 jobs:
   sbom:
     runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     permissions:
       contents: read
     steps:
