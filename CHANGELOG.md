@@ -1,4 +1,13 @@
+# Changelog
+
+All notable changes to this project are documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html) for annotated tags that consumers pin.
+
 ## [Unreleased]
+
+## [0.4.1] - 2026-09-14
 
 ### Added
 
@@ -22,7 +31,6 @@
 
 ### Changed
 
-- Document planned `v0.4.1` patch for Unreleased additive inputs
 - Self-test concurrency: `cancel-in-progress` only for `pull_request` (preserve main CI)
 - Dependabot major bumps (CI green): `docker/build-push-action` v6→v7 (#46), `docker/setup-buildx-action` v3→v4 (#48)
 - README SBOM input table (`format`, retention)
