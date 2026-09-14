@@ -74,3 +74,5 @@ Jobs use GitHub-hosted runners. Consumers who need stronger isolation should fol
 - `sbom-java-sample` runs against `samples/java-hello` (same reusable workflow, different path).
 
 Caller workflows that invoke `dependency-review.yml` must enable Dependency graph and grant `pull-requests: write` (plus `contents: read`). This repository keeps the reusable workflow but does not self-test it in `ci.yml` until Dependency review is supported on the repo.
+
+`dependency-review.yml` accepts `fail-on-severity` and optional `deny-licenses` (comma-separated SPDX license identifiers).
