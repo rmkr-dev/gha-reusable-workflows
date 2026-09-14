@@ -73,6 +73,15 @@ PYTHONPATH=src pytest
 mvn -B -f samples/java-multi/pom.xml test
 ```
 
+## Release helper inputs
+
+| Input | Default | Notes |
+| --- | --- | --- |
+| `tag` | `""` | Empty = safe no-op |
+| `generate-notes` | `true` | Used when changelog section missing |
+| `changelog-path` | `CHANGELOG.md` | Soft-extract `## [X.Y.Z]`; empty skips |
+| `notes-fallback` | `generate` | `generate` \| `notes` \| `tag` |
+
 ## Publishing a version
 
 After CI is green on `main`:
