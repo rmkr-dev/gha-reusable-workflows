@@ -20,6 +20,7 @@
 
 ### Changed
 
+- Document planned `v0.4.1` patch for Unreleased additive inputs
 - Self-test concurrency: `cancel-in-progress` only for `pull_request` (preserve main CI)
 - Dependabot major bumps (CI green): `docker/build-push-action` v6→v7 (#46), `docker/setup-buildx-action` v3→v4 (#48)
 - README SBOM input table (`format`, retention)

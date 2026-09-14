@@ -121,6 +121,7 @@ Usage help: [SUPPORT.md](SUPPORT.md). Troubleshooting: [docs/references/troubles
 
 - `main` — latest merged work; OK for early adopters.
 - Annotated tags (`v0.1.0`, later `v0.2.0` / `v1`) — preferred for consumers.
+- `v0.4.1` (planned) — patch for post-`v0.4.0` additive inputs currently on `main`.
 - Breaking input/output changes bump the major tag line; document in PR and release notes.
 
 ## Samples
