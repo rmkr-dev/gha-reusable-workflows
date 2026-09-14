@@ -35,6 +35,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `pytest-args` | `""` | Python (appended after `pytest -q`) |
 | `enable-maven-cache` | `true` | Java |
 | `maven-goals` | `test` | Java |
+| `maven-extra-args` | `""` | Java (extra CLI args after goals) |
 
 ### Docker build inputs
 

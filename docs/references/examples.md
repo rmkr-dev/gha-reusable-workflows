@@ -58,6 +58,7 @@ jobs:
       enable-maven-cache: true
       maven-goals: test
       # or: maven-goals: verify -Pintegration-test   # Failsafe IT profile
+      # maven-extra-args: -pl module-a -am           # optional reactor selectors
 ```
 
 ## CodeQL
