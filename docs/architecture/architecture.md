@@ -55,3 +55,5 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 | [troubleshooting.md](../references/troubleshooting.md) | Symptom → fix tables |
 | [docker-build.md](../references/docker-build.md) | Docker inputs including `labels` |
 | [sbom.md](../references/sbom.md) | SBOM inputs, verify, retention |
+
+Self-test also supports `workflow_dispatch` for manual matrix runs.
