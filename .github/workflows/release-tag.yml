@@ -28,6 +28,11 @@ on:
         required: false
         type: boolean
         default: false
+      prerelease:
+        description: Mark the GitHub Release as a prerelease when true
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   release:
@@ -48,6 +53,7 @@ jobs:
           CHANGELOG_PATH: ${{ inputs.changelog-path }}
           NOTES_FALLBACK: ${{ inputs.notes-fallback }}
           DRAFT: ${{ inputs.draft }}
+          PRERELEASE: ${{ inputs.prerelease }}
         run: |
           set -euo pipefail
           if [ -z "${TAG}" ]; then
@@ -96,6 +102,10 @@ jobs:
           if [ "${DRAFT}" = "true" ]; then
             DRAFT_ARGS=(--draft)
           fi
+          PRERELEASE_ARGS=()
+          if [ "${PRERELEASE}" = "true" ]; then
+            PRERELEASE_ARGS=(--prerelease)
+          fi
 
           if gh release view "${TAG}" >/dev/null 2>&1; then
             echo "Release ${TAG} already exists"
@@ -104,21 +114,21 @@ jobs:
             fi
           else
             if [ "${USED_CHANGELOG}" = "true" ]; then
-              gh release create "${TAG}" --title "${TAG}" --notes-file "${NOTES_FILE}" --verify-tag "${DRAFT_ARGS[@]}"
+              gh release create "${TAG}" --title "${TAG}" --notes-file "${NOTES_FILE}" --verify-tag "${DRAFT_ARGS[@]}" "${PRERELEASE_ARGS[@]}"
             else
               case "${NOTES_FALLBACK}" in
                 generate)
                   if [ "${GEN_NOTES}" = "true" ]; then
-                    gh release create "${TAG}" --generate-notes --verify-tag "${DRAFT_ARGS[@]}"
+                    gh release create "${TAG}" --generate-notes --verify-tag "${DRAFT_ARGS[@]}" "${PRERELEASE_ARGS[@]}"
                   else
-                    gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag "${DRAFT_ARGS[@]}"
+                    gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag "${DRAFT_ARGS[@]}" "${PRERELEASE_ARGS[@]}"
                   fi
                   ;;
                 notes)
-                  gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag "${DRAFT_ARGS[@]}"
+                  gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag "${DRAFT_ARGS[@]}" "${PRERELEASE_ARGS[@]}"
                   ;;
                 tag)
-                  gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag "${DRAFT_ARGS[@]}"
+                  gh release create "${TAG}" --title "${TAG}" --notes "${TAG}" --verify-tag "${DRAFT_ARGS[@]}" "${PRERELEASE_ARGS[@]}"
                   ;;
                 *)
                   echo "Unknown notes-fallback '${NOTES_FALLBACK}'; expected generate|notes|tag"
@@ -142,6 +152,7 @@ jobs:
             echo "| used-changelog | \`${USED_CHANGELOG}\` |"
             echo "| notes-fallback | \`${NOTES_FALLBACK}\` |"
             echo "| draft | \`${DRAFT}\` |"
+            echo "| prerelease | \`${PRERELEASE}\` |"
             echo "| notes-bytes | \`${NOTES_BYTES}\` |"
             echo ""
             if [ "${USED_CHANGELOG}" = "true" ] && [ -s "${NOTES_FILE}" ]; then
