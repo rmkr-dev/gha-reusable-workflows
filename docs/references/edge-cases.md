@@ -24,7 +24,7 @@ understands; tox/nox as the primary runner; Windows/macOS runners.
 | Missing `pom.xml` under `working-directory` | Setup composite fails fast |
 | Default `maven-goals: test` | Surefire only |
 | `maven-goals: verify -Pintegration-test` | Runs Failsafe when the profile is defined (see `java-hello`) |
-| Multi-module reactor root | Pass reactor root as `working-directory`; use `-pl` / `-am` in `maven-goals` if needed |
+| Multi-module reactor root | Pass reactor root as `working-directory`; use `-pl` / `-am` in `maven-goals` if needed (see [`java-multi` README](../../samples/java-multi/README.md)) |
 | `fail-fast: true` | Sets `surefire.skipAfterFailureCount=1` |
 
 **Unsupported:** Gradle; non-Temurin JDKs via this workflow's inputs; publishing artifacts.
