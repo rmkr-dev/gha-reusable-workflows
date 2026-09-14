@@ -35,3 +35,21 @@ jobs:
           fail-on-severity: ${{ inputs.fail-on-severity }}
           deny-licenses: ${{ inputs.deny-licenses }}
           comment-summary-in-pr: ${{ inputs.comment-summary-in-pr }}
+
+      - name: Job summary
+        if: always()
+        env:
+          SEVERITY: ${{ inputs.fail-on-severity }}
+          DENY: ${{ inputs.deny-licenses }}
+          COMMENT: ${{ inputs.comment-summary-in-pr }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## Dependency review summary"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| fail-on-severity | \`${SEVERITY}\` |"
+            echo "| deny-licenses | \`${DENY:-}\` |"
+            echo "| comment-summary-in-pr | \`${COMMENT}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"
