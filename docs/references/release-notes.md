@@ -48,7 +48,7 @@ Existing tags and releases are left alone (safe skip).
 2. Move `[Unreleased]` bullets into `## [X.Y.Z] - YYYY-MM-DD`.
 3. Update compare footer links.
 4. Create annotated tag + release (`release-tag.yml` or `gh release create`).
-5. Bump consumer pin docs from `@v0.4.2` → `@v0.5.1` (then composites after the tag exists).
+5. Bump consumer pin docs from `@v0.5.0` → `@v0.5.1` (then composites after the tag exists).
 
 Semver rules: [versioning.md](versioning.md). History: [CHANGELOG.md](../../CHANGELOG.md).
 
