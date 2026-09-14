@@ -20,7 +20,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | [`java-maven-ci.yml`](.github/workflows/java-maven-ci.yml) | `workflow_call` | Setup Temurin JDK, Maven goals (default `test`) |
 | [`codeql.yml`](.github/workflows/codeql.yml) | `workflow_call` | CodeQL analyze for caller-provided languages |
 | [`dependency-review.yml`](.github/workflows/dependency-review.yml) | `workflow_call` | PR dependency review |
-| [`sbom.yml`](.github/workflows/sbom.yml) | `workflow_call` | Generate SPDX SBOM and upload artifact |
+| [`sbom.yml`](.github/workflows/sbom.yml) | `workflow_call` | Generate SPDX SBOM, verify, upload artifact (optional retention days) |
 | [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release (CHANGELOG soft notes) |
 | [`docker-build.yml`](.github/workflows/docker-build.yml) | `workflow_call` | Build image (push default false), optional Trivy scan |
 | [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: Python, Java, Docker, and SBOM samples |
@@ -45,6 +45,15 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `context` / `file` | `.` / `Dockerfile` | Build context paths |
 
 Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-ran`, `java-version` / `maven-goals`).
+
+### SBOM inputs
+
+| Input | Default | Notes |
+| --- | --- | --- |
+| `format` | `spdx-json` | Passed to anchore/sbom-action |
+| `upload-artifact` | `true` | Upload SPDX JSON artifact |
+| `upload-artifact-retention` | `0` | Days to retain; `0` = repo default |
+
 
 ## Supported stacks
 
