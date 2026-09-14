@@ -42,4 +42,4 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 
 ## Self-test surface
 
-`ci.yml` dogfoods the reusable workflows against `samples/*`, plus `sbom-sample` and (on PRs) `dependency-review-sample`.
+`ci.yml` dogfoods the reusable workflows against `samples/*`, plus `sbom-sample`. Callers with Dependency graph enabled can invoke `dependency-review.yml` themselves.

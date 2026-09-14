@@ -23,7 +23,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | [`sbom.yml`](.github/workflows/sbom.yml) | `workflow_call` | Generate SPDX SBOM and upload artifact |
 | [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release (CHANGELOG soft notes) |
 | [`docker-build.yml`](.github/workflows/docker-build.yml) | `workflow_call` | Build image (push default false), optional Trivy scan |
-| [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: Python, Java, Docker, SBOM; dependency-review on PRs |
+| [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: Python, Java, Docker, and SBOM samples |
 
 ### Hardening inputs (Python / Java)
 

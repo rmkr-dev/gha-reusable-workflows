@@ -95,7 +95,4 @@ jobs:
       artifact-name: sbom-python-hello
       upload-artifact: true
 
-  dependency-review-sample:
-    if: github.event_name == 'pull_request'
-    uses: ./.github/workflows/dependency-review.yml
 

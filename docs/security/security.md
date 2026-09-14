@@ -57,4 +57,5 @@ Jobs use GitHub-hosted runners. Consumers who need stronger isolation should fol
 ### Self-test jobs
 
 - `sbom-sample` runs on every CI event against `samples/python-hello`.
-- `dependency-review-sample` runs on pull requests only.
+
+Caller workflows that invoke `dependency-review.yml` must enable Dependency graph and grant `pull-requests: write` (plus `contents: read`). This repository keeps the reusable workflow but does not self-test it in `ci.yml` until Dependency review is supported on the repo.
