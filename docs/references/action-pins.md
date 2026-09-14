@@ -33,8 +33,8 @@ Reusable CI workflows pin composites to the latest annotated tag:
 
 | Composite | Pin |
 | --- | --- |
-| `setup-python-project` | `@v0.5.1` |
-| `setup-maven-project` | `@v0.5.1` |
+| `setup-python-project` | `@v0.5.2` |
+| `setup-maven-project` | `@v0.5.2` |
 
 After cutting a new annotated tag, bump these pins in a follow-up PR (see `AGENTS.md`).
 
