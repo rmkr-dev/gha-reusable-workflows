@@ -4,11 +4,13 @@
 
 - `release-tag.yml` `prerelease` input (default `false`)
 - `release-tag.yml` `prerelease` input (default `false`)
+- `release-tag.yml` `prerelease` input (default `false`)
 - Samples catalog tips for fetch-depth / Docker labels-build-args
 - `docker-build.yml` `build-args` input (comma-separated `KEY=VALUE`; empty default)
 
 ### Changed
 
+- CODEOWNERS covers `/docs/`; CONTRIBUTING mentions ownership
 - Architecture docs note self-test concurrency + workflow_dispatch
 - Examples/SBOM docs show `upload-artifact-retention` usage
 - CONTRIBUTING / development docs prefer `@v0.4.1` consumer pins

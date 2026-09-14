@@ -2,3 +2,5 @@
 # Keep reusable workflow + composite ownership explicit
 /.github/workflows/*.yml @rmkr-dev
 /.github/actions/*/action.yml @rmkr-dev
+/docs/ @rmkr-dev
+
