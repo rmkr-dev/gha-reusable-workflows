@@ -11,6 +11,8 @@ Common caller issues when using these reusable workflows.
 | Pip cache miss every run | Lockfile path not under defaults | Ensure `pyproject.toml` or `requirements*.txt` live under `working-directory` |
 | Wrong package installed | Multiple projects in repo | Set `working-directory` to the module root |
 
+- Need custom pytest flags (markers, `-k`, verbosity): pass `pytest-args` (appended after `pytest -q`).
+
 ## Java Maven CI
 
 | Symptom | Likely cause | Fix |

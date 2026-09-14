@@ -7,7 +7,7 @@ Caller contract reminders:
 - **Python** (`python-ci.yml`): optional `pyproject.toml` with `[project.optional-dependencies].dev`, or `requirements-dev.txt` / `requirements.txt`. Without those, the workflow still runs `python -m compileall`. When `ruff` is installed (for example via `dev` extras), the workflow runs `ruff check .` instead of compileall.
 - **Java** (`java-maven-ci.yml`): `pom.xml` must exist under `working-directory`.
 - Reusable workflows run on **GitHub-hosted** `ubuntu-latest` runners.
-- Optional hardening inputs: `timeout-minutes`, `fail-fast`, `enable-pip-cache` / `enable-maven-cache`, plus job summary outputs.
+- Optional hardening inputs: `timeout-minutes`, `fail-fast`, `enable-pip-cache` / `enable-maven-cache`, `pytest-args`, plus job summary outputs.
 
 ## Python CI
 
@@ -31,6 +31,7 @@ jobs:
       timeout-minutes: 20
       fail-fast: true
       enable-pip-cache: true
+      # pytest-args: -k 'not slow'   # optional extra pytest flags
 ```
 
 ## Java / Maven CI
