@@ -37,3 +37,7 @@ Thanks for helping keep these reusable workflows small, correct, and caller-frie
 ## Support
 
 Usage questions: [SUPPORT.md](SUPPORT.md). Security: [SECURITY.md](SECURITY.md).
+
+## Pins
+
+Prefer `@v0.4.1` (or newer annotated tags) in consumer `uses:` lines. Dogfood `@main` only when validating Unreleased work.
