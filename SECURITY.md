@@ -4,7 +4,7 @@
 
 | Version | Supported |
 | --- | --- |
-| Latest annotated tag (for example `v0.3.0`) | Yes |
+| Latest annotated tag (for example `v0.4.0`) | Yes |
 | `main` | Yes (rolling) |
 | Older tags | Best-effort only |
 
