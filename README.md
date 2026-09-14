@@ -119,7 +119,8 @@ Self-test packages exercised by this repo's `ci.yml`:
 
 ## Monorepo and matrices
 
-Call Python/Java/Docker reusable workflows **once per module** (or behind path filters).
+Call Python/Java/Docker reusable workflows **once per module**, via explicit jobs,
+`strategy.matrix`, or path filters.
 Copy-paste patterns: [docs/references/monorepo.md](docs/references/monorepo.md).
 
 ## Docs
