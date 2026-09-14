@@ -147,3 +147,5 @@ Prefer annotated tags via `release-tag.yml`. Use `draft: true` when previewing G
 ## Current release
 
 Latest annotated tag: `v0.4.1`. Composite actions in reusable CI workflows pin to the same tag.
+
+When stacking PRs, regenerate `CHANGELOG.md` Unreleased from current `main` to avoid duplicate bullets.

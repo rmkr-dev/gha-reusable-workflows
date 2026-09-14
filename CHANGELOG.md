@@ -1,10 +1,7 @@
 ## [Unreleased]
-
 ### Added
 
 - `docker-build.yml` `trivy-ignore-unfixed` input (default `true`)
-- `release-tag.yml` `prerelease` input (default `false`)
-- `release-tag.yml` `prerelease` input (default `false`)
 - `release-tag.yml` `prerelease` input (default `false`)
 - Samples catalog tips for fetch-depth / Docker labels-build-args
 - `docker-build.yml` `build-args` input (comma-separated `KEY=VALUE`; empty default)
