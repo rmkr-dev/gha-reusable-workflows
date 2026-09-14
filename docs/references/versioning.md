@@ -4,10 +4,10 @@
 
 | Ref | Meaning |
 | --- | --- |
-| `@v0.5.0` | Exact annotated release (preferred for production) |
+| `@v0.5.1` | Exact annotated release (preferred for production) |
+| `@v0.5.0` | Previous patch |
 | `@v0.4.2` | Previous patch |
 | `@v0.4.0` | Previous minor |
-| `@v0.3.0` | Older minor |
 | `@main` | Latest merged work (dogfooding only) |
 | `@v1` | Reserved for a future stable major line |
 
@@ -50,6 +50,10 @@ See [CHANGELOG.md](../../CHANGELOG.md).
 
 Detailed CHANGELOG / soft-notes conventions: [release-notes.md](release-notes.md).
 
-## Latest minor
+## Latest patch
+
+`v0.5.1` ships post-`v0.5.0` docs hygiene (architecture/permissions/edge-cases/troubleshooting/examples/SUPPORT pins and catalogs) plus a python-ci `fail-fast` description clarification. Prefer `@v0.5.1` for production pins.
+
+## Previous minor
 
 `v0.5.0` ships a hardening-input wave on top of `v0.4.2`: Docker `annotations` / `target` / `enable-gha-cache` / `trivy-exit-code`, Python `ruff-args` / `pytest-args` (and fail-fast → pytest `-x`), Java `maven-extra-args` / `maven-opts`, CodeQL `timeout-minutes` / `build-mode`, dependency-review `deny-licenses` / `comment-summary-in-pr`, and SBOM `timeout-minutes`.
