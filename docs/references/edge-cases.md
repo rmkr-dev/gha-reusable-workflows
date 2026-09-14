@@ -70,7 +70,7 @@ Python and Java reusable CI accept `fetch-depth` (default `1`). Pass `fetch-dept
 
 ## Alternate JDK distributions
 
-`java-maven-ci.yml` accepts `java-distribution` (default `temurin`). After `v0.4.1`, pin composites to the same tag; until then `@main` exposes this input.
+`java-maven-ci.yml` accepts `java-distribution` (default `temurin`). Prefer the latest annotated tag for composites and workflows.
 
 ## Docker build-args
 

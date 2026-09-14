@@ -1,6 +1,6 @@
 # Example consumer workflows
 
-Copy these into a caller repository under `.github/workflows/`. Prefer a version tag (`@v0.4.1`) once published; use `@main` only while iterating.
+Copy these into a caller repository under `.github/workflows/`. Prefer a version tag (`@v0.4.2`) once published; use `@main` only while iterating.
 
 Caller contract reminders:
 
@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
     with:
       working-directory: .
       python-version: "3.12"
@@ -48,7 +48,7 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.2
     with:
       working-directory: .
       java-version: "21"
@@ -78,7 +78,7 @@ permissions:
 
 jobs:
   analyze:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.4.2
     with:
       languages: '["python"]'
       # queries: security-extended
@@ -103,7 +103,7 @@ permissions:
 
 jobs:
   review:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.4.2
     with:
       fail-on-severity: high
 ```
@@ -123,7 +123,7 @@ permissions:
 
 jobs:
   sbom:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.4.2
     with:
       path: .
       artifact-name: sbom
@@ -180,7 +180,7 @@ permissions:
 
 jobs:
   image:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.2
     with:
       context: .
       file: Dockerfile
@@ -213,13 +213,14 @@ permissions:
 
 jobs:
   release:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/release-tag.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/release-tag.yml@v0.4.2
     with:
       tag: ${{ inputs.tag }}
       generate-notes: true
       changelog-path: CHANGELOG.md
       notes-fallback: generate
-      # draft: true   # optional: create unpublished GitHub Release
+      # draft: true       # optional: create unpublished GitHub Release
+      # prerelease: true  # optional: mark GitHub Release as prerelease
 ```
 
 When `CHANGELOG.md` contains a `## [X.Y.Z]` section matching the tag without the leading
@@ -245,19 +246,19 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
     with:
       python-version: "3.12"
       enable-pip-cache: true
 
   codeql:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.4.2
     with:
       languages: '["python"]'
 
   dependency-review:
     if: github.event_name == 'pull_request'
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.4.2
 ```
 
 
@@ -273,7 +274,7 @@ jobs:
       fail-fast: false
       matrix:
         module: [services/api, services/worker]
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
     with:
       working-directory: ${{ matrix.module }}
       python-version: "3.12"
@@ -300,7 +301,7 @@ Details: [concurrency.md](concurrency.md).
 | Ref | When to use |
 | --- | --- |
 | `@main` | Early adoption / dogfooding this repo |
-| `@v0.4.1` | Reproducible pin to the latest minor release |
+| `@v0.4.2` | Reproducible pin to the latest minor release |
 | `@v0.3.0` | Previous minor |
 | `@v1` | Moving major line once a `v1` tag (or `v1` major alias) exists |
 

@@ -2,7 +2,7 @@
 
 Workflow: [`.github/workflows/docker-build.yml`](../../.github/workflows/docker-build.yml)
 
-Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.1`
+Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.2`
 
 ## Inputs
 
@@ -34,7 +34,7 @@ Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.1`
 ```yaml
 jobs:
   image:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.2
     with:
       context: samples/docker-hello
       file: samples/docker-hello/Dockerfile
@@ -95,6 +95,19 @@ with:
 ```
 
 Empty `labels` leaves the build-push default (no extra labels).
+
+## Build-args
+
+Comma-separated `KEY=VALUE` pairs passed to `docker/build-push-action`:
+
+```yaml
+with:
+  image-name: api
+  build-args: BUILD_VERSION=1.2.3,GIT_SHA=${{ github.sha }}
+  push: false
+```
+
+Empty `build-args` leaves the build without extra args.
 
 ## Platforms
 

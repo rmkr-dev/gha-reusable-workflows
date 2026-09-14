@@ -4,7 +4,8 @@
 
 | Ref | Meaning |
 | --- | --- |
-| `@v0.4.0` | Exact annotated release (preferred for production) |
+| `@v0.4.2` | Exact annotated release (preferred for production) |
+| `@v0.4.1` | Previous patch |
 | `@v0.3.0` | Previous minor |
 | `@v0.1.0` | Older minor |
 | `@main` | Latest merged work (dogfooding only) |
@@ -18,7 +19,7 @@ Create annotated tags from green `main` only.
 - **MINOR** (`v0.4.0`): additive inputs/outputs, new workflows or composites, documentation that matches new behavior.
 - **PATCH** (`v0.2.1`): fixes that preserve inputs/outputs and documented contracts (including safe action pin bumps when behavior is compatible).
 
-Composite actions under `.github/actions/` are pinned by workflows to a ref (pinned to `@v0.4.0` to match the workflow release tag).
+Composite actions under `.github/actions/` are pinned by workflows to a ref (follow-up PR after each annotated tag; see `AGENTS.md`).
 
 ## Preparing a release
 
@@ -51,4 +52,4 @@ Detailed CHANGELOG / soft-notes conventions: [release-notes.md](release-notes.md
 
 ## Latest patch
 
-`v0.4.1` ships post-`v0.4.0` additive inputs (draft release, fetch-depth, labels, fail-on-severity, queries, java-distribution, workflow_dispatch self-test, and related docs).
+`v0.4.2` ships Docker `build-args` / `trivy-ignore-unfixed`, release `prerelease`, samples catalog tips, and docs hygiene on top of `v0.4.1`.

@@ -3,7 +3,7 @@
 Reusable GitHub Actions workflows that other repositories can call with:
 
 ```yaml
-uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v0.4.1
+uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v0.4.2
 ```
 
 Until you prefer a floating major, pin the annotated tag. `@main` is available for early adopters.
@@ -21,7 +21,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | [`codeql.yml`](.github/workflows/codeql.yml) | `workflow_call` | CodeQL analyze for caller-provided languages |
 | [`dependency-review.yml`](.github/workflows/dependency-review.yml) | `workflow_call` | PR dependency review |
 | [`sbom.yml`](.github/workflows/sbom.yml) | `workflow_call` | Generate SPDX SBOM, verify, upload artifact (optional retention days) |
-| [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release (CHANGELOG soft notes; optional `draft`) |
+| [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release (CHANGELOG soft notes; optional `draft` / `prerelease`) |
 | [`docker-build.yml`](.github/workflows/docker-build.yml) | `workflow_call` | Build image (push default false), optional Trivy scan |
 | [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: Python, Java, Docker, and SBOM samples |
 
@@ -45,6 +45,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `context` / `file` | `.` / `Dockerfile` | Build context paths |
 | `labels` | `""` | Optional OCI labels (`key=value`, comma-separated) |
 | `build-args` | `""` | Optional Docker build-args (`KEY=VALUE`, comma-separated) |
+| `trivy-ignore-unfixed` | `true` | Pass `ignore-unfixed` to Trivy when `scan=true` |
 
 Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-ran`, `java-version` / `maven-goals`).
 
@@ -77,14 +78,14 @@ on:
 
 jobs:
   python:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
     with:
       working-directory: .
       python-version: "3.12"
       enable-pip-cache: true
 
   java:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.2
     with:
       working-directory: .
       java-version: "21"
@@ -104,7 +105,7 @@ SBOM deep-dive: [docs/references/sbom.md](docs/references/sbom.md).
 | [`.github/actions/setup-python-project`](.github/actions/setup-python-project) | `python-ci.yml` |
 | [`.github/actions/setup-maven-project`](.github/actions/setup-maven-project) | `java-maven-ci.yml` |
 
-Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.4.1`.
+Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.4.2`.
 
 ## Support
 
