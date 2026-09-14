@@ -17,6 +17,11 @@ on:
         required: false
         type: string
         default: ""
+      build-mode:
+        description: Optional CodeQL build-mode (e.g. none, autobuild); empty uses action default
+        required: false
+        type: string
+        default: ""
 
 jobs:
   analyze:
@@ -39,6 +44,7 @@ jobs:
           languages: ${{ matrix.language }}
           source-root: ${{ inputs.working-directory }}
           queries: ${{ inputs.queries }}
+          build-mode: ${{ inputs.build-mode }}
 
       - name: Autobuild
         uses: github/codeql-action/autobuild@v4
