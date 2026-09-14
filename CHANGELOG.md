@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Added
+
+- `docker-build.yml` `build-args` input (comma-separated `KEY=VALUE`; empty default)
+
 ### Changed
 
 - Pin composite actions used by reusable CI workflows to `@v0.4.1`
