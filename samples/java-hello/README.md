@@ -27,3 +27,8 @@ This sample keeps `HelloIT` under `src/test/java` and enables the plugin via the
 `integration-test` profile. Callers who put ITs under `src/it/java` must configure
 Failsafe `testSourceDirectory` (or a similar layout) themselves — not covered here.
 
+## Caller tips
+
+- Pass `maven-extra-args` for reactor/property flags (for example `-DskipITs`) instead of stuffing them into `maven-goals`.
+- Pass `maven-opts` for JVM flags via `MAVEN_OPTS` (for example `-Xmx1g`).
+- Prefer `@v0.5.1` (or newer) when calling `java-maven-ci.yml`.

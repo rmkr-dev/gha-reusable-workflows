@@ -9,12 +9,13 @@ Multi-module Maven sample (`lib` + `app`) used to exercise `java-maven-ci.yml` a
 
 ## Caller tips (reactor / `-pl`)
 
-From a reactor root you can narrow the build with Maven flags in `maven-goals`:
+From a reactor root you can narrow the build with Maven flags in `maven-goals`, or keep goals clean and pass flags via `maven-extra-args`:
 
 ```yaml
 with:
   working-directory: .
-  maven-goals: -pl app -am test
+  maven-goals: test
+  maven-extra-args: -pl app -am
 ```
 
 | Flag | Meaning |
