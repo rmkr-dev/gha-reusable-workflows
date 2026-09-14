@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Added
+
+- Job summaries on `codeql.yml` and `dependency-review.yml` (input echo for callers)
+
 ### Changed
 
 - Pin composite actions used by reusable CI workflows to `@v0.5.1`
