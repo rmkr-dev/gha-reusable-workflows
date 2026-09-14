@@ -192,6 +192,10 @@ jobs:
       file: Dockerfile
       image-name: myapp
       tags: ghcr.io/OWNER/myapp:latest
+      # labels: org.opencontainers.image.title=myapp
+      # annotations: org.opencontainers.image.description=My app
+      # target: runtime
+      # trivy-exit-code: "0"   # report-only
       push: false
       scan: true
       trivy-severity: CRITICAL,HIGH
