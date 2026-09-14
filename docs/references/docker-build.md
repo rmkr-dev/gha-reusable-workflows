@@ -13,6 +13,7 @@ Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.2`
 | `image-name` | string | `app` | Used for default local tag / summary |
 | `tags` | string | `""` | Comma-separated tags; empty → `local/<image-name>:ci` |
 | `labels` | string | `""` | Comma-separated OCI labels (`key=value`) for build-push-action |
+| `annotations` | string | `""` | Comma-separated OCI annotations (`key=value`) for build-push-action |
 | `build-args` | string | `""` | Comma-separated `KEY=VALUE` build args |
 | `target` | string | `""` | Multi-stage Dockerfile target (empty = final stage) |
 | `enable-gha-cache` | boolean | `true` | `type=gha` cache-from/cache-to for buildx |

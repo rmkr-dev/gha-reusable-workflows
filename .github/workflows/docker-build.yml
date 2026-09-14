@@ -28,6 +28,11 @@ on:
         required: false
         type: string
         default: ""
+      annotations:
+        description: Comma-separated OCI annotations (key=value) passed to build-push-action
+        required: false
+        type: string
+        default: ""
       build-args:
         description: Comma-separated Docker build-args (KEY=VALUE) passed to build-push-action
         required: false
@@ -132,6 +137,7 @@ jobs:
           load: ${{ inputs.push == false }}
           tags: ${{ steps.tags.outputs.tags }}
           labels: ${{ inputs.labels }}
+          annotations: ${{ inputs.annotations }}
           build-args: ${{ inputs.build-args }}
           target: ${{ inputs.target }}
           platforms: ${{ inputs.platforms }}
@@ -165,6 +171,7 @@ jobs:
           IMAGE: ${{ inputs.image-name }}
           TAGS: ${{ steps.tags.outputs.tags }}
           LABELS: ${{ inputs.labels }}
+          ANNOTATIONS: ${{ inputs.annotations }}
           PUSH: ${{ inputs.push }}
           SCAN: ${{ inputs.scan }}
           CTX: ${{ inputs.context }}
@@ -189,6 +196,7 @@ jobs:
             echo "| image-name | \`${IMAGE}\` |"
             echo "| tags | \`${TAGS}\` |"
             echo "| labels | \`${LABELS:-}\` |"
+            echo "| annotations | \`${ANNOTATIONS:-}\` |"
             echo "| build-args | \`${BUILD_ARGS:-}\` |"
             echo "| target | \`${TARGET:-}\` |"
             echo "| gha-cache | \`${GHA_CACHE}\` |"

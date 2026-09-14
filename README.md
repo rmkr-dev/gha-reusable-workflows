@@ -48,6 +48,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `trivy-severity` | `CRITICAL,HIGH` | Fail the job on matching findings |
 | `context` / `file` | `.` / `Dockerfile` | Build context paths |
 | `labels` | `""` | Optional OCI labels (`key=value`, comma-separated) |
+| `annotations` | `""` | Optional OCI annotations (`key=value`, comma-separated) |
 | `build-args` | `""` | Optional Docker build-args (`KEY=VALUE`, comma-separated) |
 | `target` | `""` | Optional multi-stage Dockerfile target |
 | `enable-gha-cache` | `true` | Buildx GitHub Actions cache (`type=gha`) |
