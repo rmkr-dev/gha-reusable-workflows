@@ -13,6 +13,8 @@ Common caller issues when using these reusable workflows.
 
 - Need custom pytest flags (markers, `-k`, verbosity): pass `pytest-args` (appended after `pytest -q`).
 
+- Need custom Ruff flags (`--select`, `--ignore`): pass `ruff-args` when `ruff` is on PATH.
+
 ## Java Maven CI
 
 | Symptom | Likely cause | Fix |

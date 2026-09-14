@@ -33,6 +33,11 @@ on:
         required: false
         type: string
         default: ""
+      ruff-args:
+        description: Extra arguments appended to `ruff check` when ruff is available
+        required: false
+        type: string
+        default: ""
       fetch-depth:
         description: actions/checkout fetch-depth (0 = full history)
         required: false
@@ -70,10 +75,14 @@ jobs:
           enable-pip-cache: ${{ inputs.enable-pip-cache }}
 
       - name: Lint or compile
+        env:
+          RUFF_ARGS: ${{ inputs.ruff-args }}
         run: |
           set -euo pipefail
           if command -v ruff >/dev/null 2>&1; then
-            ruff check .
+            # Word-split ruff-args intentionally
+            # shellcheck disable=SC2086
+            ruff check . ${RUFF_ARGS}
           elif [ -d src ]; then
             python -m compileall -q src
           else
