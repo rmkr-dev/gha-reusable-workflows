@@ -23,6 +23,11 @@ on:
         required: false
         type: string
         default: spdx-json
+      upload-artifact-retention:
+        description: Artifact retention days (0 = repo default; min 1, max 90 unless org overrides)
+        required: false
+        type: number
+        default: 0
 
 jobs:
   sbom:
@@ -40,6 +45,7 @@ jobs:
           format: ${{ inputs.format }}
           artifact-name: ${{ inputs.artifact-name }}.spdx.json
           upload-artifact: ${{ inputs.upload-artifact }}
+          upload-artifact-retention: ${{ inputs.upload-artifact-retention }}
           upload-release-assets: false
           output-file: ${{ runner.temp }}/sbom-out.json
 
@@ -94,6 +100,6 @@ jobs:
             echo "## SBOM artifact"
             echo ""
             echo "Uploaded \`${{ inputs.artifact-name }}.spdx.json\` (format: \`${{ inputs.format }}\`)."
-            echo "Retention follows this repository/org Actions artifact retention (GitHub default **90 days** unless customized)."
+            echo "Retention input: \`${{ inputs.upload-artifact-retention }}\` (0 = repository/org default; GitHub default **90 days** unless customized)."
             echo "Download or attach to a Release if you need longer retention."
           } >> "$GITHUB_STEP_SUMMARY"

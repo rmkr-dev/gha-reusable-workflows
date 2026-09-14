@@ -7,6 +7,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+### Added
+
+- `sbom.yml` `upload-artifact-retention` input (days; `0` = repo default)
+
 ### Changed
 
 - CodeQL security/examples guidance; expand pull request template for Docker/SBOM/CI surface
