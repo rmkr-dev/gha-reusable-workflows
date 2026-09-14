@@ -84,6 +84,7 @@ jobs:
     with:
       languages: '["python"]'
       # build-mode: none   # optional; empty uses codeql-action default
+      # timeout-minutes: 120
       # queries: security-extended
       # or: languages: '["java-kotlin"]'
 ```

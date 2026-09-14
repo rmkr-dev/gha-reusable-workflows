@@ -77,4 +77,4 @@ Caller workflows that invoke `dependency-review.yml` must enable Dependency grap
 
 `dependency-review.yml` accepts `fail-on-severity`, optional `deny-licenses` (comma-separated SPDX license identifiers), and `comment-summary-in-pr` (default `true`).
 
-`codeql.yml` accepts optional `queries` and `build-mode` inputs passed through to `codeql-action/init`.
+`codeql.yml` accepts optional `queries` and `build-mode` inputs passed through to `codeql-action/init`, plus `timeout-minutes` (default `360`).
