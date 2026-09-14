@@ -44,3 +44,9 @@ flowchart TB
 - Does not open firewall holes on caller infrastructure.
 - Does not require VPN or private DNS.
 - Does not store or log consumer credentials.
+
+## Docker build / Trivy
+
+`docker-build.yml` may pull base images from public registries and download Trivy
+DB/vulnerability data when `scan: true`. No caller secrets are required for the
+default `push: false` self-test path.
