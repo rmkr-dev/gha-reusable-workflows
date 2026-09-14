@@ -44,3 +44,13 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 ## Self-test surface
 
 `ci.yml` dogfoods the reusable workflows against `samples/*`, plus `sbom-sample`. Callers with Dependency graph enabled can invoke `dependency-review.yml` themselves.
+
+## Caller documentation map (post-v0.4.0)
+
+| Doc | Purpose |
+| --- | --- |
+| [action-pins.md](../references/action-pins.md) | Upstream + composite pin matrix |
+| [concurrency.md](../references/concurrency.md) | Caller concurrency / cancel-in-progress |
+| [permissions.md](../security/permissions.md) | Least-privilege `permissions:` by workflow |
+| [troubleshooting.md](../references/troubleshooting.md) | Symptom → fix tables |
+| [docker-build.md](../references/docker-build.md) | Docker inputs including `labels` |
