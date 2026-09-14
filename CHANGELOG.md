@@ -14,6 +14,8 @@
 - Troubleshooting tables cover trivy-exit-code/target/cache, CodeQL build-mode/timeout, dependency-review deny-licenses/comment-summary, release draft/prerelease, Maven opts/extra-args
 - Docker-build reference documents OCI `annotations`; README adds CodeQL / dependency-review input table
 - Examples Docker snippet shows optional labels/annotations/target/trivy-exit-code; release-notes footer example uses v0.5.0
+- SUPPORT.md example pin prefers `@v0.5.0`
+- PR template additive-input examples mention `annotations`
 
 ## [0.5.0] - 2026-09-14
 
