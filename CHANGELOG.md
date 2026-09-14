@@ -9,6 +9,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Added
 
+- `samples/python-hello` optional `ruff` so self-test exercises the existing `ruff check` path
 - `release-tag.yml`: optional CHANGELOG section extraction (`changelog-path`) with soft `notes-fallback`
 - Monorepo / matrix caller docs (`docs/references/monorepo.md`) with path-filter example
 

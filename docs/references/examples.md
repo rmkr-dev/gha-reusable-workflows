@@ -4,7 +4,7 @@ Copy these into a caller repository under `.github/workflows/`. Prefer a version
 
 Caller contract reminders:
 
-- **Python** (`python-ci.yml`): optional `pyproject.toml` with `[project.optional-dependencies].dev`, or `requirements-dev.txt` / `requirements.txt`. Without those, the workflow still runs `python -m compileall`.
+- **Python** (`python-ci.yml`): optional `pyproject.toml` with `[project.optional-dependencies].dev`, or `requirements-dev.txt` / `requirements.txt`. Without those, the workflow still runs `python -m compileall`. When `ruff` is installed (for example via `dev` extras), the workflow runs `ruff check .` instead of compileall.
 - **Java** (`java-maven-ci.yml`): `pom.xml` must exist under `working-directory`.
 - Reusable workflows run on **GitHub-hosted** `ubuntu-latest` runners.
 - Optional hardening inputs: `timeout-minutes`, `fail-fast`, `enable-pip-cache` / `enable-maven-cache`, plus job summary outputs.
