@@ -14,6 +14,8 @@ Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.2`
 | `tags` | string | `""` | Comma-separated tags; empty → `local/<image-name>:ci` |
 | `labels` | string | `""` | Comma-separated OCI labels (`key=value`) for build-push-action |
 | `build-args` | string | `""` | Comma-separated `KEY=VALUE` build args |
+| `target` | string | `""` | Multi-stage Dockerfile target (empty = final stage) |
+| `enable-gha-cache` | boolean | `true` | `type=gha` cache-from/cache-to for buildx |
 | `push` | boolean | `false` | Build-only by default (self-test safe) |
 | `platforms` | string | `linux/amd64` | Prefer a single platform when `push=false` + `load` |
 | `scan` | boolean | `true` | Run Trivy after build |
@@ -108,6 +110,21 @@ with:
 ```
 
 Empty `build-args` leaves the build without extra args.
+
+## Target (multi-stage)
+
+Pass `target` to select a named build stage (empty string uses the final stage):
+
+```yaml
+with:
+  file: Dockerfile
+  target: runtime
+  push: false
+```
+
+## GHA cache
+
+`enable-gha-cache` (default `true`) sets buildx `cache-from` / `cache-to` to `type=gha`. Set `false` for cold builds or when GHA cache is undesirable.
 
 ## Platforms
 

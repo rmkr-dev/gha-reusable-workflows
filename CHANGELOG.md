@@ -2,6 +2,8 @@
 
 ### Added
 
+- `docker-build.yml` `target` input (multi-stage; empty default)
+- `docker-build.yml` `enable-gha-cache` input (default `true`; toggles buildx `type=gha` cache)
 - `python-ci.yml` `pytest-args` input (extra flags appended after `pytest -q`; empty default)
 
 ### Changed

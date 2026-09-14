@@ -46,6 +46,8 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `context` / `file` | `.` / `Dockerfile` | Build context paths |
 | `labels` | `""` | Optional OCI labels (`key=value`, comma-separated) |
 | `build-args` | `""` | Optional Docker build-args (`KEY=VALUE`, comma-separated) |
+| `target` | `""` | Optional multi-stage Dockerfile target |
+| `enable-gha-cache` | `true` | Buildx GitHub Actions cache (`type=gha`) |
 | `trivy-ignore-unfixed` | `true` | Pass `ignore-unfixed` to Trivy when `scan=true` |
 
 Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-ran`, `java-version` / `maven-goals`).

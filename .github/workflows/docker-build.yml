@@ -33,6 +33,16 @@ on:
         required: false
         type: string
         default: ""
+      target:
+        description: Optional multi-stage Dockerfile target name (empty = final stage)
+        required: false
+        type: string
+        default: ""
+      enable-gha-cache:
+        description: Use GitHub Actions cache (type=gha) for buildx cache-from/cache-to
+        required: false
+        type: boolean
+        default: true
       push:
         description: Push the image to a registry (default false — build-only / self-test safe)
         required: false
@@ -118,9 +128,10 @@ jobs:
           tags: ${{ steps.tags.outputs.tags }}
           labels: ${{ inputs.labels }}
           build-args: ${{ inputs.build-args }}
+          target: ${{ inputs.target }}
           platforms: ${{ inputs.platforms }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: ${{ inputs.enable-gha-cache && 'type=gha' || '' }}
+          cache-to: ${{ inputs.enable-gha-cache && 'type=gha,mode=max' || '' }}
 
       - name: Resolve scan image ref
         if: inputs.scan
@@ -153,6 +164,9 @@ jobs:
           SCAN: ${{ inputs.scan }}
           CTX: ${{ inputs.context }}
           FILE: ${{ inputs.file }}
+          TARGET: ${{ inputs.target }}
+          GHA_CACHE: ${{ inputs.enable-gha-cache }}
+          BUILD_ARGS: ${{ inputs.build-args }}
         run: |
           set -euo pipefail
           # When multiple tags were provided, use the first for summary fields
@@ -170,6 +184,9 @@ jobs:
             echo "| image-name | \`${IMAGE}\` |"
             echo "| tags | \`${TAGS}\` |"
             echo "| labels | \`${LABELS:-}\` |"
+            echo "| build-args | \`${BUILD_ARGS:-}\` |"
+            echo "| target | \`${TARGET:-}\` |"
+            echo "| gha-cache | \`${GHA_CACHE}\` |"
             echo "| push | \`${PUSH}\` |"
             echo "| scan (Trivy) | \`${SCAN}\` |"
             echo "| primary-tag | \`${FIRST_TAG}\` |"
