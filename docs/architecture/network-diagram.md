@@ -50,3 +50,7 @@ flowchart TB
 `docker-build.yml` may pull base images from public registries and download Trivy
 DB/vulnerability data when `scan: true`. No caller secrets are required for the
 default `push: false` self-test path.
+
+## CI concurrency
+
+Self-test `ci.yml` cancels superseded **pull_request** runs only; pushes to `main` are not cancelled mid-flight.
