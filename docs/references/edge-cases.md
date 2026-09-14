@@ -67,3 +67,7 @@ Symptom → fix tables: [troubleshooting.md](troubleshooting.md).
 ## Full git history
 
 Python and Java reusable CI accept `fetch-depth` (default `1`). Pass `fetch-depth: 0` when tools need tags or full history (for example setuptools-scm, git describe).
+
+## Alternate JDK distributions
+
+`java-maven-ci.yml` accepts `java-distribution` (default `temurin`). After `v0.4.1`, pin composites to the same tag; until then `@main` exposes this input.

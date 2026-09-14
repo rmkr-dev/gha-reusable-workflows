@@ -2,6 +2,7 @@
 
 ### Added
 
+- `java-distribution` input on `java-maven-ci.yml` / composite (default `temurin`)
 - CODEOWNERS paths for workflows/composites; PR template additive-input checkbox
 - Self-test `ci.yml` `workflow_dispatch` trigger for manual sample matrix runs
 - `codeql.yml` optional `queries` input (passed to codeql-action/init)
