@@ -30,6 +30,10 @@
 - Pin composite actions used by reusable CI workflows to `@v0.4.0`
 - CONTRIBUTING / development docs for v0.4.0 surface; Dependabot groups patch/minor `github-actions`
 
+### Fixed
+
+- Wire `setup-maven-project` `distribution` input (was missing after #65)
+
 ## [0.4.0] - 2026-09-14
 
 ### Added
