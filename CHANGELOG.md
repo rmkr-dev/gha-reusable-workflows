@@ -2,6 +2,7 @@
 
 ### Added
 
+- `dependency-review.yml` `fail-on-severity` input (default `low`)
 - SBOM reference (`docs/references/sbom.md`)
 - Architecture docs map for action-pins, concurrency, permissions, troubleshooting
 - `fetch-depth` input on `python-ci.yml` and `java-maven-ci.yml` (default `1`; `0` = full history)
