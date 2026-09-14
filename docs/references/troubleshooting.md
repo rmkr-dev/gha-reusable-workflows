@@ -15,6 +15,8 @@ Common caller issues when using these reusable workflows.
 
 - Need custom Ruff flags (`--select`, `--ignore`): pass `ruff-args` when `ruff` is on PATH.
 
+- `fail-fast: true` adds pytest `-x` (stop on first failure).
+
 ## Java Maven CI
 
 | Symptom | Likely cause | Fix |
