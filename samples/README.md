@@ -9,9 +9,9 @@ install / lint / test path a reusable workflow will take.
 | [`python-hello`](python-hello) | Python + pyproject | Editable install, pytest, optional `ruff check` |
 | [`python-requirements-dev`](python-requirements-dev) | requirements-dev.txt | Dev requirements install path + pytest |
 | [`python-requirements-only`](python-requirements-only) | requirements.txt | Runtime requirements only (no pyproject) |
-| [`python-compileall-only`](python-compileall-only) | bare sources | No metadata → `compileall` fallback (no pytest) |
+| [`python-compileall-only`](python-compileall-only) | bare sources | No metadata → `compileall` fallback (no pytest); syntax errors fail the job |
 | [`java-hello`](java-hello) | Maven single module | Surefire `test` + Failsafe `verify -Pintegration-test` |
-| [`java-multi`](java-multi) | Maven reactor | Multi-module `test` from reactor root |
+| [`java-multi`](java-multi) | Maven reactor | Multi-module `test` from reactor root; README documents `-pl` / `-am` |
 | [`docker-hello`](docker-hello) | Dockerfile | `docker-build` with `push: false` + Trivy |
 
 ## Edge coverage map
