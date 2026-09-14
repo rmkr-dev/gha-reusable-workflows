@@ -7,21 +7,25 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-14
+
 ### Added
 
-- `sbom-sample` self-test job in `ci.yml` (calls `sbom.yml` on `samples/python-hello`)
-- `sbom-java-sample` self-test job scanning `samples/java-hello`
-- `sbom.yml` `format` input (default `spdx-json`) and post-generate verify step
-
-### Fixed
-
-- Drop `dependency-review-sample` self-test — Dependency review is not supported on this repository without Dependency graph; reusable workflow remains for callers who enable it
+- `sbom.yml` `format` input (default `spdx-json`) and post-generate verify step (non-empty / parseable SPDX JSON)
+- `sbom-sample` and `sbom-java-sample` CI self-tests
+- Docker build reference (`docs/references/docker-build.md`)
+- Matrix caller patterns (`strategy.matrix` on reusable workflow jobs, language/version and Docker-per-service matrices) in `docs/references/monorepo.md`
+- Samples catalog (`samples/README.md`), caller edge-cases (`docs/references/edge-cases.md`), and release-notes conventions (`docs/references/release-notes.md`)
+- `release-tag.yml` job-summary preview of CHANGELOG excerpt (`notes-bytes` + markdown preview)
 
 ### Changed
 
-- Sample READMEs for `java-hello` (Failsafe) and `docker-hello` (Trivy); README Docker input table
-- Dedicated Docker build reference (`docs/references/docker-build.md`)
-- Pin composite actions used by reusable CI workflows to `@v0.3.0`
+- Expanded sample READMEs: `docker-hello` (Trivy), `java-hello` (Failsafe IT naming), `java-multi` (`-pl`/`-am`), `python-compileall-only`
+- Consumer docs cross-links for Docker, matrix, edge cases, and release notes
+
+### Fixed
+
+- Dropped unsupported `dependency-review` self-test on this repository (reusable workflow remains for callers with Dependency graph)
 
 ## [0.3.0] - 2026-09-14
 
@@ -67,7 +71,8 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - Self-test `ci.yml` with `samples/python-hello` and `samples/java-hello`
 - Foundation docs, MIT license, Dependabot for `github-actions`
 
-[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/rmkr-dev/gha-reusable-workflows/releases/tag/v0.1.0
