@@ -68,6 +68,18 @@ Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-
 
 
 
+### CodeQL / dependency-review inputs
+
+| Input | Default | Workflow | Notes |
+| --- | --- | --- | --- |
+| `languages` | (required) | CodeQL | Comma-separated CodeQL languages |
+| `queries` | `""` | CodeQL | Optional query suites / packs |
+| `build-mode` | `""` | CodeQL | Optional; empty uses codeql-action default |
+| `timeout-minutes` | `360` | CodeQL | Job timeout |
+| `fail-on-severity` | `low` | dependency-review | Minimum severity that fails the job |
+| `deny-licenses` | `""` | dependency-review | Comma-separated SPDX ids to block |
+| `comment-summary-in-pr` | `true` | dependency-review | Post review summary on the PR |
+
 ### Release tag inputs
 
 | Input | Default | Notes |
