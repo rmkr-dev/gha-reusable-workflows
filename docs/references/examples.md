@@ -110,6 +110,7 @@ jobs:
     with:
       fail-on-severity: high
       # deny-licenses: GPL-3.0, AGPL-3.0   # optional SPDX deny list
+      # comment-summary-in-pr: true        # default; set false to skip PR comment
 ```
 
 ## SBOM artifact

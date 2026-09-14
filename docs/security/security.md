@@ -75,6 +75,6 @@ Jobs use GitHub-hosted runners. Consumers who need stronger isolation should fol
 
 Caller workflows that invoke `dependency-review.yml` must enable Dependency graph and grant `pull-requests: write` (plus `contents: read`). This repository keeps the reusable workflow but does not self-test it in `ci.yml` until Dependency review is supported on the repo.
 
-`dependency-review.yml` accepts `fail-on-severity` and optional `deny-licenses` (comma-separated SPDX license identifiers).
+`dependency-review.yml` accepts `fail-on-severity`, optional `deny-licenses` (comma-separated SPDX license identifiers), and `comment-summary-in-pr` (default `true`).
 
 `codeql.yml` accepts optional `queries` and `build-mode` inputs passed through to `codeql-action/init`.
