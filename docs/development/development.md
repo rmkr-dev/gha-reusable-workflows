@@ -52,6 +52,12 @@ Reusable workflows reference these with an absolute `owner/repo/.github/actions/
 
 Job summaries are written to `$GITHUB_STEP_SUMMARY`. Workflow outputs expose resolved language versions and whether tests ran.
 
+## Monorepo callers
+
+Consumer repos with multiple modules should call each reusable workflow with a distinct
+`working-directory` (or Docker `context`). Optional path-filter examples live in
+[monorepo.md](../references/monorepo.md).
+
 ## Local sample commands
 
 ```bash
