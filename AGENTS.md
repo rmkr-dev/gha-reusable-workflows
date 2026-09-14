@@ -38,3 +38,7 @@ Human-first rules for changing reusable workflows in this repository.
 ## Action pins
 
 - Keep the matrix in `docs/references/action-pins.md` current when Dependabot majors merge or composites are retargeted.
+
+## Docs map
+
+When adding workflows or inputs, update the relevant page under `docs/references/` or `docs/security/` and keep `docs/architecture/architecture.md` links current.
