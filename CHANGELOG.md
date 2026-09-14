@@ -10,6 +10,8 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 ### Added
 
 - `sbom-sample` self-test job in `ci.yml` (calls `sbom.yml` on `samples/python-hello`)
+- `sbom-java-sample` self-test job scanning `samples/java-hello`
+- `sbom.yml` `format` input (default `spdx-json`) and post-generate verify step
 
 ### Fixed
 
