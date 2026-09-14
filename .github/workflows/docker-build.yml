@@ -105,11 +105,21 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Resolve scan image ref
+        if: inputs.scan
+        id: scanref
+        env:
+          TAGS: ${{ steps.tags.outputs.tags }}
+        run: |
+          set -euo pipefail
+          # Trivy expects a single image ref; use the first tag when several are listed
+          echo "ref=${TAGS%%,*}" >> "$GITHUB_OUTPUT"
+
       - name: Trivy scan
         if: inputs.scan
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: ${{ steps.tags.outputs.tags }}
+          image-ref: ${{ steps.scanref.outputs.ref }}
           format: table
           exit-code: "1"
           severity: ${{ inputs.trivy-severity }}
