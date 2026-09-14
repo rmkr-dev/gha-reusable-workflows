@@ -13,6 +13,7 @@ Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.4.2`
 | `artifact-name` | string | `sbom` | Basename; `.spdx.json` appended |
 | `upload-artifact` | boolean | `true` | Upload workflow artifact |
 | `upload-artifact-retention` | number | `0` | Days to retain; `0` = repo default |
+| `timeout-minutes` | number | `30` | Job timeout |
 
 ## Verify step
 

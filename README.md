@@ -60,6 +60,7 @@ Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-
 | `format` | `spdx-json` | Passed to anchore/sbom-action |
 | `upload-artifact` | `true` | Upload SPDX JSON artifact |
 | `upload-artifact-retention` | `0` | Days to retain; `0` = repo default |
+| `timeout-minutes` | `30` | Job timeout |
 
 
 ## Supported stacks
