@@ -94,6 +94,7 @@ Full copy-paste snippets (CodeQL, dependency review, SBOM, Docker, release): [do
 Docker build deep-dive (inputs, Trivy, GHCR): [docs/references/docker-build.md](docs/references/docker-build.md).
 Action pin matrix (Dependabot majors): [docs/references/action-pins.md](docs/references/action-pins.md).
 Troubleshooting: [docs/references/troubleshooting.md](docs/references/troubleshooting.md).
+SBOM deep-dive: [docs/references/sbom.md](docs/references/sbom.md).
 
 ## Composite actions
 
