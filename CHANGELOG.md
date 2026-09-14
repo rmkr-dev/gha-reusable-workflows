@@ -8,6 +8,7 @@
 
 ### Changed
 
+- Examples/SBOM docs show `upload-artifact-retention` usage
 - CONTRIBUTING / development docs prefer `@v0.4.1` consumer pins
 - Pin composite actions used by reusable CI workflows to `@v0.4.1`
 
