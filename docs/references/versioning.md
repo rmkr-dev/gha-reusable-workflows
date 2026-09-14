@@ -49,6 +49,6 @@ See [CHANGELOG.md](../../CHANGELOG.md).
 
 Detailed CHANGELOG / soft-notes conventions: [release-notes.md](release-notes.md).
 
-## Upcoming
+## Latest patch
 
-Unreleased additive inputs on `main` (draft release, fetch-depth, labels, fail-on-severity, queries, java-distribution) are intended for a `v0.4.1` patch tag once CI stays green.
+`v0.4.1` ships post-`v0.4.0` additive inputs (draft release, fetch-depth, labels, fail-on-severity, queries, java-distribution, workflow_dispatch self-test, and related docs).
