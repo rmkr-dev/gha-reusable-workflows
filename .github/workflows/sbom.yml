@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       artifact-name:
-        description: Name for the uploaded SBOM artifact
+        description: Basename for the uploaded SBOM artifact (extension added for SPDX JSON)
         required: false
         type: string
         default: sbom
@@ -18,6 +18,11 @@ on:
         required: false
         type: boolean
         default: true
+      format:
+        description: SBOM format passed to anchore/sbom-action (default spdx-json)
+        required: false
+        type: string
+        default: spdx-json
 
 jobs:
   sbom:
@@ -32,10 +37,54 @@ jobs:
         uses: anchore/sbom-action@v0
         with:
           path: ${{ inputs.path }}
-          format: spdx-json
+          format: ${{ inputs.format }}
           artifact-name: ${{ inputs.artifact-name }}.spdx.json
           upload-artifact: ${{ inputs.upload-artifact }}
           upload-release-assets: false
+          output-file: ${{ runner.temp }}/sbom-out.json
+
+      - name: Verify SBOM output
+        env:
+          SBOM_FILE: ${{ runner.temp }}/sbom-out.json
+          FORMAT: ${{ inputs.format }}
+          SCAN_PATH: ${{ inputs.path }}
+        run: |
+          set -euo pipefail
+          if [ ! -s "$SBOM_FILE" ]; then
+            echo "Expected non-empty SBOM at $SBOM_FILE"
+            exit 1
+          fi
+          SIZE=$(wc -c < "$SBOM_FILE" | tr -d ' ')
+          echo "SBOM bytes=${SIZE} format=${FORMAT} path=${SCAN_PATH}"
+          if [ "$FORMAT" = "spdx-json" ]; then
+            python3 - <<'PY'
+          import json, os, sys
+          path = os.environ["SBOM_FILE"]
+          with open(path, encoding="utf-8") as f:
+              data = json.load(f)
+          version = data.get("spdxVersion") or data.get("spdx_version")
+          if not version:
+              print("Missing spdxVersion in SPDX JSON", file=sys.stderr)
+              sys.exit(1)
+          packages = data.get("packages") or []
+          files = data.get("files") or []
+          print(f"spdxVersion={version} packages={len(packages)} files={len(files)}")
+          # Directory scans may have zero packages; require a parseable document with some content
+          if len(packages) == 0 and len(files) == 0 and len(json.dumps(data)) < 64:
+              print("SBOM document looks empty", file=sys.stderr)
+              sys.exit(1)
+          PY
+          fi
+          {
+            echo "## SBOM verify"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| path | \`${SCAN_PATH}\` |"
+            echo "| format | \`${FORMAT}\` |"
+            echo "| bytes | \`${SIZE}\` |"
+            echo "| output-file | verified |"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Retention reminder
         if: inputs.upload-artifact
@@ -44,7 +93,7 @@ jobs:
           {
             echo "## SBOM artifact"
             echo ""
-            echo "Uploaded \`${{ inputs.artifact-name }}.spdx.json\` (SPDX JSON)."
+            echo "Uploaded \`${{ inputs.artifact-name }}.spdx.json\` (format: \`${{ inputs.format }}\`)."
             echo "Retention follows this repository/org Actions artifact retention (GitHub default **90 days** unless customized)."
             echo "Download or attach to a Release if you need longer retention."
           } >> "$GITHUB_STEP_SUMMARY"

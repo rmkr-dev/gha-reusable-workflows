@@ -95,4 +95,10 @@ jobs:
       artifact-name: sbom-python-hello
       upload-artifact: true
 
-
+  sbom-java-sample:
+    uses: ./.github/workflows/sbom.yml
+    with:
+      path: samples/java-hello
+      artifact-name: sbom-java-hello
+      upload-artifact: true
+      format: spdx-json

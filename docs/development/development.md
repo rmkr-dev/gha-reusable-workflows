@@ -61,6 +61,7 @@ Consumer repos with multiple modules should call each reusable workflow with a d
 ## Security self-test jobs
 
 - `sbom-sample` — calls `sbom.yml` on `samples/python-hello` (SPDX artifact `sbom-python-hello`)
+- `sbom-java-sample` — calls `sbom.yml` on `samples/java-hello` (SPDX artifact `sbom-java-hello`)
 - `dependency-review.yml` is provided for callers with Dependency graph enabled (not self-tested in this repo yet)
 
 ## Local sample commands
@@ -85,6 +86,17 @@ PYTHONPATH=src pytest
 # Java multi-module
 mvn -B -f samples/java-multi/pom.xml test
 ```
+
+## SBOM self-test inputs
+
+| Workflow | Input | Default | Notes |
+| --- | --- | --- | --- |
+| `sbom.yml` | `path` | `.` | Directory to scan |
+| `sbom.yml` | `format` | `spdx-json` | Passed to anchore/sbom-action |
+| `sbom.yml` | `artifact-name` | `sbom` | Basename; `.spdx.json` suffix applied |
+| `sbom.yml` | `upload-artifact` | `true` | Actions artifact upload |
+
+The reusable workflow verifies a local `output-file` after generation so empty/broken SBOMs fail CI.
 
 ## Release helper inputs
 
