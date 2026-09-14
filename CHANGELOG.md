@@ -7,6 +7,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+### Added
+
+- `samples/python-hello` optional `ruff` so self-test exercises the existing `ruff check` path
+
 ### Changed
 
 - Pin composite actions used by reusable CI workflows to `@v0.2.0`

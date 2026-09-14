@@ -59,6 +59,7 @@ Job summaries are written to `$GITHUB_STEP_SUMMARY`. Workflow outputs expose res
 cd samples/python-hello
 python -m venv .venv && source .venv/bin/activate
 python -m pip install -e ".[dev]"
+ruff check .
 pytest
 
 # Java
