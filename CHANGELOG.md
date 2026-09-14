@@ -12,6 +12,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 - `sbom-sample` self-test job in `ci.yml` (calls `sbom.yml` on `samples/python-hello`)
 - `dependency-review-sample` self-test job (PR events only)
 
+### Fixed
+
+- `ci.yml` grants `pull-requests: write` so `dependency-review-sample` can call the reusable workflow
+
 ### Changed
 
 - Pin composite actions used by reusable CI workflows to `@v0.3.0`
