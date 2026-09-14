@@ -34,3 +34,7 @@ Human-first rules for changing reusable workflows in this repository.
 - Confirm self-test CI (`.github/workflows/ci.yml`) calls the reusable workflows against `samples/`.
 - Prefer running example callers before tagging a release.
 - SBOM self-tests must keep the verify step green (non-empty / parseable SPDX when format is `spdx-json`).
+
+## Action pins
+
+- Keep the matrix in `docs/references/action-pins.md` current when Dependabot majors merge or composites are retargeted.

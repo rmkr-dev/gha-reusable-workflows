@@ -91,6 +91,7 @@ jobs:
 
 Full copy-paste snippets (CodeQL, dependency review, SBOM, Docker, release): [docs/references/examples.md](docs/references/examples.md).
 Docker build deep-dive (inputs, Trivy, GHCR): [docs/references/docker-build.md](docs/references/docker-build.md).
+Action pin matrix (Dependabot majors): [docs/references/action-pins.md](docs/references/action-pins.md).
 
 ## Composite actions
 
