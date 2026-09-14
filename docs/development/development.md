@@ -70,6 +70,7 @@ pytest
 
 # Java
 mvn -B -f samples/java-hello/pom.xml test
+mvn -B -f samples/java-hello/pom.xml verify -Pintegration-test
 
 # Python requirements-dev path
 cd samples/python-requirements-dev
