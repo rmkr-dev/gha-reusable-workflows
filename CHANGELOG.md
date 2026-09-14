@@ -13,6 +13,7 @@
 
 ### Changed
 
+- README documents `release-tag.yml` input table (`draft` / `prerelease` / notes)
 - Pin composite actions used by reusable CI workflows to `@v0.4.2`
 
 ## [0.4.2] - 2026-09-14
