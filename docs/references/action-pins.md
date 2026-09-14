@@ -45,3 +45,5 @@ After cutting a new annotated tag, bump these pins in a follow-up PR (see `AGENT
 - Patch/minor `github-actions` updates are grouped by Dependabot; majors open as single PRs.
 
 See also: [docker-build.md](docker-build.md), [versioning.md](versioning.md), [../../CHANGELOG.md](../../CHANGELOG.md).
+
+Composite `setup-maven-project` accepts optional `distribution` (default `temurin`) for `actions/setup-java`.
