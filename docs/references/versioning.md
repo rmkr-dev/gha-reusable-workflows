@@ -45,3 +45,5 @@ See [CHANGELOG.md](../../CHANGELOG.md).
 ## Release notes source
 
 `release-tag.yml` prefers a matching `## [X.Y.Z]` section from `changelog-path` (default `CHANGELOG.md`). If none is found, it uses `gh release create --generate-notes` when `generate-notes` is true. Empty `tag` input remains a safe no-op.
+
+Detailed CHANGELOG / soft-notes conventions: [release-notes.md](release-notes.md).

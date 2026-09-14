@@ -107,7 +107,7 @@ Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>
 
 ## Samples
 
-Self-test packages exercised by this repo's `ci.yml`:
+Self-test packages exercised by this repo's `ci.yml` (catalog: [`samples/README.md`](samples/README.md)):
 
 - [`samples/python-hello`](samples/python-hello) — tiny package + pytest + ruff
 - [`samples/java-hello`](samples/java-hello) — minimal Maven app + JUnit 5 + Failsafe IT profile (Java 21)
@@ -128,7 +128,7 @@ Copy-paste patterns: [docs/references/monorepo.md](docs/references/monorepo.md).
 - [Architecture](docs/architecture/architecture.md) · [Diagram](docs/architecture/architecture-diagram.md) · [Network](docs/architecture/network-diagram.md)
 - [Development](docs/development/development.md)
 - [Security](docs/security/security.md) · [SECURITY.md](SECURITY.md)
-- [Examples](docs/references/examples.md) · [Docker build](docs/references/docker-build.md) · [Monorepo / matrix](docs/references/monorepo.md) · [Versioning](docs/references/versioning.md) · [Changelog](CHANGELOG.md)
+- [Examples](docs/references/examples.md) · [Docker build](docs/references/docker-build.md) · [Monorepo / matrix](docs/references/monorepo.md) · [Edge cases](docs/references/edge-cases.md) · [Release notes](docs/references/release-notes.md) · [Versioning](docs/references/versioning.md) · [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md) · [Agent notes](AGENTS.md)
 
 ## License
