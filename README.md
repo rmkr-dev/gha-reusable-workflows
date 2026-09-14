@@ -21,7 +21,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | [`codeql.yml`](.github/workflows/codeql.yml) | `workflow_call` | CodeQL analyze for caller-provided languages |
 | [`dependency-review.yml`](.github/workflows/dependency-review.yml) | `workflow_call` | PR dependency review |
 | [`sbom.yml`](.github/workflows/sbom.yml) | `workflow_call` | Generate SPDX SBOM, verify, upload artifact (optional retention days) |
-| [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release (CHANGELOG soft notes) |
+| [`release-tag.yml`](.github/workflows/release-tag.yml) | `workflow_call` | Create annotated `v*` tag + GitHub Release (CHANGELOG soft notes; optional `draft`) |
 | [`docker-build.yml`](.github/workflows/docker-build.yml) | `workflow_call` | Build image (push default false), optional Trivy scan |
 | [`ci.yml`](.github/workflows/ci.yml) | `push`/`pull_request` | Self-test: Python, Java, Docker, and SBOM samples |
 
