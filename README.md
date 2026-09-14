@@ -108,6 +108,7 @@ Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>
 - No paid SaaS CI required.
 - No secrets in workflow logs; reusable workflows stay secret-agnostic unless a caller explicitly passes an input they own.
 - Dependabot for `github-actions` keeps action pins current.
+- Caller permission tables: [docs/security/permissions.md](docs/security/permissions.md).
 
 ## Versioning
 

@@ -2,6 +2,7 @@
 
 ### Added
 
+- Caller permissions reference (`docs/security/permissions.md`) with per-workflow least-privilege table
 - Self-test `ci.yml` concurrency group with `cancel-in-progress` for superseded PR/branch runs
 - Caller concurrency patterns (`docs/references/concurrency.md`) and examples snippet
 - Action pin matrix reference (`docs/references/action-pins.md`)
