@@ -13,6 +13,11 @@ on:
         required: false
         type: string
         default: ""
+      comment-summary-in-pr:
+        description: Post a dependency review summary comment on the PR
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   dependency-review:
@@ -29,3 +34,4 @@ jobs:
         with:
           fail-on-severity: ${{ inputs.fail-on-severity }}
           deny-licenses: ${{ inputs.deny-licenses }}
+          comment-summary-in-pr: ${{ inputs.comment-summary-in-pr }}
