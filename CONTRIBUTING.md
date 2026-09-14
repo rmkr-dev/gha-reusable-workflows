@@ -33,3 +33,7 @@ Thanks for helping keep these reusable workflows small, correct, and caller-frie
 - [edge-cases.md](docs/references/edge-cases.md)
 - [versioning.md](docs/references/versioning.md)
 - [release-notes.md](docs/references/release-notes.md)
+
+## Support
+
+Usage questions: [SUPPORT.md](SUPPORT.md). Security: [SECURITY.md](SECURITY.md).

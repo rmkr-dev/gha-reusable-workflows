@@ -41,3 +41,7 @@ Callers who want OpenSSF Scorecard should add it in **their** repository. See [d
 ## Permissions
 
 Caller least-privilege tables: [docs/security/permissions.md](docs/security/permissions.md).
+
+## Support (non-security)
+
+For usage questions see [SUPPORT.md](SUPPORT.md).
