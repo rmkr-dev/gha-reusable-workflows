@@ -81,6 +81,7 @@ jobs:
 ```
 
 Full copy-paste snippets (CodeQL, dependency review, SBOM, Docker, release): [docs/references/examples.md](docs/references/examples.md).
+Docker build deep-dive (inputs, Trivy, GHCR): [docs/references/docker-build.md](docs/references/docker-build.md).
 
 ## Composite actions
 
@@ -126,7 +127,7 @@ Copy-paste patterns: [docs/references/monorepo.md](docs/references/monorepo.md).
 - [Architecture](docs/architecture/architecture.md) · [Diagram](docs/architecture/architecture-diagram.md) · [Network](docs/architecture/network-diagram.md)
 - [Development](docs/development/development.md)
 - [Security](docs/security/security.md) · [SECURITY.md](SECURITY.md)
-- [Examples](docs/references/examples.md) · [Monorepo / matrix](docs/references/monorepo.md) · [Versioning](docs/references/versioning.md) · [Changelog](CHANGELOG.md)
+- [Examples](docs/references/examples.md) · [Docker build](docs/references/docker-build.md) · [Monorepo / matrix](docs/references/monorepo.md) · [Versioning](docs/references/versioning.md) · [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md) · [Agent notes](AGENTS.md)
 
 ## License

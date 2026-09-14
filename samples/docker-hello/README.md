@@ -10,7 +10,17 @@ docker build -t local/docker-hello:dev -f samples/docker-hello/Dockerfile sample
 docker run --rm local/docker-hello:dev
 ```
 
-## Caller tip
+## Self-test contract
 
-Prefer your own Dockerfile and base image in consumer repos. This sample exists
-only to keep the reusable workflow's self-test green without a registry push.
+| Setting | Value in `ci.yml` |
+| --- | --- |
+| `context` / `file` | `samples/docker-hello` |
+| `push` | `false` (load locally for Trivy) |
+| `scan` | `true` |
+| `trivy-severity` | `CRITICAL` (keeps the BusyBox base quiet) |
+
+## Caller tips
+
+- Prefer your own Dockerfile and base image in consumer repos.
+- Start with `push: false` on pull requests; only enable push after registry login in a **caller-owned** job (see [docker-build.md](../../docs/references/docker-build.md)).
+- If Trivy fails on HIGH findings for a fat base image, narrow `trivy-severity` or upgrade the base — do not disable `scan` without a documented exception.

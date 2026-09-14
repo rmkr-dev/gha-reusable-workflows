@@ -9,9 +9,9 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 | Component | Role |
 | --- | --- |
 | Caller repos | Own application code; declare thin wrapper workflows that `uses:` this repo |
-| Reusable workflows | `.github/workflows/{python-ci,java-maven-ci,codeql,dependency-review,sbom,release-tag}.yml` |
+| Reusable workflows | `.github/workflows/{python-ci,java-maven-ci,codeql,dependency-review,sbom,release-tag,docker-build}.yml` |
 | Composite actions | `.github/actions/setup-python-project`, `.github/actions/setup-maven-project` — shared setup helpers |
-| Self-test CI | `.github/workflows/ci.yml` calls `python-ci` and `java-maven-ci` against `samples/` |
+| Self-test CI | `.github/workflows/ci.yml` calls Python/Java/Docker/SBOM reusable workflows against `samples/` |
 | GitHub-hosted runners | Execute jobs (`ubuntu-latest`); no self-hosted runners |
 | Security / supply-chain jobs | CodeQL analysis, dependency review on PRs, SBOM artifact upload |
 | Samples | `samples/python-hello`, `samples/java-hello` — keep contracts honest |
@@ -39,6 +39,7 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 - [architecture-diagram.md](architecture-diagram.md) — Mermaid overview
 - [network-diagram.md](network-diagram.md) — runner egress expectations
 - [examples.md](../references/examples.md) — consumer snippets
+- [docker-build.md](../references/docker-build.md) — Docker build inputs, Trivy, push caveats
 
 ## Self-test surface
 
