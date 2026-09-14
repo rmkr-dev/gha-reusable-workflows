@@ -17,6 +17,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Changed
 
+- Sample READMEs for `java-hello` (Failsafe) and `docker-hello` (Trivy); README Docker input table
 - Pin composite actions used by reusable CI workflows to `@v0.3.0`
 
 ## [0.3.0] - 2026-09-14
