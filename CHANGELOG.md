@@ -2,6 +2,7 @@
 
 ### Added
 
+- `python-ci.yml` `ruff-args` input (extra flags for `ruff check`; empty default)
 - `codeql.yml` `timeout-minutes` input (default `360`)
 - `java-maven-ci.yml` `maven-opts` input (sets `MAVEN_OPTS`; empty default)
 - `dependency-review.yml` `comment-summary-in-pr` input (default `true`)
