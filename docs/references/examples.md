@@ -108,6 +108,7 @@ jobs:
     uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.4.2
     with:
       fail-on-severity: high
+      # deny-licenses: GPL-3.0, AGPL-3.0   # optional SPDX deny list
 ```
 
 ## SBOM artifact
