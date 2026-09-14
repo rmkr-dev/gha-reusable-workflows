@@ -35,6 +35,8 @@ Reusable workflows run on **caller** repositories with the caller's `GITHUB_TOKE
 
 ## Dependency review (`dependency-review.yml`)
 
+- Optional `fail-on-severity` input (default `low`) passed to `actions/dependency-review-action`.
+
 - Intended for `pull_request` events only (GitHub requirement for the action).
 - Caller should grant `pull-requests: write` when commenting is desired; `contents: read` is always required.
 - Blocks merge only when the caller configures branch protection / required checks — this workflow surfaces findings.

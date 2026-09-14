@@ -103,6 +103,8 @@ permissions:
 jobs:
   review:
     uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.4.0
+    with:
+      fail-on-severity: high
 ```
 
 ## SBOM artifact
