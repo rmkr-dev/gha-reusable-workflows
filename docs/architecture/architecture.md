@@ -54,3 +54,4 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 | [permissions.md](../security/permissions.md) | Least-privilege `permissions:` by workflow |
 | [troubleshooting.md](../references/troubleshooting.md) | Symptom → fix tables |
 | [docker-build.md](../references/docker-build.md) | Docker inputs including `labels` |
+| [sbom.md](../references/sbom.md) | SBOM inputs, verify, retention |
