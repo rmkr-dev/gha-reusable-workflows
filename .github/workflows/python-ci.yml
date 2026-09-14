@@ -28,6 +28,11 @@ on:
         required: false
         type: boolean
         default: true
+      fetch-depth:
+        description: actions/checkout fetch-depth (0 = full history)
+        required: false
+        type: number
+        default: 1
     outputs:
       python-version:
         description: Resolved Python version used for the job
@@ -49,6 +54,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          fetch-depth: ${{ inputs.fetch-depth }}
 
       - name: Setup Python project
         uses: rmkr-dev/gha-reusable-workflows/.github/actions/setup-python-project@v0.4.0
