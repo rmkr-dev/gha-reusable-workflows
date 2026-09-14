@@ -44,7 +44,7 @@ Reusable workflows run on **caller** repositories with the caller's `GITHUB_TOKE
 - Uses `anchore/sbom-action` to produce an SBOM (default format **`spdx-json`**; override with the `format` input).
 - Writes a local `output-file` and **verifies** it is non-empty (and parseable SPDX JSON when `format` is `spdx-json`) before the job succeeds.
 - Uploads an Actions artifact named `${{ inputs.artifact-name }}.spdx.json` (default `sbom.spdx.json`) when `upload-artifact` is true.
-- **Retention**: artifact lifetime follows the repository or organization Actions artifact retention setting (GitHub default is **90 days** unless customized). Callers who need longer retention should download the artifact in a follow-up job or attach it to a GitHub Release.
+- **Retention**: optional `upload-artifact-retention` (days; `0` = repo/org default). GitHub default is **90 days** unless customized. Callers who need longer retention should download the artifact in a follow-up job or attach it to a GitHub Release.
 - `upload-release-assets` is left `false` so callers control release attachment explicitly.
 
 ## OpenSSF Scorecard

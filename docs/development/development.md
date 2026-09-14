@@ -105,6 +105,7 @@ docker build -t local/docker-hello:dev -f samples/docker-hello/Dockerfile sample
 | `sbom.yml` | `format` | `spdx-json` | Passed to anchore/sbom-action |
 | `sbom.yml` | `artifact-name` | `sbom` | Basename; `.spdx.json` suffix applied |
 | `sbom.yml` | `upload-artifact` | `true` | Actions artifact upload |
+| `sbom.yml` | `upload-artifact-retention` | `0` | Days to retain; `0` = repo default |
 
 The reusable workflow verifies a local `output-file` after generation so empty/broken SBOMs fail CI.
 
