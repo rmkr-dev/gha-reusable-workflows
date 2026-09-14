@@ -2,6 +2,7 @@
 
 ### Added
 
+- `docker-build.yml` `trivy-ignore-unfixed` input (default `true`)
 - `release-tag.yml` `prerelease` input (default `false`)
 - `release-tag.yml` `prerelease` input (default `false`)
 - `release-tag.yml` `prerelease` input (default `false`)

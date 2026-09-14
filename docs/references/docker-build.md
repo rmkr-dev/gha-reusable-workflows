@@ -18,6 +18,7 @@ Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.1`
 | `platforms` | string | `linux/amd64` | Prefer a single platform when `push=false` + `load` |
 | `scan` | boolean | `true` | Run Trivy after build |
 | `trivy-severity` | string | `CRITICAL,HIGH` | Severities that fail the job |
+| `trivy-ignore-unfixed` | boolean | `true` | Trivy `ignore-unfixed` |
 | `timeout-minutes` | number | `30` | Job timeout |
 
 ## Outputs
