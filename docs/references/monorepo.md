@@ -4,7 +4,7 @@ Reusable workflows in this repository accept a single `working-directory` (or Do
 `context`) per job. Callers that house multiple modules should **invoke the reusable
 workflow once per module**, optionally behind path filters or a matrix.
 
-Pin the same tag you use elsewhere (for example `@v0.3.0` until `v0.3.0` lands).
+Pin the same tag you use elsewhere (for example `@v0.3.0`).
 
 ## Pattern A — Explicit jobs per module
 
@@ -40,16 +40,59 @@ jobs:
       maven-goals: test
 ```
 
-## Pattern B — Matrix of working directories
+## Pattern B — `strategy.matrix` on a reusable workflow job
 
-GitHub Actions does not expand `strategy.matrix` into `uses:` inputs on a reusable
-workflow job the same way as a normal job. Prefer a thin wrapper job that maps matrix
-values, **or** keep explicit jobs (Pattern A). When you do use a matrix on a
-**caller-owned** job that checks out and then shells into modules, keep lint/test logic
-in the reusable workflows where possible.
+GitHub Actions **does** support `strategy` (including `matrix`) on jobs that call a
+reusable workflow. Each matrix combination becomes a separate reusable-workflow run.
+Pass matrix values into `with:` like any other expression.
 
-Example using **path-filtered** reusable calls (Pattern C below) is usually clearer for
-monorepos than forcing a matrix through `workflow_call`.
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python-modules:
+    strategy:
+      fail-fast: false
+      matrix:
+        module: [services/api, services/worker, libs/shared-py]
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.3.0
+    with:
+      working-directory: ${{ matrix.module }}
+      python-version: "3.12"
+      timeout-minutes: 20
+      enable-pip-cache: true
+
+  java-modules:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - dir: libs/common
+            goals: test
+          - dir: apps/java-service
+            goals: verify
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.3.0
+    with:
+      working-directory: ${{ matrix.dir }}
+      java-version: "21"
+      maven-goals: ${{ matrix.goals }}
+      enable-maven-cache: true
+```
+
+### Matrix tips
+
+- Prefer `fail-fast: false` in monorepos so one module failure does not cancel siblings.
+- Keep matrix axes small; prefer Pattern C (path filters) when most PRs touch one module.
+- You cannot expand a matrix *inside* the reusable workflow from the caller — only on the
+  caller job that uses `uses:`.
 
 ## Pattern C — Optional path filters (paths-filter)
 
@@ -123,6 +166,58 @@ jobs:
 - On `push` to `main`, configure the filter's `base`/`ref` as needed, or always run
   modules on `main` by omitting the `if:` guards for that event.
 
+## Pattern D — Language / version matrix (caller-owned)
+
+When you need multiple language versions for **one** module, put the version on the
+matrix and pass it through:
+
+```yaml
+jobs:
+  python-versions:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.3.0
+    with:
+      working-directory: .
+      python-version: ${{ matrix.python-version }}
+
+  java-versions:
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version: ["17", "21"]
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.3.0
+    with:
+      working-directory: .
+      java-version: ${{ matrix.java-version }}
+```
+
+## Pattern E — Docker images per service
+
+```yaml
+jobs:
+  images:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - context: services/api
+            file: services/api/Dockerfile
+            name: api
+          - context: services/worker
+            file: services/worker/Dockerfile
+            name: worker
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.3.0
+    with:
+      context: ${{ matrix.context }}
+      file: ${{ matrix.file }}
+      image-name: ${{ matrix.name }}
+      push: false
+      scan: true
+```
+
 ## Inputs that help monorepos
 
 | Workflow | Input | Monorepo use |
@@ -140,10 +235,12 @@ jobs:
 - No Node/npm matrices.
 - No automatic discovery of every module under the tree.
 
-See also: [examples.md](examples.md), [development.md](../development/development.md).
+See also: [examples.md](examples.md), [docker-build.md](docker-build.md), [development.md](../development/development.md).
 
 ## In-repo example
 
 This repository's own `ci.yml` calls the Java workflow twice — once for
 `samples/java-hello` and once for `samples/java-multi` — which is the same
-"one job per module root" pattern consumers should copy.
+"one job per module root" pattern consumers should copy. The Python samples are
+likewise separate jobs (explicit Pattern A), not a matrix, to keep the dogfood
+surface easy to read in the Actions UI.

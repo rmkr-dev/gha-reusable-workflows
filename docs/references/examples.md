@@ -253,6 +253,28 @@ jobs:
     uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.3.0
 ```
 
+
+
+## Matrix callers
+
+Reusable workflow jobs may use `strategy.matrix`. Example — two Python modules:
+
+```yaml
+jobs:
+  python-modules:
+    strategy:
+      fail-fast: false
+      matrix:
+        module: [services/api, services/worker]
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.3.0
+    with:
+      working-directory: ${{ matrix.module }}
+      python-version: "3.12"
+```
+
+More patterns (path filters, Java `include`, Docker per-service, language versions):
+[monorepo.md](monorepo.md).
+
 ## Pinning `@main` vs tags
 
 | Ref | When to use |

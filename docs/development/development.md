@@ -55,8 +55,14 @@ Job summaries are written to `$GITHUB_STEP_SUMMARY`. Workflow outputs expose res
 ## Monorepo callers
 
 Consumer repos with multiple modules should call each reusable workflow with a distinct
-`working-directory` (or Docker `context`). Optional path-filter examples live in
-[monorepo.md](../references/monorepo.md).
+`working-directory` (or Docker `context`). Supported patterns:
+
+- Explicit jobs per module
+- `strategy.matrix` on the caller job that `uses:` the reusable workflow
+- Path filters (`dorny/paths-filter`) gating each call
+- Language/version matrices and per-service Docker matrices
+
+Copy-paste examples: [monorepo.md](../references/monorepo.md).
 
 ## Security self-test jobs
 
