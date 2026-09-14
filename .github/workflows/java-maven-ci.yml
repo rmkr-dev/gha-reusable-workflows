@@ -13,6 +13,11 @@ on:
         required: false
         type: string
         default: "21"
+      java-distribution:
+        description: JDK distribution passed to setup-java (default temurin)
+        required: false
+        type: string
+        default: "temurin"
       timeout-minutes:
         description: Job timeout in minutes
         required: false
@@ -66,6 +71,7 @@ jobs:
         uses: rmkr-dev/gha-reusable-workflows/.github/actions/setup-maven-project@v0.4.0
         with:
           java-version: ${{ inputs.java-version }}
+          distribution: ${{ inputs.java-distribution }}
           working-directory: ${{ inputs.working-directory }}
           enable-maven-cache: ${{ inputs.enable-maven-cache }}
 
@@ -89,6 +95,7 @@ jobs:
         id: meta
         env:
           JAVA_VER: ${{ inputs.java-version }}
+          JAVA_DIST: ${{ inputs.java-distribution }}
           GOALS: ${{ inputs.maven-goals }}
           WD: ${{ inputs.working-directory }}
           FAIL_FAST: ${{ inputs.fail-fast }}
@@ -104,6 +111,7 @@ jobs:
             echo "| --- | --- |"
             echo "| working-directory | \`${WD}\` |"
             echo "| java-version | \`${JAVA_VER}\` |"
+            echo "| java-distribution | \`${JAVA_DIST}\` |"
             echo "| maven-goals | \`${GOALS}\` |"
             echo "| fail-fast | \`${FAIL_FAST}\` |"
             echo "| maven-cache | \`${MVN_CACHE}\` |"
