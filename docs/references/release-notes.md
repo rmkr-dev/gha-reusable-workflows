@@ -20,8 +20,8 @@ Semantic Versioning tags (`vX.Y.Z`).
 Footer links:
 
 ```markdown
-[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.4.0...HEAD
-[0.4.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.3.0...v0.4.0
+[Unreleased]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/rmkr-dev/gha-reusable-workflows/compare/v0.4.2...v0.5.0
 ```
 
 ## How `release-tag.yml` uses the CHANGELOG
