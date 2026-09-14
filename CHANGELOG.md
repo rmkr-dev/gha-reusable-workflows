@@ -2,6 +2,7 @@
 
 ### Added
 
+- CODEOWNERS paths for workflows/composites; PR template additive-input checkbox
 - Self-test `ci.yml` `workflow_dispatch` trigger for manual sample matrix runs
 - `codeql.yml` optional `queries` input (passed to codeql-action/init)
 - `dependency-review.yml` `fail-on-severity` input (default `low`)

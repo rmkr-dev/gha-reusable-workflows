@@ -5,6 +5,7 @@
 ## Compatibility
 
 - [ ] `workflow_call` inputs remain backward compatible, or breaking change is documented
+- [ ] Additive inputs use safe defaults (for example `draft: false`, `fetch-depth: 1`, empty `labels`/`queries`)
 - [ ] Samples / docs updated if contracts changed
 - [ ] `CHANGELOG.md` Unreleased updated when behavior or caller docs change
 
