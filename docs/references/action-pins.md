@@ -40,7 +40,7 @@ After cutting a new annotated tag, bump these pins in a follow-up PR (see `AGENT
 
 ## Consumer guidance
 
-- Pin **this** repository's workflows with an annotated tag (`@v0.5.0`), not `@main`, for production.
+- Pin **this** repository's workflows with an annotated tag (`@v0.5.1`), not `@main`, for production.
 - Upstream action majors may change defaults (for example Buildx / build-push). Rely on self-test `ci.yml` (`docker-sample`) before merging Dependabot majors.
 - Patch/minor `github-actions` updates are grouped by Dependabot; majors open as single PRs.
 

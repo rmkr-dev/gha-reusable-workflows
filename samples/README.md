@@ -34,4 +34,4 @@ Caller pitfalls and unsupported edges: [edge-cases.md](../docs/references/edge-c
 - Pass `fetch-depth: 0` on Python/Java reusable CI when packaging needs git history.
 - Docker `labels` / `annotations` / `build-args` are optional strings; leave empty for defaults.
 - Multi-stage images: set Docker `target`. Report-only scans: `trivy-exit-code: 0`.
-- Prefer `@v0.5.0` (or newer annotated tags) in consumer `uses:` lines.
+- Prefer `@v0.5.1` (or newer annotated tags) in consumer `uses:` lines.
