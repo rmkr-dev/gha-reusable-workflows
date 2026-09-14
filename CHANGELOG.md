@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Changed
+
+- Pin composite actions used by reusable CI workflows to `@v0.5.2`
+
 ## [0.5.2] - 2026-09-14
 
 ### Added

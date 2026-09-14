@@ -78,7 +78,7 @@ jobs:
           fetch-depth: ${{ inputs.fetch-depth }}
 
       - name: Setup Maven project
-        uses: rmkr-dev/gha-reusable-workflows/.github/actions/setup-maven-project@v0.5.1
+        uses: rmkr-dev/gha-reusable-workflows/.github/actions/setup-maven-project@v0.5.2
         with:
           java-version: ${{ inputs.java-version }}
           distribution: ${{ inputs.java-distribution }}
