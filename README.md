@@ -104,6 +104,10 @@ Troubleshooting: [docs/references/troubleshooting.md](docs/references/troublesho
 
 Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.4.0`.
 
+## Support
+
+Usage help: [SUPPORT.md](SUPPORT.md). Troubleshooting: [docs/references/troubleshooting.md](docs/references/troubleshooting.md).
+
 ## Free-first GitHub Actions stance
 
 - Prefer GitHub-hosted runners and first-party or widely used free actions.
