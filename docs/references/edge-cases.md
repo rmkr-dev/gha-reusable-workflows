@@ -45,6 +45,7 @@ understands; tox/nox as the primary runner; Windows/macOS runners.
 | Situation | Behavior |
 | --- | --- |
 | Directory with little/no ecosystem metadata | SPDX document still produced; verify step requires parseable non-empty JSON |
+| Custom artifact retention | Set `upload-artifact-retention` (days); `0` keeps the repo/org default |
 | `format` other than `spdx-json` | Generated; SPDX-specific parse checks are skipped |
 | Dependency review without Dependency graph | GitHub rejects the action — enable Dependency graph on the **caller** repo |
 
