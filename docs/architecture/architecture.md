@@ -39,3 +39,7 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 - [architecture-diagram.md](architecture-diagram.md) — Mermaid overview
 - [network-diagram.md](network-diagram.md) — runner egress expectations
 - [examples.md](../references/examples.md) — consumer snippets
+
+## Self-test surface
+
+`ci.yml` dogfoods the reusable workflows against `samples/*`, plus `sbom-sample` and (on PRs) `dependency-review-sample`.
