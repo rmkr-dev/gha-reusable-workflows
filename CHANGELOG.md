@@ -2,6 +2,7 @@
 
 ### Added
 
+- `codeql.yml` optional `queries` input (passed to codeql-action/init)
 - `dependency-review.yml` `fail-on-severity` input (default `low`)
 - SBOM reference (`docs/references/sbom.md`)
 - Architecture docs map for action-pins, concurrency, permissions, troubleshooting

@@ -12,6 +12,11 @@ on:
         required: false
         type: string
         default: "."
+      queries:
+        description: Optional CodeQL queries pack / config (passed to codeql-action/init)
+        required: false
+        type: string
+        default: ""
 
 jobs:
   analyze:
@@ -33,6 +38,7 @@ jobs:
         with:
           languages: ${{ matrix.language }}
           source-root: ${{ inputs.working-directory }}
+          queries: ${{ inputs.queries }}
 
       - name: Autobuild
         uses: github/codeql-action/autobuild@v4
