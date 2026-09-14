@@ -58,7 +58,7 @@ jobs:
           fetch-depth: ${{ inputs.fetch-depth }}
 
       - name: Setup Python project
-        uses: rmkr-dev/gha-reusable-workflows/.github/actions/setup-python-project@v0.4.0
+        uses: rmkr-dev/gha-reusable-workflows/.github/actions/setup-python-project@v0.4.1
         with:
           python-version: ${{ inputs.python-version }}
           working-directory: ${{ inputs.working-directory }}
