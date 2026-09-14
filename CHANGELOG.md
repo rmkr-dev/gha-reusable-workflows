@@ -7,6 +7,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+### Changed
+
+- Pin composite actions used by reusable CI workflows to `@v0.4.0`
+
 ## [0.4.0] - 2026-09-14
 
 ### Added

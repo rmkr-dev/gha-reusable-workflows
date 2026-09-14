@@ -18,7 +18,7 @@ Create annotated tags from green `main` only.
 - **MINOR** (`v0.4.0`): additive inputs/outputs, new workflows or composites, documentation that matches new behavior.
 - **PATCH** (`v0.2.1`): fixes that preserve inputs/outputs and documented contracts (including safe action pin bumps when behavior is compatible).
 
-Composite actions under `.github/actions/` are pinned by workflows to a ref (stay on `@v0.3.0` until the `v0.4.0` tag exists, then bump in a follow-up).
+Composite actions under `.github/actions/` are pinned by workflows to a ref (pinned to `@v0.4.0` to match the workflow release tag).
 
 ## Preparing a release
 
