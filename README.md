@@ -64,6 +64,17 @@ Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-
 | `timeout-minutes` | `30` | Job timeout |
 
 
+
+### Release tag inputs
+
+| Input | Default | Notes |
+| --- | --- | --- |
+| `tag` | `""` | Annotated `v*` tag; empty = safe no-op |
+| `changelog-path` | `CHANGELOG.md` | Soft notes extraction |
+| `notes-fallback` | `generate` | `generate` \| `notes` \| `tag` |
+| `draft` | `false` | Unpublished GitHub Release |
+| `prerelease` | `false` | Mark release as prerelease |
+
 ## Supported stacks
 
 | Stack | Workflow | Caller contract |
