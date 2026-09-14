@@ -22,10 +22,16 @@ on:
         required: false
         type: string
         default: ""
+      timeout-minutes:
+        description: Job timeout in minutes
+        required: false
+        type: number
+        default: 360
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.timeout-minutes }}
     permissions:
       security-events: write
       contents: read
