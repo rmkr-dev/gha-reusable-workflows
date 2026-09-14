@@ -2,6 +2,7 @@
 
 ### Added
 
+- `codeql.yml` `build-mode` input (optional; empty uses codeql-action default)
 - `sbom.yml` `timeout-minutes` input (default `30`)
 - `dependency-review.yml` `deny-licenses` input (comma-separated SPDX ids; empty default)
 - `java-maven-ci.yml` `maven-extra-args` input (extra CLI args after goals; empty default)
