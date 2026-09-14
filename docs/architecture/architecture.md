@@ -13,7 +13,7 @@ This repository hosts **reusable** GitHub Actions workflows (`on: workflow_call`
 | Composite actions | `.github/actions/setup-python-project`, `.github/actions/setup-maven-project` — shared setup helpers |
 | Self-test CI | `.github/workflows/ci.yml` calls Python/Java/Docker/SBOM reusable workflows against `samples/` |
 | GitHub-hosted runners | Execute jobs (`ubuntu-latest`); no self-hosted runners |
-| Security / supply-chain jobs | CodeQL analysis, dependency review on PRs, SBOM artifact upload |
+| Security / supply-chain jobs | CodeQL analysis, dependency review on PRs, SBOM generate/verify/upload (optional retention) |
 | Samples | `samples/python-hello`, `samples/java-hello` — keep contracts honest |
 
 ## Data flow (summary)
