@@ -117,6 +117,10 @@ jobs:
             fi
           fi
 
+          NOTES_BYTES=0
+          if [ -f "${NOTES_FILE}" ]; then
+            NOTES_BYTES=$(wc -c < "${NOTES_FILE}" | tr -d ' ')
+          fi
           {
             echo "## Release tag summary"
             echo ""
@@ -126,4 +130,13 @@ jobs:
             echo "| changelog-path | \`${CHANGELOG_PATH}\` |"
             echo "| used-changelog | \`${USED_CHANGELOG}\` |"
             echo "| notes-fallback | \`${NOTES_FALLBACK}\` |"
+            echo "| notes-bytes | \`${NOTES_BYTES}\` |"
+            echo ""
+            if [ "${USED_CHANGELOG}" = "true" ] && [ -s "${NOTES_FILE}" ]; then
+              echo "### CHANGELOG excerpt (preview)"
+              echo ""
+              echo '```markdown'
+              head -n 40 "${NOTES_FILE}"
+              echo '```'
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
