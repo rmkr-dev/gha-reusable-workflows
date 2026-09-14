@@ -20,6 +20,7 @@ Reusable workflows run on **caller** repositories with the caller's `GITHUB_TOKE
 
 - Caller must pass `languages` as a JSON array string (for example `'["python"]'` or `'["java-kotlin"]'`).
 - Optional `working-directory` sets CodeQL `source-root` for monorepos.
+- Optional `queries` input is passed to `codeql-action/init` (empty = action default).
 - Required permissions on the caller job: `security-events: write`, `contents: read`, `actions: read`.
 - Matrix uses `fail-fast: false` so one language failure does not cancel others.
 - Uses `github/codeql-action` init → autobuild → analyze (`@v4` pins in this repo).
