@@ -94,12 +94,17 @@ jobs:
         id: pytest
         env:
           PYTEST_ARGS: ${{ inputs.pytest-args }}
+          FAIL_FAST: ${{ inputs.fail-fast }}
         run: |
           set -euo pipefail
           if [ -d tests ] || [ -d test ] || compgen -G "test_*.py" >/dev/null || compgen -G "*_test.py" >/dev/null; then
+            EXTRA=()
+            if [ "${FAIL_FAST}" = "true" ]; then
+              EXTRA+=(-x)
+            fi
             # Word-split pytest-args intentionally (callers pass flags like -k 'name')
             # shellcheck disable=SC2086
-            python -m pytest -q ${PYTEST_ARGS}
+            python -m pytest -q "${EXTRA[@]}" ${PYTEST_ARGS}
             echo "ran=true" >> "$GITHUB_OUTPUT"
           else
             echo "No tests found; skipping pytest"

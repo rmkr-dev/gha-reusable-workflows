@@ -15,6 +15,10 @@
 - `docker-build.yml` `enable-gha-cache` input (default `true`; toggles buildx `type=gha` cache)
 - `python-ci.yml` `pytest-args` input (extra flags appended after `pytest -q`; empty default)
 
+### Fixed
+
+- `python-ci.yml` `fail-fast` now passes pytest `-x` when tests run (was summary-only)
+
 ### Changed
 
 - README documents `release-tag.yml` input table (`draft` / `prerelease` / notes)
