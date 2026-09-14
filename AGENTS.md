@@ -42,3 +42,7 @@ Human-first rules for changing reusable workflows in this repository.
 ## Docs map
 
 When adding workflows or inputs, update the relevant page under `docs/references/` or `docs/security/` and keep `docs/architecture/architecture.md` links current.
+
+## Changelog hygiene
+
+Avoid duplicate Unreleased bullets when rebasing multi-commit PRs; prefer regenerating Unreleased from `main` + the PR’s new bullets only.
