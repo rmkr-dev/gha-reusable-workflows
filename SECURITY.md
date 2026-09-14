@@ -37,3 +37,7 @@ Out of scope:
 ## Scorecard / badges
 
 Callers who want OpenSSF Scorecard should add it in **their** repository. See [docs/security/security.md](docs/security/security.md#openssf-scorecard) for why this repo does not yet wrap Scorecard as a reusable workflow.
+
+## Permissions
+
+Caller least-privilege tables: [docs/security/permissions.md](docs/security/permissions.md).
