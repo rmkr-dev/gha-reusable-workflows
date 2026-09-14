@@ -4,7 +4,7 @@ Reusable workflows in this repository accept a single `working-directory` (or Do
 `context`) per job. Callers that house multiple modules should **invoke the reusable
 workflow once per module**, optionally behind path filters or a matrix.
 
-Pin the same tag you use elsewhere (for example `@v0.2.0` until `v0.3.0` lands).
+Pin the same tag you use elsewhere (for example `@v0.3.0` until `v0.3.0` lands).
 
 ## Pattern A — Explicit jobs per module
 
@@ -21,19 +21,19 @@ permissions:
 
 jobs:
   python-api:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.2.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.3.0
     with:
       working-directory: services/api
       python-version: "3.12"
 
   python-worker:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.2.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.3.0
     with:
       working-directory: services/worker
       python-version: "3.12"
 
   java-lib:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.2.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.3.0
     with:
       working-directory: libs/common
       java-version: "21"
@@ -95,7 +95,7 @@ jobs:
   python-api:
     needs: changes
     if: needs.changes.outputs.api == 'true'
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.2.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.3.0
     with:
       working-directory: services/api
       python-version: "3.12"
@@ -103,7 +103,7 @@ jobs:
   python-worker:
     needs: changes
     if: needs.changes.outputs.worker == 'true'
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.2.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.3.0
     with:
       working-directory: services/worker
       python-version: "3.12"
@@ -111,7 +111,7 @@ jobs:
   java-lib:
     needs: changes
     if: needs.changes.outputs.java == 'true'
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.2.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.3.0
     with:
       working-directory: libs/common
       java-version: "21"

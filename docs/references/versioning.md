@@ -4,7 +4,7 @@
 
 | Ref | Meaning |
 | --- | --- |
-| `@v0.2.0` | Exact annotated release (preferred for production) |
+| `@v0.3.0` | Exact annotated release (preferred for production) |
 | `@v0.1.0` | Previous minor |
 | `@main` | Latest merged work (dogfooding only) |
 | `@v1` | Reserved for a future stable major line |
@@ -14,10 +14,10 @@ Create annotated tags from green `main` only.
 ## Semver rules for this repo
 
 - **MAJOR** (`v1.0.0`): removing or renaming a `workflow_call` input/output, or changing defaults in a breaking way.
-- **MINOR** (`v0.2.0`): additive inputs/outputs, new workflows or composites, documentation that matches new behavior.
+- **MINOR** (`v0.3.0`): additive inputs/outputs, new workflows or composites, documentation that matches new behavior.
 - **PATCH** (`v0.2.1`): fixes that preserve inputs/outputs and documented contracts (including safe action pin bumps when behavior is compatible).
 
-Composite actions under `.github/actions/` are pinned by workflows to a ref (pinned to `@v0.2.0` to match the workflow release tag).
+Composite actions under `.github/actions/` are pinned by workflows to a ref (pinned to `@v0.3.0` to match the workflow release tag).
 
 ## Preparing a release
 
