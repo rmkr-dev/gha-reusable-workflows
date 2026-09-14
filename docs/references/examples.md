@@ -84,6 +84,8 @@ jobs:
       # or: languages: '["java-kotlin"]'
 ```
 
+Optional `working-directory` sets CodeQL `source-root` for monorepos. This repository does not run CodeQL in its own `ci.yml` self-tests; enable it on consumer repos that hold real application code.
+
 ## Dependency review (pull requests)
 
 
