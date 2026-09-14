@@ -2,6 +2,7 @@
 
 ### Added
 
+- `docker-build.yml` `annotations` input (OCI annotations; empty default)
 - `python-ci.yml` `ruff-args` input (extra flags for `ruff check`; empty default)
 - `codeql.yml` `timeout-minutes` input (default `360`)
 - `java-maven-ci.yml` `maven-opts` input (sets `MAVEN_OPTS`; empty default)
