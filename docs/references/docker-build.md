@@ -101,6 +101,19 @@ with:
 
 Empty `labels` leaves the build-push default (no extra labels).
 
+## Annotations
+
+Optional OCI annotations (comma-separated `key=value`) flow through to `docker/build-push-action`:
+
+```yaml
+with:
+  image-name: api
+  annotations: org.opencontainers.image.description=API service,org.opencontainers.image.licenses=MIT
+  push: false
+```
+
+Empty `annotations` leaves the build without extra annotations. Prefer annotations for registries that surface them separately from labels.
+
 ## Build-args
 
 Comma-separated `KEY=VALUE` pairs passed to `docker/build-push-action`:
