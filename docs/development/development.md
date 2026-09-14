@@ -65,6 +65,7 @@ Consumer repos with multiple modules should call each reusable workflow with a d
 cd samples/python-hello
 python -m venv .venv && source .venv/bin/activate
 python -m pip install -e ".[dev]"
+ruff check .
 pytest
 
 # Java
