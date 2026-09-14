@@ -122,6 +122,8 @@ jobs:
       upload-artifact: true
 ```
 
+This repository's own `ci.yml` includes an `sbom-sample` job as a live self-test.
+
 **Retention:** Actions artifacts follow the repository/org retention setting (GitHub default **90 days**). The reusable workflow writes a step-summary reminder. For longer retention, download the SPDX JSON in a follow-up job or attach it to a GitHub Release (`upload-release-assets` stays false by design so callers stay in control).
 
 ## OpenSSF Scorecard (caller-owned)

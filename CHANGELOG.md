@@ -7,6 +7,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+### Added
+
+- `sbom-sample` self-test job in `ci.yml` (calls `sbom.yml` on `samples/python-hello`)
+
 ## [0.3.0] - 2026-09-14
 
 ### Added
