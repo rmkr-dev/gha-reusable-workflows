@@ -24,14 +24,14 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.1
 
   codeql:
     permissions:
       contents: read
       actions: read
       security-events: write
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.5.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.5.1
     with:
       languages: '["python"]'
 
@@ -40,7 +40,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.5.0
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.5.1
 ```
 
 ## Anti-patterns

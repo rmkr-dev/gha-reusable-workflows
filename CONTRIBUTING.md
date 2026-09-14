@@ -40,6 +40,6 @@ Usage questions: [SUPPORT.md](SUPPORT.md). Security: [SECURITY.md](SECURITY.md).
 
 ## Pins
 
-Prefer `@v0.5.0` (or newer annotated tags) in consumer `uses:` lines. Dogfood `@main` only when validating Unreleased work.
+Prefer `@v0.5.1` (or newer annotated tags) in consumer `uses:` lines. Dogfood `@main` only when validating Unreleased work.
 
 Reviewers are guided by `.github/CODEOWNERS` (workflows, composites, docs).

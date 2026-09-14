@@ -124,13 +124,13 @@ After CI is green on `main`:
 
 ```bash
 # Prefer CHANGELOG soft notes via release-tag.yml, or:
-gh release create v0.5.0 --notes-file /tmp/notes.md --target main
+gh release create v0.5.1 --notes-file /tmp/notes.md --target main
 ```
 
 See [versioning.md](../references/versioning.md), [release-notes.md](../references/release-notes.md),
 and [CHANGELOG.md](../../CHANGELOG.md).
 
-Callers should prefer `@v0.5.0` / `@v1` over floating `@main` once tags exist.
+Callers should prefer `@v0.5.1` / `@v1` over floating `@main` once tags exist.
 
 Docker build inputs: [docker-build.md](../references/docker-build.md).
 Matrix / monorepo: [monorepo.md](../references/monorepo.md).
@@ -146,6 +146,6 @@ Prefer annotated tags via `release-tag.yml`. Use `draft: true` when previewing G
 
 ## Current release
 
-Latest annotated tag: `v0.5.0`. Composite actions in reusable CI workflows pin to `@v0.5.0` (see `AGENTS.md`).
+Latest annotated tag: `v0.5.1`. Composite actions in reusable CI workflows pin to the latest annotated tag (follow-up PR after cut; see `AGENTS.md`).
 
 When stacking PRs, regenerate `CHANGELOG.md` Unreleased from current `main` to avoid duplicate bullets.
