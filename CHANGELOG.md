@@ -9,6 +9,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Added
 
+- `samples/python-hello` optional `ruff` so self-test exercises the existing `ruff check` path
 - `docker-build.yml` reusable workflow (`workflow_call`): buildx build, `push` default false, optional Trivy scan
 - Sample `samples/docker-hello` and self-test job in `ci.yml`
 - `release-tag.yml`: optional CHANGELOG section extraction (`changelog-path`) with soft `notes-fallback`
