@@ -13,6 +13,8 @@ workflows. Sample fixtures that exercise the happy paths live under [`samples/`]
 | No metadata files | `python -m compileall` on the working directory (no pytest) |
 | Empty `working-directory` | Uses `.` (repository root) |
 | Tests directory missing | Pytest may be skipped depending on composite setup; compile/lint still run |
+| `fail-fast: true` | Adds pytest `-x` when tests run |
+| Custom Ruff / pytest flags | Pass `ruff-args` / `pytest-args` (appended after defaults) |
 
 **Unsupported:** Poetry/Pipenv lock-only flows without an install path the composite
 understands; tox/nox as the primary runner; Windows/macOS runners.
@@ -37,8 +39,12 @@ understands; tox/nox as the primary runner; Windows/macOS runners.
 | Empty `tags` | Tags `local/<image-name>:ci` |
 | Multi-platform + `push: false` | Not recommended — buildx cannot easily load multi-arch |
 | Registry push | Requires login **in the same job**; prefer caller-owned push (see [docker-build.md](docker-build.md)) |
+| Multi-stage `target` | Pass `target` to select a Dockerfile stage; empty builds the final stage |
+| Disable GHA cache | Set `enable-gha-cache: false` when cache is unwanted or restricted |
+| OCI `labels` / `annotations` | Optional comma-separated `key=value` strings (empty = omit) |
+| Report-only Trivy | Set `trivy-exit-code: 0` to publish findings without failing the job |
 
-**Unsupported:** Built-in GHCR login; caching beyond GitHub Actions cache (`type=gha`).
+**Unsupported:** Built-in GHCR login; caching beyond GitHub Actions cache (`type=gha`) when `enable-gha-cache` is true.
 
 ## SBOM / security
 
@@ -48,6 +54,9 @@ understands; tox/nox as the primary runner; Windows/macOS runners.
 | Custom artifact retention | Set `upload-artifact-retention` (days); `0` keeps the repo/org default |
 | `format` other than `spdx-json` | Generated; SPDX-specific parse checks are skipped |
 | Dependency review without Dependency graph | GitHub rejects the action — enable Dependency graph on the **caller** repo |
+| Deny specific licenses | Pass `deny-licenses` (comma-separated SPDX ids) to `dependency-review.yml` |
+| Quiet PR comments | Set `comment-summary-in-pr: false` on dependency-review |
+| CodeQL custom build | Pass optional `build-mode` / `queries`; `timeout-minutes` defaults to `360` |
 
 ## Release (`release-tag.yml`)
 
@@ -57,6 +66,8 @@ understands; tox/nox as the primary runner; Windows/macOS runners.
 | Tag without leading `v` | Fails |
 | Tag/release already exists | Skips create; leaves notes unchanged |
 | No matching `## [X.Y.Z]` in CHANGELOG | Falls back per `notes-fallback` / `generate-notes` |
+| `draft: true` | Annotated tag created; GitHub Release stays unpublished |
+| `prerelease: true` | Marks the GitHub Release as a prerelease |
 
 See [release-notes.md](release-notes.md) for CHANGELOG conventions.
 
