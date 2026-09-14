@@ -13,6 +13,7 @@ Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.1`
 | `image-name` | string | `app` | Used for default local tag / summary |
 | `tags` | string | `""` | Comma-separated tags; empty → `local/<image-name>:ci` |
 | `labels` | string | `""` | Comma-separated OCI labels (`key=value`) for build-push-action |
+| `build-args` | string | `""` | Comma-separated `KEY=VALUE` build args |
 | `push` | boolean | `false` | Build-only by default (self-test safe) |
 | `platforms` | string | `linux/amd64` | Prefer a single platform when `push=false` + `load` |
 | `scan` | boolean | `true` | Run Trivy after build |
