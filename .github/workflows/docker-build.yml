@@ -28,6 +28,11 @@ on:
         required: false
         type: string
         default: ""
+      build-args:
+        description: Comma-separated Docker build-args (KEY=VALUE) passed to build-push-action
+        required: false
+        type: string
+        default: ""
       push:
         description: Push the image to a registry (default false — build-only / self-test safe)
         required: false
@@ -107,6 +112,7 @@ jobs:
           load: ${{ inputs.push == false }}
           tags: ${{ steps.tags.outputs.tags }}
           labels: ${{ inputs.labels }}
+          build-args: ${{ inputs.build-args }}
           platforms: ${{ inputs.platforms }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
