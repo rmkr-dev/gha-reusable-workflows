@@ -9,6 +9,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Changed
 
+- CodeQL security/examples guidance; expand pull request template for Docker/SBOM/CI surface
 - Pin composite actions used by reusable CI workflows to `@v0.4.0`
 - CONTRIBUTING / development docs for v0.4.0 surface; Dependabot groups patch/minor `github-actions`
 

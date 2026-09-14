@@ -18,10 +18,20 @@ Reusable workflows run on **caller** repositories with the caller's `GITHUB_TOKE
 
 ## CodeQL (`codeql.yml`)
 
-- Caller must pass `languages` as a JSON array string.
+- Caller must pass `languages` as a JSON array string (for example `'["python"]'` or `'["java-kotlin"]'`).
 - Optional `working-directory` sets CodeQL `source-root` for monorepos.
 - Required permissions on the caller job: `security-events: write`, `contents: read`, `actions: read`.
 - Matrix uses `fail-fast: false` so one language failure does not cancel others.
+- Uses `github/codeql-action` init → autobuild → analyze (`@v4` pins in this repo).
+- This repository does **not** dogfood CodeQL in `ci.yml` (no first-party app code to analyze beyond samples); callers should enable it on their own repos.
+
+### Language tips
+
+| Language input | Notes |
+| --- | --- |
+| `python` | Works well with source-only trees |
+| `java-kotlin` | Relies on CodeQL autobuild; ensure the module under `working-directory` builds |
+| Multiple | Pass a JSON array; each language is a matrix leg |
 
 ## Dependency review (`dependency-review.yml`)
 
