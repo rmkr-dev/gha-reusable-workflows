@@ -10,7 +10,7 @@ Reusable workflows run on **caller** repositories with the caller's `GITHUB_TOKE
 | --- | --- |
 | No secrets in logs | Never `echo` tokens; mask sensitive outputs |
 | Least privilege | Callers should set `permissions:` narrowly on jobs that call these workflows — see [permissions.md](permissions.md) |
-| Pin by tag | Prefer annotated semver tags (`@v0.2.0`, `@v0.1.0`) over mutable branches for production callers |
+| Pin by tag | Prefer annotated semver tags (`@v0.5.1`, `@v0.5.0`) over mutable branches for production callers |
 | Dependency review | Use `dependency-review.yml` on pull requests |
 | CodeQL | Use `codeql.yml` with a JSON `languages` input (for example `'["python"]'` or `'["java-kotlin"]'`) |
 | SBOM | Generate and upload an SBOM artifact for release traceability |
@@ -21,6 +21,8 @@ Reusable workflows run on **caller** repositories with the caller's `GITHUB_TOKE
 - Caller must pass `languages` as a JSON array string (for example `'["python"]'` or `'["java-kotlin"]'`).
 - Optional `working-directory` sets CodeQL `source-root` for monorepos.
 - Optional `queries` input is passed to `codeql-action/init` (empty = action default).
+- Optional `build-mode` (empty = action default) and `timeout-minutes` (default `360`).
+- Writes a job summary of language / working-directory / queries / build-mode / timeout.
 - Required permissions on the caller job: `security-events: write`, `contents: read`, `actions: read`.
 - Matrix uses `fail-fast: false` so one language failure does not cancel others.
 - Uses `github/codeql-action` init → autobuild → analyze (`@v4` pins in this repo).
@@ -37,7 +39,7 @@ Reusable workflows run on **caller** repositories with the caller's `GITHUB_TOKE
 ## Dependency review (`dependency-review.yml`)
 
 - Optional `fail-on-severity` input (default `low`) passed to `actions/dependency-review-action`.
-
+- Optional `deny-licenses` / `comment-summary-in-pr`; job summary echoes these inputs.
 - Intended for `pull_request` events only (GitHub requirement for the action).
 - Caller should grant `pull-requests: write` when commenting is desired; `contents: read` is always required.
 - Blocks merge only when the caller configures branch protection / required checks — this workflow surfaces findings.

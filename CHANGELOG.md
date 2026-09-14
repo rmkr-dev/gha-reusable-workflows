@@ -6,6 +6,7 @@
 
 ### Changed
 
+- Security docs cover CodeQL/dependency-review job summaries and v0.5.x inputs
 - Pin composite actions used by reusable CI workflows to `@v0.5.1`
 - `samples/docker-hello` caller tips cover annotations/target/cache/trivy-exit-code
 - Architecture docs map labeled post-v0.5.1
