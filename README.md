@@ -35,6 +35,15 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `enable-maven-cache` | `true` | Java |
 | `maven-goals` | `test` | Java |
 
+### Docker build inputs
+
+| Input | Default | Notes |
+| --- | --- | --- |
+| `push` | `false` | Build-only unless caller logs into a registry |
+| `scan` | `true` | Trivy via `aquasecurity/trivy-action` |
+| `trivy-severity` | `CRITICAL,HIGH` | Fail the job on matching findings |
+| `context` / `file` | `.` / `Dockerfile` | Build context paths |
+
 Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-ran`, `java-version` / `maven-goals`).
 
 ## Supported stacks
