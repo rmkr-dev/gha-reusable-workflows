@@ -278,6 +278,19 @@ jobs:
 More patterns (path filters, Java `include`, Docker per-service, language versions):
 [monorepo.md](monorepo.md).
 
+
+
+## Concurrency (caller)
+
+```yaml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+```
+
+Place this at the top level of the **caller** workflow so superseded PR runs cancel.
+Details: [concurrency.md](concurrency.md).
+
 ## Pinning `@main` vs tags
 
 | Ref | When to use |

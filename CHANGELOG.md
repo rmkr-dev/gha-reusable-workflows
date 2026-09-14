@@ -1,14 +1,9 @@
-# Changelog
-
-All notable changes to this project are documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html) for annotated tags that consumers pin.
-
 ## [Unreleased]
 
 ### Added
 
+- Self-test `ci.yml` concurrency group with `cancel-in-progress` for superseded PR/branch runs
+- Caller concurrency patterns (`docs/references/concurrency.md`) and examples snippet
 - Action pin matrix reference (`docs/references/action-pins.md`)
 - `sbom.yml` `upload-artifact-retention` input (days; `0` = repo default)
 
