@@ -87,3 +87,10 @@ jobs:
       fail-fast: true
       enable-maven-cache: true
       maven-goals: verify -Pintegration-test
+
+  sbom-sample:
+    uses: ./.github/workflows/sbom.yml
+    with:
+      path: samples/python-hello
+      artifact-name: sbom-python-hello
+      upload-artifact: true
