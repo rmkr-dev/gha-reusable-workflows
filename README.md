@@ -50,6 +50,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `target` | `""` | Optional multi-stage Dockerfile target |
 | `enable-gha-cache` | `true` | Buildx GitHub Actions cache (`type=gha`) |
 | `trivy-ignore-unfixed` | `true` | Pass `ignore-unfixed` to Trivy when `scan=true` |
+| `trivy-exit-code` | `1` | `1` fails on findings; `0` report-only |
 
 Jobs emit a step summary and expose workflow outputs (`python-version` / `tests-ran`, `java-version` / `maven-goals`).
 

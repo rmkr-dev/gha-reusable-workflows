@@ -21,6 +21,7 @@ Pin: `rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.2`
 | `scan` | boolean | `true` | Run Trivy after build |
 | `trivy-severity` | string | `CRITICAL,HIGH` | Severities that fail the job |
 | `trivy-ignore-unfixed` | boolean | `true` | Trivy `ignore-unfixed` |
+| `trivy-exit-code` | string | `1` | `1` fails on findings; `0` report-only |
 | `timeout-minutes` | number | `30` | Job timeout |
 
 ## Outputs
@@ -83,6 +84,7 @@ Keeping `push: false` in this reusable workflow is intentional for safe dogfoodi
 - Action: `aquasecurity/trivy-action` (pinned in the workflow).
 - `ignore-unfixed: true` so findings without fixes do not fail the job.
 - Tune `trivy-severity` (for example `CRITICAL` only) for noisy base images.
+- Set `trivy-exit-code: "0"` for advisory scans that must not fail the job.
 
 
 ## Labels

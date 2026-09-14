@@ -68,6 +68,11 @@ on:
         required: false
         type: boolean
         default: true
+      trivy-exit-code:
+        description: Trivy exit-code (1 fails the job on findings; 0 reports only)
+        required: false
+        type: string
+        default: "1"
       timeout-minutes:
         description: Job timeout in minutes
         required: false
@@ -149,7 +154,7 @@ jobs:
         with:
           image-ref: ${{ steps.scanref.outputs.ref }}
           format: table
-          exit-code: "1"
+          exit-code: ${{ inputs.trivy-exit-code }}
           severity: ${{ inputs.trivy-severity }}
           ignore-unfixed: ${{ inputs.trivy-ignore-unfixed }}
 
