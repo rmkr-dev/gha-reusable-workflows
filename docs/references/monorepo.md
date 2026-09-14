@@ -141,3 +141,9 @@ jobs:
 - No automatic discovery of every module under the tree.
 
 See also: [examples.md](examples.md), [development.md](../development/development.md).
+
+## In-repo example
+
+This repository's own `ci.yml` calls the Java workflow twice — once for
+`samples/java-hello` and once for `samples/java-multi` — which is the same
+"one job per module root" pattern consumers should copy.
