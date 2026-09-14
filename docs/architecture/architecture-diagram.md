@@ -5,11 +5,13 @@ flowchart LR
   subgraph Callers["Caller repositories"]
     JP["Java/Maven repo"]
     PP["Python repo"]
+    DP["Container / service repo"]
   end
 
   subgraph Reusable["rmkr-dev/gha-reusable-workflows"]
     PY["python-ci.yml"]
     JV["java-maven-ci.yml"]
+    DK["docker-build.yml"]
     CQ["codeql.yml"]
     DR["dependency-review.yml"]
     SB["sbom.yml"]
@@ -24,22 +26,26 @@ flowchart LR
     CQout["CodeQL results"]
     DRout["Dependency review"]
     SBout["SBOM artifact"]
+    TRout["Trivy findings"]
     RELout["Release / tag"]
   end
 
-  JP -->|uses @v1 or @main| JV
+  JP -->|uses @v0.4.0| JV
   JP -->|uses| CQ
   JP -->|uses| DR
   JP -->|uses| SB
   JP -->|uses| RT
-  PP -->|uses @v1 or @main| PY
+  PP -->|uses @v0.4.0| PY
   PP -->|uses| CQ
   PP -->|uses| DR
   PP -->|uses| SB
   PP -->|uses| RT
+  DP -->|uses @v0.4.0| DK
+  DP -->|uses| SB
 
   PY --> R
   JV --> R
+  DK --> R
   CQ --> R
   DR --> R
   SB --> R
@@ -48,9 +54,11 @@ flowchart LR
   CQ --> CQout
   DR --> DRout
   SB --> SBout
+  DK --> TRout
   RT --> RELout
 ```
 
-Self-test path (this repository): `ci.yml` → `python-ci` / `java-maven-ci` against `samples/`.
+Self-test path (this repository): `ci.yml` → Python / Java / Docker / SBOM reusable
+workflows against `samples/*`.
 
-Callers pin `@v0.1.0` (or `@main` while dogfooding).
+Callers pin `@v0.4.0` (or `@main` while dogfooding).
