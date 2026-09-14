@@ -25,6 +25,8 @@ Common caller issues when using these reusable workflows.
 | Reactor module not built | Goals lack `-pl`/`-am` | Pass `maven-goals: test -pl :module -am` (see `samples/java-multi`) |
 | ITs skipped | Failsafe profile not active | Use `maven-goals: verify -Pintegration-test` (see `samples/java-hello`) |
 | Cache not restoring | pom path | Composite caches `${working-directory}/pom.xml` |
+| Need JVM flags / heap | `MAVEN_OPTS` unset | Pass `maven-opts` (for example `-Xmx2g`) |
+| Reactor flags mixed into goals | Hard to read `maven-goals` | Prefer `maven-extra-args` for `-pl`/`-am`/`-D…` |
 
 ## Docker build
 
@@ -33,6 +35,9 @@ Common caller issues when using these reusable workflows.
 | Trivy cannot find image | `push: true` without load, or multi-platform + load | Keep `push: false` for local scan; single `platforms` value |
 | Push fails / unauthorized | Login not in same job | Reusable job is isolated — use a caller-owned job with `docker/login-action` (see [docker-build.md](docker-build.md)) |
 | Base image CRITICAL noise | Broad severity | Tighten `trivy-severity` (self-test uses `CRITICAL`) |
+| Job fails on known unfixed CVEs | Want advisory-only | Set `trivy-exit-code: "0"` (and optionally keep `trivy-ignore-unfixed: true`) |
+| Wrong stage built | Multi-stage Dockerfile | Pass `target` for the runtime/final stage name |
+| Cache thrash / policy block | GHA cache unwanted | Set `enable-gha-cache: false` |
 
 ## SBOM
 
@@ -48,7 +53,10 @@ Common caller issues when using these reusable workflows.
 | --- | --- | --- |
 | CodeQL permission error | Missing `security-events: write` | See [permissions.md](../security/permissions.md) |
 | Dependency review no-op on push | Action requires `pull_request` | Gate the job with `if: github.event_name == 'pull_request'` |
-| Autobuild fails (Java) | Module not buildable at `working-directory` | Fix build or narrow `working-directory` |
+| Autobuild fails (Java) | Module not buildable at `working-directory` | Fix build or narrow `working-directory`; or set `build-mode` when using a non-default CodeQL build |
+| License policy fail | Package uses a banned SPDX id | Pass `deny-licenses` only for licenses you truly block; empty disables |
+| Noisy PR review comments | Default comment summary | Set `comment-summary-in-pr: false` |
+| CodeQL job hits 6h default | Large monorepo | Raise or lower `timeout-minutes` (default `360`) |
 
 ## Release tag
 
@@ -56,6 +64,8 @@ Common caller issues when using these reusable workflows.
 | --- | --- | --- |
 | Notes empty | No `## [X.Y.Z]` in CHANGELOG | Add section or set `notes-fallback: generate` |
 | Tag already exists | Re-run on same version | Safe no-op; bump version / tag input |
+| Release published too early | Want review first | Pass `draft: true` (tag still created) |
+| Mark beta / RC | Prerelease channel | Pass `prerelease: true` |
 
 ## Getting help
 
