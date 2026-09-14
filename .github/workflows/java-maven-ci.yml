@@ -38,6 +38,11 @@ on:
         required: false
         type: string
         default: "test"
+      maven-extra-args:
+        description: Extra Maven CLI args after goals (e.g. -pl module -am -DskipITs)
+        required: false
+        type: string
+        default: ""
       fetch-depth:
         description: actions/checkout fetch-depth (0 = full history)
         required: false
@@ -79,15 +84,16 @@ jobs:
         id: mvn
         env:
           GOALS: ${{ inputs.maven-goals }}
+          EXTRA: ${{ inputs.maven-extra-args }}
           FAIL_FAST: ${{ inputs.fail-fast }}
         run: |
           set -euo pipefail
-          # Word-split goals intentionally so callers can pass "clean test"
+          # Word-split goals/extra intentionally so callers can pass "clean test" / "-pl m -am"
           # shellcheck disable=SC2086
           if [ "${FAIL_FAST}" = "true" ]; then
-            mvn -B ${GOALS} -Dsurefire.skipAfterFailureCount=1
+            mvn -B ${GOALS} ${EXTRA} -Dsurefire.skipAfterFailureCount=1
           else
-            mvn -B ${GOALS}
+            mvn -B ${GOALS} ${EXTRA}
           fi
 
       - name: Job summary
@@ -100,6 +106,7 @@ jobs:
           WD: ${{ inputs.working-directory }}
           FAIL_FAST: ${{ inputs.fail-fast }}
           MVN_CACHE: ${{ inputs.enable-maven-cache }}
+          EXTRA: ${{ inputs.maven-extra-args }}
         run: |
           set -euo pipefail
           echo "java-version=${JAVA_VER}" >> "$GITHUB_OUTPUT"
@@ -113,6 +120,7 @@ jobs:
             echo "| java-version | \`${JAVA_VER}\` |"
             echo "| java-distribution | \`${JAVA_DIST}\` |"
             echo "| maven-goals | \`${GOALS}\` |"
+            echo "| maven-extra-args | \`${EXTRA:-}\` |"
             echo "| fail-fast | \`${FAIL_FAST}\` |"
             echo "| maven-cache | \`${MVN_CACHE}\` |"
             echo "| setup | composite setup-maven-project |"
