@@ -126,6 +126,7 @@ jobs:
       artifact-name: sbom
       upload-artifact: true
       format: spdx-json
+      upload-artifact-retention: 0
 ```
 
 This repository's own `ci.yml` includes `sbom-sample` and `sbom-java-sample` jobs as live self-tests.
