@@ -19,7 +19,7 @@ on:
         type: number
         default: 30
       fail-fast:
-        description: When true, surface failures immediately (default pytest/Maven behavior)
+        description: When true, pass pytest -x to stop on first test failure
         required: false
         type: boolean
         default: true

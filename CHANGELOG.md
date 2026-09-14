@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Fixed
+
+- `python-ci.yml` `fail-fast` input description now matches pytest `-x` behavior (was Maven-worded)
+
 ### Changed
 
 - Pin composite actions used by reusable CI workflows to `@v0.5.0`
