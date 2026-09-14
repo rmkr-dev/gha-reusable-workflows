@@ -53,6 +53,11 @@ on:
         required: false
         type: string
         default: "CRITICAL,HIGH"
+      trivy-ignore-unfixed:
+        description: Pass ignore-unfixed to Trivy (default true)
+        required: false
+        type: boolean
+        default: true
       timeout-minutes:
         description: Job timeout in minutes
         required: false
@@ -135,7 +140,7 @@ jobs:
           format: table
           exit-code: "1"
           severity: ${{ inputs.trivy-severity }}
-          ignore-unfixed: true
+          ignore-unfixed: ${{ inputs.trivy-ignore-unfixed }}
 
       - name: Job summary
         if: always()
