@@ -14,8 +14,10 @@ concurrency:
   cancel-in-progress: true
 ```
 
-Effect: a new push to the same PR (or branch) cancels the previous in-flight self-test
-run, saving Actions minutes while keeping the latest revision covered.
+Effect: a new push to the **same pull request** cancels the previous in-flight self-test
+run, saving Actions minutes. Pushes to `main` share a concurrency group but do **not**
+cancel in-flight runs (`cancel-in-progress` is false unless `github.event_name == 'pull_request'`),
+so release validation on `main` is not aborted by a fast follow-up merge.
 
 ## Caller examples
 
