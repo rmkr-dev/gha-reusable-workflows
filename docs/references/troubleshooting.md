@@ -55,4 +55,4 @@ Common caller issues when using these reusable workflows.
 
 1. Compare against `samples/` and `.github/workflows/ci.yml` self-tests.
 2. Check [edge-cases.md](edge-cases.md), [examples.md](examples.md), and [permissions.md](../security/permissions.md).
-3. Open a PR or discussion with the failing job URL and the `uses:` pin (`@v0.4.1`).
+3. Open a PR or discussion with the failing job URL and the `uses:` pin (`@v0.4.2`).
