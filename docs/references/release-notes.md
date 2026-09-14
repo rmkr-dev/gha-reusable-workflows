@@ -66,3 +66,7 @@ jobs:
       draft: true
       changelog-path: CHANGELOG.md
 ```
+
+## Prereleases
+
+Pass `prerelease: true` (optionally with `draft: true`) to mark the GitHub Release as a prerelease.
