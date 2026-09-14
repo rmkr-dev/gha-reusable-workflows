@@ -3,7 +3,7 @@
 Reusable GitHub Actions workflows that other repositories can call with:
 
 ```yaml
-uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v0.5.1
+uses: rmkr-dev/gha-reusable-workflows/.github/workflows/<name>.yml@v0.5.2
 ```
 
 Until you prefer a floating major, pin the annotated tag. `@main` is available for early adopters.
@@ -110,14 +110,14 @@ on:
 
 jobs:
   python:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.2
     with:
       working-directory: .
       python-version: "3.12"
       enable-pip-cache: true
 
   java:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.5.1
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.5.2
     with:
       working-directory: .
       java-version: "21"
@@ -137,7 +137,7 @@ SBOM deep-dive: [docs/references/sbom.md](docs/references/sbom.md).
 | [`.github/actions/setup-python-project`](.github/actions/setup-python-project) | `python-ci.yml` |
 | [`.github/actions/setup-maven-project`](.github/actions/setup-maven-project) | `java-maven-ci.yml` |
 
-Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.5.1`.
+Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>@v0.5.2`.
 
 ## Support
 
