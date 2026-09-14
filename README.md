@@ -98,7 +98,7 @@ Workflows pin these with `rmkr-dev/gha-reusable-workflows/.github/actions/<name>
 
 Self-test packages exercised by this repo's `ci.yml`:
 
-- [`samples/python-hello`](samples/python-hello) — tiny package + pytest
+- [`samples/python-hello`](samples/python-hello) — tiny package + pytest + ruff
 - [`samples/java-hello`](samples/java-hello) — minimal Maven app + JUnit 5 (Java 21)
 - [`samples/python-requirements-dev`](samples/python-requirements-dev) — `requirements-dev.txt` install path
 - [`samples/java-multi`](samples/java-multi) — multi-module Maven reactor
