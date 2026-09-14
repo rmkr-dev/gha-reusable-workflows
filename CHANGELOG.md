@@ -7,6 +7,11 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [Unreleased]
 
+### Added
+
+- `docker-build.yml` reusable workflow (`workflow_call`): buildx build, `push` default false, optional Trivy scan
+- Sample `samples/docker-hello` and self-test job in `ci.yml`
+
 ### Changed
 
 - Pin composite actions used by reusable CI workflows to `@v0.2.0`
