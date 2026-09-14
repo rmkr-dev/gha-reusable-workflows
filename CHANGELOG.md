@@ -10,11 +10,10 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 ### Added
 
 - `sbom-sample` self-test job in `ci.yml` (calls `sbom.yml` on `samples/python-hello`)
-- `dependency-review-sample` self-test job (PR events only)
 
 ### Fixed
 
-- `ci.yml` grants `pull-requests: write` so `dependency-review-sample` can call the reusable workflow
+- Drop `dependency-review-sample` self-test — Dependency review is not supported on this repository without Dependency graph; reusable workflow remains for callers who enable it
 
 ### Changed
 

@@ -61,7 +61,7 @@ Consumer repos with multiple modules should call each reusable workflow with a d
 ## Security self-test jobs
 
 - `sbom-sample` — calls `sbom.yml` on `samples/python-hello` (SPDX artifact `sbom-python-hello`)
-- `dependency-review-sample` — calls `dependency-review.yml` when `github.event_name == 'pull_request'`
+- `dependency-review.yml` is provided for callers with Dependency graph enabled (not self-tested in this repo yet)
 
 ## Local sample commands
 
