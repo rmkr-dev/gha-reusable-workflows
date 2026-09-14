@@ -9,10 +9,12 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ### Added
 
+- Action pin matrix reference (`docs/references/action-pins.md`)
 - `sbom.yml` `upload-artifact-retention` input (days; `0` = repo default)
 
 ### Changed
 
+- Dependabot major bumps (CI green): `docker/build-push-action` v6→v7 (#46), `docker/setup-buildx-action` v3→v4 (#48)
 - README SBOM input table (`format`, retention)
 - CodeQL security/examples guidance; expand pull request template for Docker/SBOM/CI surface
 - Pin composite actions used by reusable CI workflows to `@v0.4.0`
