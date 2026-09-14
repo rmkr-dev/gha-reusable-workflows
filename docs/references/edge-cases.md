@@ -80,3 +80,7 @@ Pass `build-args: FOO=bar,BAZ=qux` to `docker-build.yml` when the Dockerfile dec
 ## Maven extra CLI args
 
 Prefer `maven-goals` for the goal list (`test`, `verify -Pintegration-test`). Use `maven-extra-args` for reactor / property flags that should not be mixed into the goals string, for example `-pl module-a -am` or `-DskipITs`.
+
+## Maven JVM options
+
+Set `maven-opts` to populate `MAVEN_OPTS` for the Maven process (for example `-Xmx2g` or `--add-opens` flags). Leave empty to leave the environment unset/default.

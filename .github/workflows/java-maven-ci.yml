@@ -43,6 +43,11 @@ on:
         required: false
         type: string
         default: ""
+      maven-opts:
+        description: Value for MAVEN_OPTS (JVM flags for the Maven process; empty = unset)
+        required: false
+        type: string
+        default: ""
       fetch-depth:
         description: actions/checkout fetch-depth (0 = full history)
         required: false
@@ -86,6 +91,7 @@ jobs:
           GOALS: ${{ inputs.maven-goals }}
           EXTRA: ${{ inputs.maven-extra-args }}
           FAIL_FAST: ${{ inputs.fail-fast }}
+          MAVEN_OPTS: ${{ inputs.maven-opts }}
         run: |
           set -euo pipefail
           # Word-split goals/extra intentionally so callers can pass "clean test" / "-pl m -am"
@@ -107,6 +113,7 @@ jobs:
           FAIL_FAST: ${{ inputs.fail-fast }}
           MVN_CACHE: ${{ inputs.enable-maven-cache }}
           EXTRA: ${{ inputs.maven-extra-args }}
+          MAVEN_OPTS_IN: ${{ inputs.maven-opts }}
         run: |
           set -euo pipefail
           echo "java-version=${JAVA_VER}" >> "$GITHUB_OUTPUT"
@@ -121,6 +128,7 @@ jobs:
             echo "| java-distribution | \`${JAVA_DIST}\` |"
             echo "| maven-goals | \`${GOALS}\` |"
             echo "| maven-extra-args | \`${EXTRA:-}\` |"
+            echo "| maven-opts | \`${MAVEN_OPTS_IN:-}\` |"
             echo "| fail-fast | \`${FAIL_FAST}\` |"
             echo "| maven-cache | \`${MVN_CACHE}\` |"
             echo "| setup | composite setup-maven-project |"

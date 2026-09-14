@@ -36,6 +36,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `enable-maven-cache` | `true` | Java |
 | `maven-goals` | `test` | Java |
 | `maven-extra-args` | `""` | Java (extra CLI args after goals) |
+| `maven-opts` | `""` | Java (`MAVEN_OPTS` JVM flags) |
 
 ### Docker build inputs
 
