@@ -30,17 +30,17 @@ flowchart LR
     RELout["Release / tag"]
   end
 
-  JP -->|uses @v0.4.0| JV
+  JP -->|uses @v0.5.0| JV
   JP -->|uses| CQ
   JP -->|uses| DR
   JP -->|uses| SB
   JP -->|uses| RT
-  PP -->|uses @v0.4.0| PY
+  PP -->|uses @v0.5.0| PY
   PP -->|uses| CQ
   PP -->|uses| DR
   PP -->|uses| SB
   PP -->|uses| RT
-  DP -->|uses @v0.4.0| DK
+  DP -->|uses @v0.5.0| DK
   DP -->|uses| SB
 
   PY --> R
@@ -61,4 +61,4 @@ flowchart LR
 Self-test path (this repository): `ci.yml` → Python / Java / Docker / SBOM reusable
 workflows against `samples/*`.
 
-Callers pin `@v0.4.0` (or `@main` while dogfooding).
+Callers pin `@v0.5.0` (or `@main` while dogfooding).
