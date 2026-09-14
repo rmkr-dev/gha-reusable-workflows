@@ -36,7 +36,7 @@ concurrency:
 
 jobs:
   python:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       python-version: "3.12"
 ```

@@ -1,6 +1,6 @@
 # Example consumer workflows
 
-Copy these into a caller repository under `.github/workflows/`. Prefer a version tag (`@v0.4.2`) once published; use `@main` only while iterating.
+Copy these into a caller repository under `.github/workflows/`. Prefer a version tag (`@v0.5.0`) once published; use `@main` only while iterating.
 
 Caller contract reminders:
 
@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       working-directory: .
       python-version: "3.12"
@@ -49,7 +49,7 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.5.0
     with:
       working-directory: .
       java-version: "21"
@@ -80,7 +80,7 @@ permissions:
 
 jobs:
   analyze:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.5.0
     with:
       languages: '["python"]'
       # build-mode: none   # optional; empty uses codeql-action default
@@ -107,7 +107,7 @@ permissions:
 
 jobs:
   review:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.5.0
     with:
       fail-on-severity: high
       # deny-licenses: GPL-3.0, AGPL-3.0   # optional SPDX deny list
@@ -129,7 +129,7 @@ permissions:
 
 jobs:
   sbom:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/sbom.yml@v0.5.0
     with:
       path: .
       artifact-name: sbom
@@ -186,7 +186,7 @@ permissions:
 
 jobs:
   image:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.5.0
     with:
       context: .
       file: Dockerfile
@@ -219,7 +219,7 @@ permissions:
 
 jobs:
   release:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/release-tag.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/release-tag.yml@v0.5.0
     with:
       tag: ${{ inputs.tag }}
       generate-notes: true
@@ -252,19 +252,19 @@ permissions:
 
 jobs:
   test:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       python-version: "3.12"
       enable-pip-cache: true
 
   codeql:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/codeql.yml@v0.5.0
     with:
       languages: '["python"]'
 
   dependency-review:
     if: github.event_name == 'pull_request'
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/dependency-review.yml@v0.5.0
 ```
 
 
@@ -280,7 +280,7 @@ jobs:
       fail-fast: false
       matrix:
         module: [services/api, services/worker]
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       working-directory: ${{ matrix.module }}
       python-version: "3.12"
@@ -307,7 +307,7 @@ Details: [concurrency.md](concurrency.md).
 | Ref | When to use |
 | --- | --- |
 | `@main` | Early adoption / dogfooding this repo |
-| `@v0.4.2` | Reproducible pin to the latest minor release |
+| `@v0.5.0` | Reproducible pin to the latest minor release |
 | `@v0.3.0` | Previous minor |
 | `@v1` | Moving major line once a `v1` tag (or `v1` major alias) exists |
 

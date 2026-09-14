@@ -4,7 +4,7 @@ Reusable workflows in this repository accept a single `working-directory` (or Do
 `context`) per job. Callers that house multiple modules should **invoke the reusable
 workflow once per module**, optionally behind path filters or a matrix.
 
-Pin the same tag you use elsewhere (for example `@v0.4.2`).
+Pin the same tag you use elsewhere (for example `@v0.5.0`).
 
 ## Pattern A — Explicit jobs per module
 
@@ -21,19 +21,19 @@ permissions:
 
 jobs:
   python-api:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       working-directory: services/api
       python-version: "3.12"
 
   python-worker:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       working-directory: services/worker
       python-version: "3.12"
 
   java-lib:
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.5.0
     with:
       working-directory: libs/common
       java-version: "21"
@@ -63,7 +63,7 @@ jobs:
       fail-fast: false
       matrix:
         module: [services/api, services/worker, libs/shared-py]
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       working-directory: ${{ matrix.module }}
       python-version: "3.12"
@@ -79,7 +79,7 @@ jobs:
             goals: test
           - dir: apps/java-service
             goals: verify
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.5.0
     with:
       working-directory: ${{ matrix.dir }}
       java-version: "21"
@@ -138,7 +138,7 @@ jobs:
   python-api:
     needs: changes
     if: needs.changes.outputs.api == 'true'
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       working-directory: services/api
       python-version: "3.12"
@@ -146,7 +146,7 @@ jobs:
   python-worker:
     needs: changes
     if: needs.changes.outputs.worker == 'true'
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       working-directory: services/worker
       python-version: "3.12"
@@ -154,7 +154,7 @@ jobs:
   java-lib:
     needs: changes
     if: needs.changes.outputs.java == 'true'
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.5.0
     with:
       working-directory: libs/common
       java-version: "21"
@@ -178,7 +178,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.11", "3.12"]
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/python-ci.yml@v0.5.0
     with:
       working-directory: .
       python-version: ${{ matrix.python-version }}
@@ -188,7 +188,7 @@ jobs:
       fail-fast: false
       matrix:
         java-version: ["17", "21"]
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/java-maven-ci.yml@v0.5.0
     with:
       working-directory: .
       java-version: ${{ matrix.java-version }}
@@ -209,7 +209,7 @@ jobs:
           - context: services/worker
             file: services/worker/Dockerfile
             name: worker
-    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.4.2
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/docker-build.yml@v0.5.0
     with:
       context: ${{ matrix.context }}
       file: ${{ matrix.file }}

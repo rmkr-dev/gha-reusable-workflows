@@ -4,10 +4,10 @@
 
 | Ref | Meaning |
 | --- | --- |
-| `@v0.4.2` | Exact annotated release (preferred for production) |
-| `@v0.4.1` | Previous patch |
-| `@v0.3.0` | Previous minor |
-| `@v0.1.0` | Older minor |
+| `@v0.5.0` | Exact annotated release (preferred for production) |
+| `@v0.4.2` | Previous patch |
+| `@v0.4.0` | Previous minor |
+| `@v0.3.0` | Older minor |
 | `@main` | Latest merged work (dogfooding only) |
 | `@v1` | Reserved for a future stable major line |
 
@@ -50,6 +50,6 @@ See [CHANGELOG.md](../../CHANGELOG.md).
 
 Detailed CHANGELOG / soft-notes conventions: [release-notes.md](release-notes.md).
 
-## Latest patch
+## Latest minor
 
-`v0.4.2` ships Docker `build-args` / `trivy-ignore-unfixed`, release `prerelease`, samples catalog tips, and docs hygiene on top of `v0.4.1`.
+`v0.5.0` ships a hardening-input wave on top of `v0.4.2`: Docker `annotations` / `target` / `enable-gha-cache` / `trivy-exit-code`, Python `ruff-args` / `pytest-args` (and fail-fast → pytest `-x`), Java `maven-extra-args` / `maven-opts`, CodeQL `timeout-minutes` / `build-mode`, dependency-review `deny-licenses` / `comment-summary-in-pr`, and SBOM `timeout-minutes`.
