@@ -77,3 +77,13 @@ jobs:
       scan: true
       trivy-severity: CRITICAL
       timeout-minutes: 20
+
+  java-failsafe-sample:
+    uses: ./.github/workflows/java-maven-ci.yml
+    with:
+      working-directory: samples/java-hello
+      java-version: "21"
+      timeout-minutes: 20
+      fail-fast: true
+      enable-maven-cache: true
+      maven-goals: verify -Pintegration-test
