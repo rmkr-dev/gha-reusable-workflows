@@ -58,6 +58,11 @@ Consumer repos with multiple modules should call each reusable workflow with a d
 `working-directory` (or Docker `context`). Optional path-filter examples live in
 [monorepo.md](../references/monorepo.md).
 
+## Security self-test jobs
+
+- `sbom-sample` — calls `sbom.yml` on `samples/python-hello` (SPDX artifact `sbom-python-hello`)
+- `dependency-review-sample` — calls `dependency-review.yml` when `github.event_name == 'pull_request'`
+
 ## Local sample commands
 
 ```bash
