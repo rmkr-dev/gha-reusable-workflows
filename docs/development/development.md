@@ -135,3 +135,7 @@ Callers should prefer `@v0.4.0` / `@v1` over floating `@main` once tags exist.
 Docker build inputs: [docker-build.md](../references/docker-build.md).
 Matrix / monorepo: [monorepo.md](../references/monorepo.md).
 See [examples.md](../references/examples.md) for consumer pins.
+
+## Releases
+
+Prefer annotated tags via `release-tag.yml`. Use `draft: true` when previewing GitHub Release notes before publish.

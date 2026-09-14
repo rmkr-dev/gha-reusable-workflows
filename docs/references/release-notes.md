@@ -54,7 +54,7 @@ Semver rules: [versioning.md](versioning.md). History: [CHANGELOG.md](../../CHAN
 
 ## Draft releases
 
-Pass `draft: true` to `release-tag.yml` so `gh release create` adds `--draft`.
+Pass the `draft` input (`draft: true`) to `release-tag.yml` so `gh release create` adds `--draft`.
 Annotated tags are still created; the GitHub Release stays unpublished until promoted.
 
 ```yaml
