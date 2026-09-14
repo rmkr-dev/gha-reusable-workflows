@@ -5,6 +5,8 @@
 - Pin composite actions used by reusable CI workflows to `@v0.5.0`
 - Architecture diagram and permissions examples prefer `@v0.5.0`
 - Architecture docs map labeled post-v0.5.0
+- Edge-cases catalog covers Docker target/cache/annotations/trivy-exit-code, Python fail-fast/`ruff-args`/`pytest-args`, dependency-review deny-licenses, CodeQL build-mode, release draft/prerelease
+- Development docs prefer `@v0.5.0`; samples catalog caller tips refreshed
 
 ## [0.5.0] - 2026-09-14
 
