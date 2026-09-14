@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+### Added
+
+- `python-ci.yml` `pytest-args` input (extra flags appended after `pytest -q`; empty default)
+
 ### Changed
 
 - Pin composite actions used by reusable CI workflows to `@v0.4.2`

@@ -32,6 +32,7 @@ Keep CI consistent across personal Java/Maven and Python repositories without co
 | `timeout-minutes` | `30` | both |
 | `fail-fast` | `true` | both |
 | `enable-pip-cache` | `true` | Python |
+| `pytest-args` | `""` | Python (appended after `pytest -q`) |
 | `enable-maven-cache` | `true` | Java |
 | `maven-goals` | `test` | Java |
 
