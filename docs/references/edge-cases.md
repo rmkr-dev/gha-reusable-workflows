@@ -59,3 +59,7 @@ understands; tox/nox as the primary runner; Windows/macOS runners.
 | No matching `## [X.Y.Z]` in CHANGELOG | Falls back per `notes-fallback` / `generate-notes` |
 
 See [release-notes.md](release-notes.md) for CHANGELOG conventions.
+
+## More help
+
+Symptom → fix tables: [troubleshooting.md](troubleshooting.md).

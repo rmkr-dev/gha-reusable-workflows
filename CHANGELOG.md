@@ -2,6 +2,7 @@
 
 ### Added
 
+- Troubleshooting guide (`docs/references/troubleshooting.md`) for Python/Java/Docker/SBOM/CodeQL callers
 - `docker-build.yml` `labels` input (OCI labels passed to build-push-action; empty default)
 - Caller permissions reference (`docs/security/permissions.md`) with per-workflow least-privilege table
 - Self-test `ci.yml` concurrency group with `cancel-in-progress` for superseded PR/branch runs
