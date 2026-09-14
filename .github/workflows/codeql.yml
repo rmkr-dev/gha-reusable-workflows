@@ -57,3 +57,25 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v4
+
+      - name: Job summary
+        if: always()
+        env:
+          LANGUAGE: ${{ matrix.language }}
+          WD: ${{ inputs.working-directory }}
+          QUERIES: ${{ inputs.queries }}
+          BUILD_MODE: ${{ inputs.build-mode }}
+          TIMEOUT: ${{ inputs.timeout-minutes }}
+        run: |
+          set -euo pipefail
+          {
+            echo "## CodeQL summary"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| language | \`${LANGUAGE}\` |"
+            echo "| working-directory | \`${WD}\` |"
+            echo "| queries | \`${QUERIES:-}\` |"
+            echo "| build-mode | \`${BUILD_MODE:-}\` |"
+            echo "| timeout-minutes | \`${TIMEOUT}\` |"
+          } >> "$GITHUB_STEP_SUMMARY"
