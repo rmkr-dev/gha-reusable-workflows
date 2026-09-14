@@ -216,6 +216,7 @@ jobs:
       generate-notes: true
       changelog-path: CHANGELOG.md
       notes-fallback: generate
+      # draft: true   # optional: create unpublished GitHub Release
 ```
 
 When `CHANGELOG.md` contains a `## [X.Y.Z]` section matching the tag without the leading

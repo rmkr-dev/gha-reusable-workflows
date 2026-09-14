@@ -51,3 +51,18 @@ Existing tags and releases are left alone (safe skip).
 5. Bump consumer pin docs from `@v0.3.0` → `@v0.4.0` (then composites after the tag exists).
 
 Semver rules: [versioning.md](versioning.md). History: [CHANGELOG.md](../../CHANGELOG.md).
+
+## Draft releases
+
+Pass `draft: true` to `release-tag.yml` so `gh release create` adds `--draft`.
+Annotated tags are still created; the GitHub Release stays unpublished until promoted.
+
+```yaml
+jobs:
+  release:
+    uses: rmkr-dev/gha-reusable-workflows/.github/workflows/release-tag.yml@v0.4.0
+    with:
+      tag: v0.4.1
+      draft: true
+      changelog-path: CHANGELOG.md
+```
